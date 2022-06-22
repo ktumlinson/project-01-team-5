@@ -17,8 +17,8 @@ public class Employee {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 	
-	@Column(name="first_name")
-	private String fistName;
+	@Column(name="first_name") 
+	private String firstName;
 	
 	@Column(name="last_name")
 	private String lastName;
@@ -32,7 +32,7 @@ public class Employee {
 	public Employee(int id, String fistName, String lastName, String username, String password) {
 		super();
 		this.id = id;
-		this.fistName = fistName;
+		this.firstName = fistName;
 		this.lastName = lastName;
 		this.username = username;
 		this.password = password;
@@ -40,7 +40,7 @@ public class Employee {
 
 	public Employee(String fistName, String lastName, String username, String password) {
 		super();
-		this.fistName = fistName;
+		this.firstName = fistName;
 		this.lastName = lastName;
 		this.username = username;
 		this.password = password;
@@ -52,7 +52,7 @@ public class Employee {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(fistName, id, lastName, password, username);
+		return Objects.hash(firstName, id, lastName, password, username);
 	}
 
 	@Override
@@ -64,13 +64,13 @@ public class Employee {
 		if (getClass() != obj.getClass())
 			return false;
 		Employee other = (Employee) obj;
-		return Objects.equals(fistName, other.fistName) && id == other.id && Objects.equals(lastName, other.lastName)
+		return Objects.equals(firstName, other.firstName) && id == other.id && Objects.equals(lastName, other.lastName)
 				&& Objects.equals(password, other.password) && Objects.equals(username, other.username);
 	}
 
 	@Override
 	public String toString() {
-		return "Employee [id=" + id + ", fistName=" + fistName + ", lastName=" + lastName + ", username=" + username
+		return "Employee [id=" + id + ", fistName=" + firstName + ", lastName=" + lastName + ", username=" + username
 				+ ", password=" + password + "]";
 	}
 
@@ -83,11 +83,11 @@ public class Employee {
 	}
 
 	public String getFistName() {
-		return fistName;
+		return firstName;
 	}
 
 	public void setFistName(String fistName) {
-		this.fistName = fistName;
+		this.firstName = fistName;
 	}
 
 	public String getLastName() {
