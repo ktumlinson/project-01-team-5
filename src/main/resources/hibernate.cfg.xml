@@ -42,6 +42,11 @@
       
       <!-- List of persistent classes -->
       <mapping class = "com.revature.models.Employee"/>
+      <mapping class = "com.revature.models.Reimbursement"/>
+      <mapping class = "com.revature.models.ReimbursementStatus"/>
+      <mapping class = "com.revature.models.ReimbursementType"/>
+      <mapping class = "com.revature.models.UserRoles"/>
+      <mapping class = "com.revature.models.Users"/>
       
    </session-factory>
 </hibernate-configuration>
