@@ -13,12 +13,14 @@ public class EmployeeDao {
 	public int insert(Employee e) {
 		Session ses = HibernateUtil.getSession();
 		Transaction tx = ses.beginTransaction();
+		tx.commit();
 		return (int) ses.save(e);
 	}
 	
 	public List<Employee> findAll(){
 		Session ses = HibernateUtil.getSession();
-		return ses.createQuery("from Employee", Employee.class).list();
+		List<Employee> employees = ses.createQuery("from Employee", Employee.class).list();
+		return employees;
 	}
 	
 	public boolean update() {
