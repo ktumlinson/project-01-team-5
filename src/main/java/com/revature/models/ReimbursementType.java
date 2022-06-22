@@ -13,20 +13,37 @@ import javax.persistence.Table;
 public class ReimbursementType {
 
 	
-	@Id
+	@Id @Column(name="reimb_type_id")
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@OneToMany(mappedBy="ers_reimbursement_types")
-	private int reimb_type_id;
+	private int id;
 	
 	@Column(name="reimb_type")
 	private String status;
 
-	public int getReimb_type_id() {
-		return reimb_type_id;
+	
+	
+	public ReimbursementType() {
+		super();
 	}
 
-	public void setReimb_type_id(int reimb_type_id) {
-		this.reimb_type_id = reimb_type_id;
+	public ReimbursementType(String status) {
+		super();
+		this.status = status;
+	}
+
+	public ReimbursementType(int id, String status) {
+		super();
+		this.id = id;
+		this.status = status;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int reimb_type_id) {
+		this.id = reimb_type_id;
 	}
 
 	public String getStatus() {

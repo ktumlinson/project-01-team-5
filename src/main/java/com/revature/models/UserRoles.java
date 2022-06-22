@@ -14,17 +14,17 @@ import javax.persistence.Table;
 @Table(name="ers_user_roles")
 public class UserRoles {
 
-	@Id
+	@Id @Column(name="ers_user_role_id")
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@OneToMany(mappedBy="ers_user_roles")
-	private int ers_user_role_id;
+	private int id;
 	
 	@Column(name="user_role")
 	private String userRole;
 
 	public UserRoles(int id, String userRole) {
 		super();
-		this.ers_user_role_id = id;
+		this.id = id;
 		this.userRole = userRole;
 	}
 
@@ -38,11 +38,11 @@ public class UserRoles {
 	}
 
 	public int getId() {
-		return ers_user_role_id;
+		return id;
 	}
 
 	public void setId(int id) {
-		this.ers_user_role_id = id;
+		this.id = id;
 	}
 
 	public String getUserRole() {
@@ -55,12 +55,12 @@ public class UserRoles {
 
 	@Override
 	public String toString() {
-		return "User_Roles [id=" + ers_user_role_id + ", userRole=" + userRole + "]";
+		return "User_Roles [id=" + id + ", userRole=" + userRole + "]";
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(ers_user_role_id, userRole);
+		return Objects.hash(id, userRole);
 	}
 
 	@Override
@@ -72,7 +72,7 @@ public class UserRoles {
 		if (getClass() != obj.getClass())
 			return false;
 		UserRoles other = (UserRoles) obj;
-		return ers_user_role_id == other.ers_user_role_id && Objects.equals(userRole, other.userRole);
+		return id == other.id && Objects.equals(userRole, other.userRole);
 	}
 	
 	

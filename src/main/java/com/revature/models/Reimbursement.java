@@ -1,5 +1,7 @@
 package com.revature.models;
 
+import java.sql.Timestamp;
+
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,9 +14,9 @@ import javax.persistence.Table;
 @Table(name="ers_reimbursement")
 public class Reimbursement {
 
-	@Id
+	@Id @Column(name="reimb_id")
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int reimb_id;
+	private int id;
 	
 	@Column(name="reimb_amount")
 	private int reimbursementAmt;
@@ -48,12 +50,45 @@ public class Reimbursement {
 	@Column(name="reimb_type_id")
 	private int reimbursementTypeId;
 
-	public int getReimb_id() {
-		return reimb_id;
+	
+	
+	public Reimbursement() {
+		super();
 	}
 
-	public void setReimb_id(int reimb_id) {
-		this.reimb_id = reimb_id;
+	public Reimbursement(int reimbursementAmt, Timestamp timeSubmitted, Timestamp timeResolved, String description,
+			int employeeId, int managerId, int statusId, int reimbursementTypeId) {
+		super();
+		this.reimbursementAmt = reimbursementAmt;
+		this.timeSubmitted = timeSubmitted;
+		this.timeResolved = timeResolved;
+		this.description = description;
+		this.employeeId = employeeId;
+		this.managerId = managerId;
+		this.statusId = statusId;
+		this.reimbursementTypeId = reimbursementTypeId;
+	}
+
+	public Reimbursement(int id, int reimbursementAmt, Timestamp timeSubmitted, Timestamp timeResolved,
+			String description, int employeeId, int managerId, int statusId, int reimbursementTypeId) {
+		super();
+		this.id = id;
+		this.reimbursementAmt = reimbursementAmt;
+		this.timeSubmitted = timeSubmitted;
+		this.timeResolved = timeResolved;
+		this.description = description;
+		this.employeeId = employeeId;
+		this.managerId = managerId;
+		this.statusId = statusId;
+		this.reimbursementTypeId = reimbursementTypeId;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int reimb_id) {
+		this.id = reimb_id;
 	}
 
 	public int getReimbursementAmt() {

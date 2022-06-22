@@ -15,10 +15,10 @@ import javax.persistence.Table;
 @Table(name="ers_users")
 public class Users {
 
-	@Id
+	@Id @Column(name="ers_users_id")
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@OneToMany(mappedBy="ers_users")
-	private int ers_user_id;
+	private int id;
 	
 	@Column(name="ers_username")
 	private String username;
@@ -67,7 +67,7 @@ public class Users {
 			int roleId, String userInfo) {
 		super();
 		this.userInfo = userInfo;
-		this.ers_user_id = ers_users_id;
+		this.id = ers_users_id;
 		this.username = username;
 		this.password = password;
 		this.firstname = firstname;
@@ -93,15 +93,15 @@ public class Users {
 
 
 
-	public int getErs_users_id() {
-		return ers_user_id;
+	public int getId() {
+		return id;
 	}
 
 
 
 
-	public void setErs_users_id(int ers_users_id) {
-		this.ers_user_id = ers_users_id;
+	public void setId(int ers_users_id) {
+		this.id = ers_users_id;
 	}
 
 
@@ -193,7 +193,7 @@ public class Users {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(email, ers_user_id, firstname, lastname, password, roleId, userInfo, username);
+		return Objects.hash(email, id, firstname, lastname, password, roleId, userInfo, username);
 	}
 
 
@@ -208,7 +208,7 @@ public class Users {
 		if (getClass() != obj.getClass())
 			return false;
 		Users other = (Users) obj;
-		return Objects.equals(email, other.email) && ers_user_id == other.ers_user_id
+		return Objects.equals(email, other.email) && id == other.id
 				&& Objects.equals(firstname, other.firstname) && Objects.equals(lastname, other.lastname)
 				&& Objects.equals(password, other.password) && roleId == other.roleId
 				&& Objects.equals(userInfo, other.userInfo) && Objects.equals(username, other.username);
@@ -219,7 +219,7 @@ public class Users {
 
 	@Override
 	public String toString() {
-		return "Users [ers_users_id=" + ers_user_id + ", username=" + username + ", password=" + password
+		return "Users [ers_users_id=" + id + ", username=" + username + ", password=" + password
 				+ ", firstname=" + firstname + ", lastname=" + lastname + ", email=" + email + ", roleId=" + roleId
 				+ ", userInfo=" + userInfo + "]";
 	}
