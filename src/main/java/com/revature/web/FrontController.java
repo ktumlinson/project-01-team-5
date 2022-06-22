@@ -12,13 +12,16 @@ import javax.servlet.http.HttpServletResponse;
 public class FrontController extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		final String URI = request.getRequestURI().replace("/project-01/", "");
+		final String URI = request.getRequestURI().replace("/employee-servlet-app/", "");
 		switch(URI) {
 		case "login":
 			RequestHelper.processLogin(request, response);
 			break;
 		case "employees":
-			// invoke get all employees from requesthelper
+			RequestHelper.processEmployees(request, response);
+			break;
+		case "register":
+			RequestHelper.processRegistration(request, response);
 			break;
 		}
 	}

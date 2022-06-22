@@ -20,6 +20,9 @@ public class EmployeeService {
 				.findFirst();
 		return (possibleEmp.isPresent() ? possibleEmp.get() : new Employee());
 	}
+	public int register(Employee e) {
+		return edao.insert(e);
+	}
 	
 	public List<Employee> getAll(){
 		return edao.findAll();

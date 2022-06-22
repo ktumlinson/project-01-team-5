@@ -7,12 +7,23 @@
 <body>
 	<h1>Welcome Employee!</h1>
 	<h3>Please Login</h3>
-	<form method="POST" action="login">
+	<form method="POST" action="login"> <!--  adds /login -->
 		<label>Username:</label>
 		<input type="text" name="username" placeholder="Enter a username"><br>
 		<label>Password:</label>
 		<input type="password" name="password" placeholder="Enter the password">	
 		<input type="submit" value="Login">
+	</form>
+	<br>
+	<br>
+	
+	
+	<form method="GET" action="registration.html">
+		<input type="submit" value="Register">
+	</form>
+	
+	<form method="GET" action="employees">
+		<input type="submit" value="See all employees">
 	</form>
 </body>
 </html>
