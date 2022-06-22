@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -15,6 +16,7 @@ public class User_Roles {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@OneToMany(mappedBy="ers_user_roles")
 	private int ers_user_role_id;
 	
 	@Column(name="user_role")

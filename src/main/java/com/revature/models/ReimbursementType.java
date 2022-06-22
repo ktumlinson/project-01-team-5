@@ -5,14 +5,17 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="ers_reimbursement_types")
 public class ReimbursementType {
 
+	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@OneToMany(mappedBy="ers_reimbursement_types")
 	private int reimb_type_id;
 	
 	@Column(name="reimb_type")
