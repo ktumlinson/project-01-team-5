@@ -15,7 +15,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="ers_users")
-public class Users {
+public class User {
 
 	@Id @Column(name="ers_users_id")
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -37,22 +37,21 @@ public class Users {
 	private String email;
 	
 	
-	@ManyToOne(targetEntity=UserRoles.class, optional=false)
-	@JoinColumn(name="user_role_id", referencedColumnName="ers_user_role_id")
-	private int roleId;
+	@ManyToOne(targetEntity=UserRole.class, optional=false)
+	private UserRole role;
 
 	@Column(name="user_information") @Basic(optional=true)
 	private String userInfo;
 	
 	
-	public Users() {
+	public User() {
 		super();
 	}
 
 
 
 
-	public Users(String username, String password, String firstname, String lastname, String email, int roleId, String userInfo) {
+	public User(String username, String password, String firstname, String lastname, String email, int roleId, String userInfo) {
 		super();
 		this.username = username;
 		this.password = password;
@@ -66,7 +65,7 @@ public class Users {
 
 
 
-	public Users(int ers_users_id, String username, String password, String firstname, String lastname, String email,
+	public User(int ers_users_id, String username, String password, String firstname, String lastname, String email,
 			int roleId, String userInfo) {
 		super();
 		this.userInfo = userInfo;
@@ -210,7 +209,7 @@ public class Users {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Users other = (Users) obj;
+		User other = (User) obj;
 		return Objects.equals(email, other.email) && id == other.id
 				&& Objects.equals(firstname, other.firstname) && Objects.equals(lastname, other.lastname)
 				&& Objects.equals(password, other.password) && roleId == other.roleId

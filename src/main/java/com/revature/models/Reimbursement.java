@@ -39,28 +39,27 @@ public class Reimbursement {
 	
 	// FK to UserId of Employee
 
-	@ManyToOne(targetEntity=Users.class, optional=false)
-	@JoinColumn(name="reimb_author", referencedColumnName="ers_users_id")
-	private int employeeId;
+	@ManyToOne(targetEntity=User.class, optional=false)
+//	@JoinColumn(name="reimb_author", referencedColumnName="ers_users_id")
+	private User employee;
 	
 	
 	// FK to UserId of Manager resolver
 
-	@ManyToOne(targetEntity=Users.class, optional=false)
-	@JoinColumn(name="reimb_resolver", referencedColumnName="ers_users_id")
-	private int managerId;
+	@ManyToOne(targetEntity=User.class, optional=false)
+//	@JoinColumn(name="reimb_resolver", referencedColumnName="ers_users_id")
+	private User managerId;
 	
 	// FK to reim_type_status
 	@ManyToOne(targetEntity=ReimbursementStatus.class, optional=false)
-	@JoinColumn(name="reimb_status_id", referencedColumnName="reimb_status_id")
-	private int statusId;
+//	@JoinColumn(name="reimb_status_id", referencedColumnName="reimb_status_id")
+	private ReimbursementStatus status;
 	
 	// FK to reim_type_id
 	@ManyToOne(targetEntity=ReimbursementType.class, optional=false)
-	@JoinColumn(name="reimb_type_id", referencedColumnName="reimb_type_id")
-	private int reimbursementId;
-
-	// CONSTRUCTORS
+//	@JoinColumn(name="reimb_type_id", referencedColumnName="reimb_type_id")
+	private ReimbursementType reimbursementType;
+	
 	
 	
 	
@@ -71,107 +70,270 @@ public class Reimbursement {
 	public Reimbursement() {
 		super();
 	}
-	
+
+
+
+
+
+
+
+
 	public Reimbursement(int reimbursementAmt, Timestamp timeSubmitted, Timestamp timeResolved, String description,
-			int employeeId, int managerId, int statusId, int reimbursementId) {
+			User employee, User managerId, ReimbursementStatus status, ReimbursementType reimbursementType) {
 		super();
 		this.reimbursementAmt = reimbursementAmt;
 		this.timeSubmitted = timeSubmitted;
 		this.timeResolved = timeResolved;
 		this.description = description;
-		this.employeeId = employeeId;
+		this.employee = employee;
 		this.managerId = managerId;
-		this.statusId = statusId;
-		this.reimbursementId = reimbursementId;
+		this.status = status;
+		this.reimbursementType = reimbursementType;
 	}
 
+
+
+
+
+
+
+
 	public Reimbursement(int id, int reimbursementAmt, Timestamp timeSubmitted, Timestamp timeResolved,
-			String description, int employeeId, int managerId, int statusId, int reimbursementId) {
+			String description, User employee, User managerId, ReimbursementStatus status,
+			ReimbursementType reimbursementType) {
 		super();
 		this.id = id;
 		this.reimbursementAmt = reimbursementAmt;
 		this.timeSubmitted = timeSubmitted;
 		this.timeResolved = timeResolved;
 		this.description = description;
-		this.employeeId = employeeId;
+		this.employee = employee;
 		this.managerId = managerId;
-		this.statusId = statusId;
-		this.reimbursementId = reimbursementId;
+		this.status = status;
+		this.reimbursementType = reimbursementType;
 	}
 
-	// GETTERS + SETTERS
-		public int getId() {
-			return id;
-		}
+
+
+
+
+
+
+
+	public int getId() {
+		return id;
+	}
+
+
+
+
+
+
+
 
 	public void setId(int id) {
 		this.id = id;
 	}
 
+
+
+
+
+
+
+
 	public int getReimbursementAmt() {
 		return reimbursementAmt;
 	}
+
+
+
+
+
+
+
 
 	public void setReimbursementAmt(int reimbursementAmt) {
 		this.reimbursementAmt = reimbursementAmt;
 	}
 
+
+
+
+
+
+
+
 	public java.sql.Timestamp getTimeSubmitted() {
 		return timeSubmitted;
 	}
+
+
+
+
+
+
+
 
 	public void setTimeSubmitted(java.sql.Timestamp timeSubmitted) {
 		this.timeSubmitted = timeSubmitted;
 	}
 
+
+
+
+
+
+
+
 	public java.sql.Timestamp getTimeResolved() {
 		return timeResolved;
 	}
+
+
+
+
+
+
+
 
 	public void setTimeResolved(java.sql.Timestamp timeResolved) {
 		this.timeResolved = timeResolved;
 	}
 
+
+
+
+
+
+
+
 	public String getDescription() {
 		return description;
 	}
+
+
+
+
+
+
+
 
 	public void setDescription(String description) {
 		this.description = description;
 	}
 
-	public int getEmployeeId() {
-		return employeeId;
+
+
+
+
+
+
+
+	public User getEmployee() {
+		return employee;
 	}
 
-	public void setEmployeeId(int employeeId) {
-		this.employeeId = employeeId;
+
+
+
+
+
+
+
+	public void setEmployee(User employee) {
+		this.employee = employee;
 	}
 
-	public int getManagerId() {
+
+
+
+
+
+
+
+	public User getManagerId() {
 		return managerId;
 	}
 
-	public void setManagerId(int managerId) {
+
+
+
+
+
+
+
+	public void setManagerId(User managerId) {
 		this.managerId = managerId;
 	}
 
-	public int getStatusId() {
-		return statusId;
+
+
+
+
+
+
+
+	public ReimbursementStatus getStatus() {
+		return status;
 	}
 
-	public void setStatusId(int statusId) {
-		this.statusId = statusId;
+
+
+
+
+
+
+
+	public void setStatus(ReimbursementStatus status) {
+		this.status = status;
 	}
 
-	public int getReimbursementId() {
-		return reimbursementId;
+
+
+
+
+
+
+
+	public ReimbursementType getReimbursementType() {
+		return reimbursementType;
 	}
 
-	public void setReimbursementId(int reimbursementId) {
-		this.reimbursementId = reimbursementId;
+
+
+
+
+
+
+
+	public void setReimbursementType(ReimbursementType reimbursementType) {
+		this.reimbursementType = reimbursementType;
 	}
 
+
+
+
+
+
+
+
+	@Override
+	public String toString() {
+		return "Reimbursement [id=" + id + ", reimbursementAmt=" + reimbursementAmt + ", timeSubmitted=" + timeSubmitted
+				+ ", timeResolved=" + timeResolved + ", description=" + description + ", employee=" + employee
+				+ ", managerId=" + managerId + ", status=" + status + ", reimbursementType=" + reimbursementType + "]";
+	}
+
+	
+	
+	
+	
+	
+	
+	
+
+	
 	
 	
 	
