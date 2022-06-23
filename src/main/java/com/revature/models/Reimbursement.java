@@ -1,6 +1,7 @@
 package com.revature.models;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -8,6 +9,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -34,30 +38,42 @@ public class Reimbursement {
 	//private String receipt;
 	
 	// FK to UserId of Employee
-	@Column(name="reimb_author")
+
+	@ManyToOne(targetEntity=Users.class, optional=false)
+	@JoinColumn(name="reimb_author", referencedColumnName="ers_users_id")
 	private int employeeId;
 	
 	
 	// FK to UserId of Manager resolver
-	@Column(name="reimb_resolver")
+
+	@ManyToOne(targetEntity=Users.class, optional=false)
+	@JoinColumn(name="reimb_resolver", referencedColumnName="ers_users_id")
 	private int managerId;
 	
 	// FK to reim_type_status
-	@Column(name="reimb_status_id")
+	@ManyToOne(targetEntity=ReimbursementStatus.class, optional=false)
+	@JoinColumn(name="reimb_status_id", referencedColumnName="reimb_status_id")
 	private int statusId;
 	
 	// FK to reim_type_id
-	@Column(name="reimb_type_id")
-	private int reimbursementTypeId;
+	@ManyToOne(targetEntity=ReimbursementType.class, optional=false)
+	@JoinColumn(name="reimb_type_id", referencedColumnName="reimb_type_id")
+	private int reimbursementId;
 
+	// CONSTRUCTORS
 	
 	
+	
+	
+	
+	
+
 	public Reimbursement() {
 		super();
 	}
-
+	
 	public Reimbursement(int reimbursementAmt, Timestamp timeSubmitted, Timestamp timeResolved, String description,
-			int employeeId, int managerId, int statusId, int reimbursementTypeId) {
+			int employeeId, int managerId, int statusId, int reimbursementId) {
 		super();
 		this.reimbursementAmt = reimbursementAmt;
 		this.timeSubmitted = timeSubmitted;
@@ -66,11 +82,11 @@ public class Reimbursement {
 		this.employeeId = employeeId;
 		this.managerId = managerId;
 		this.statusId = statusId;
-		this.reimbursementTypeId = reimbursementTypeId;
+		this.reimbursementId = reimbursementId;
 	}
 
 	public Reimbursement(int id, int reimbursementAmt, Timestamp timeSubmitted, Timestamp timeResolved,
-			String description, int employeeId, int managerId, int statusId, int reimbursementTypeId) {
+			String description, int employeeId, int managerId, int statusId, int reimbursementId) {
 		super();
 		this.id = id;
 		this.reimbursementAmt = reimbursementAmt;
@@ -80,15 +96,16 @@ public class Reimbursement {
 		this.employeeId = employeeId;
 		this.managerId = managerId;
 		this.statusId = statusId;
-		this.reimbursementTypeId = reimbursementTypeId;
+		this.reimbursementId = reimbursementId;
 	}
 
-	public int getId() {
-		return id;
-	}
+	// GETTERS + SETTERS
+		public int getId() {
+			return id;
+		}
 
-	public void setId(int reimb_id) {
-		this.id = reimb_id;
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public int getReimbursementAmt() {
@@ -147,13 +164,17 @@ public class Reimbursement {
 		this.statusId = statusId;
 	}
 
-	public int getReimbursementTypeId() {
-		return reimbursementTypeId;
+	public int getReimbursementId() {
+		return reimbursementId;
 	}
 
-	public void setReimbursementTypeId(int reimbursementTypeId) {
-		this.reimbursementTypeId = reimbursementTypeId;
+	public void setReimbursementId(int reimbursementId) {
+		this.reimbursementId = reimbursementId;
 	}
+
+	
+	
+	
 	
 	
 	

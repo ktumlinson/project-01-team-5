@@ -16,7 +16,6 @@ public class UserRoles {
 
 	@Id @Column(name="ers_user_role_id")
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@OneToMany(mappedBy="ers_user_roles")
 	private int id;
 	
 	@Column(name="user_role")
@@ -36,6 +35,8 @@ public class UserRoles {
 	public UserRoles() {
 		super();
 	}
+	
+	// GETTERS + SETTERS
 
 	public int getId() {
 		return id;

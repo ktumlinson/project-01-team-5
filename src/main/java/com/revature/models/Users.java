@@ -8,6 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -17,7 +19,6 @@ public class Users {
 
 	@Id @Column(name="ers_users_id")
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@OneToMany(mappedBy="ers_users")
 	private int id;
 	
 	@Column(name="ers_username")
@@ -35,7 +36,9 @@ public class Users {
 	@Column(name="user_email")
 	private String email;
 	
-	@Column(name="user_role_id")
+	
+	@ManyToOne(targetEntity=UserRoles.class, optional=false)
+	@JoinColumn(name="user_role_id", referencedColumnName="ers_user_role_id")
 	private int roleId;
 
 	@Column(name="user_information") @Basic(optional=true)

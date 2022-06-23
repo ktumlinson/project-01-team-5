@@ -14,7 +14,6 @@ public class ReimbursementStatus {
 	
 	@Id @Column(name="reimb_status_id")
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@OneToMany(mappedBy="ers_reimbursement_status")
 	private int id;
 	
 	@Column(name="reimb_status")
