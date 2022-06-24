@@ -51,12 +51,25 @@ public class User {
 	private String userInfo;
 
 
+<<<<<<< HEAD
 
 	public User(int id, String username, String password, String firstname, String lastname, String email,
 			UserRole role, String userInfo) {
 
 		super();
 		this.id = id;
+=======
+	
+	
+	public User() {
+		super();
+	}
+
+
+	public User(String username, String password, String firstname, String lastname, String email, UserRole role,
+			String userInfo) {
+		super();
+>>>>>>> 3ab5fcb
 		this.username = username;
 		this.password = password;
 		this.firstname = firstname;
@@ -67,11 +80,18 @@ public class User {
 	}
 
 
+<<<<<<< HEAD
 
 	public User(String username, String password, String firstname, String lastname, String email, UserRole role,
 			String userInfo) {
 
 		super();
+=======
+	public User(int id, String username, String password, String firstname, String lastname, String email,
+			UserRole role, String userInfo) {
+		super();
+		this.id = id;
+>>>>>>> 3ab5fcb
 		this.username = username;
 		this.password = password;
 		this.firstname = firstname;
@@ -82,6 +102,7 @@ public class User {
 	}
 
 
+<<<<<<< HEAD
 	public User() {
 		super();
 	}
@@ -116,6 +137,8 @@ public class User {
 	}
 
 
+=======
+>>>>>>> 3ab5fcb
 	public int getId() {
 		return id;
 	}
@@ -186,11 +209,52 @@ public class User {
 	}
 
 
+<<<<<<< HEAD
 
 
 
 
 
+=======
+	public String getUserInfo() {
+		return userInfo;
+	}
+
+
+	public void setUserInfo(String userInfo) {
+		this.userInfo = userInfo;
+	}
+
+
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", username=" + username + ", password=" + password + ", firstname=" + firstname
+				+ ", lastname=" + lastname + ", email=" + email + ", role=" + role + ", userInfo=" + userInfo + "]";
+	}
+
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(email, firstname, id, lastname, password, role, userInfo, username);
+	}
+
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		User other = (User) obj;
+		return Objects.equals(email, other.email) && Objects.equals(firstname, other.firstname) && id == other.id
+				&& Objects.equals(lastname, other.lastname) && Objects.equals(password, other.password)
+				&& Objects.equals(role, other.role) && Objects.equals(userInfo, other.userInfo)
+				&& Objects.equals(username, other.username);
+	}
+	
+>>>>>>> 3ab5fcb
 	
 	
 	
