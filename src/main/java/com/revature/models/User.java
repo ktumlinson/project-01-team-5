@@ -40,8 +40,7 @@ public class User {
 	private String email;
 	
 
-	
-	@ManyToOne(targetEntity=EUserRole.class, optional=false)
+
 	@Enumerated(EnumType.STRING)
 	private EUserRole role;
 

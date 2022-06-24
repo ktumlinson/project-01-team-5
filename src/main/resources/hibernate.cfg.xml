@@ -28,7 +28,7 @@
       <property name="hibernate.default_schema">public</property>
       
       <!-- CREATE will drop any existing tables and RE-CREATE our tables -->
-      <property name="hibernate.hbm2ddl.auto">create</property>
+      <property name="hibernate.hbm2ddl.auto">update</property>
       		
 		<!-- UPDATE: wouldn't delete anything, but would add tables or object  -->
 		<!-- VALIDATE: best for production checks to make sure that everything in the DB is as expected -->
@@ -42,11 +42,11 @@
       
       <!-- List of persistent classes -->
       <mapping class = "com.revature.models.Employee"/>
+      <mapping class = "com.revature.models.EReimbursementStatus"/>
+      <mapping class = "com.revature.models.EReimbursementType"/>
+      <mapping class = "com.revature.models.EUserRole"/>
       <mapping class = "com.revature.models.Reimbursement"/>
-      <mapping class = "com.revature.models.ReimbursementStatus"/>
-      <mapping class = "com.revature.models.ReimbursementType"/>
-      <mapping class = "com.revature.models.UserRoles"/>
-      <mapping class = "com.revature.models.Users"/>
+      <mapping class = "com.revature.models.User"/>
       
    </session-factory>
 </hibernate-configuration>
