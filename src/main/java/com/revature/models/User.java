@@ -12,11 +12,11 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import com.revature.models.UserRoles.UserRole;
+
 
 @Entity
 @Table(name="ers_users")
-public class Users {
+public class User {
 
 	@Id @Column(name="ers_users_id")
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
