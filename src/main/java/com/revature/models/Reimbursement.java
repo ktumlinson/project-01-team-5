@@ -1,6 +1,7 @@
 package com.revature.models;
 
 import java.sql.Timestamp;
+import java.util.Objects;
 
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -56,4 +57,138 @@ public class Reimbursement {
 	@ManyToOne(targetEntity = User.class, optional = false)
 //	@JoinColumn(name="reimb_resolver", referencedColumnName="ers_users_id")
 	private User managerId;
+
+	public Reimbursement(int id, EReimbursementType type, EReimbursementStatus status, int reimbursementAmt,
+			Timestamp timeSubmitted, Timestamp timeResolved, String description, User employee, User managerId) {
+		super();
+		this.id = id;
+		this.type = type;
+		this.status = status;
+		this.reimbursementAmt = reimbursementAmt;
+		this.timeSubmitted = timeSubmitted;
+		this.timeResolved = timeResolved;
+		this.description = description;
+		this.employee = employee;
+		this.managerId = managerId;
+	}
+
+	public Reimbursement(EReimbursementType type, EReimbursementStatus status, int reimbursementAmt,
+			Timestamp timeSubmitted, Timestamp timeResolved, String description, User employee, User managerId) {
+		super();
+		this.type = type;
+		this.status = status;
+		this.reimbursementAmt = reimbursementAmt;
+		this.timeSubmitted = timeSubmitted;
+		this.timeResolved = timeResolved;
+		this.description = description;
+		this.employee = employee;
+		this.managerId = managerId;
+	}
+
+	public Reimbursement() {
+		super();
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(description, employee, id, managerId, reimbursementAmt, status, timeResolved, timeSubmitted,
+				type);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Reimbursement other = (Reimbursement) obj;
+		return Objects.equals(description, other.description) && Objects.equals(employee, other.employee)
+				&& id == other.id && Objects.equals(managerId, other.managerId)
+				&& reimbursementAmt == other.reimbursementAmt && status == other.status
+				&& Objects.equals(timeResolved, other.timeResolved)
+				&& Objects.equals(timeSubmitted, other.timeSubmitted) && type == other.type;
+	}
+
+	@Override
+	public String toString() {
+		return "Reimbursement [id=" + id + ", type=" + type + ", status=" + status + ", reimbursementAmt="
+				+ reimbursementAmt + ", timeSubmitted=" + timeSubmitted + ", timeResolved=" + timeResolved
+				+ ", description=" + description + ", employee=" + employee + ", managerId=" + managerId + "]";
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public EReimbursementType getType() {
+		return type;
+	}
+
+	public void setType(EReimbursementType type) {
+		this.type = type;
+	}
+
+	public EReimbursementStatus getStatus() {
+		return status;
+	}
+
+	public void setStatus(EReimbursementStatus status) {
+		this.status = status;
+	}
+
+	public int getReimbursementAmt() {
+		return reimbursementAmt;
+	}
+
+	public void setReimbursementAmt(int reimbursementAmt) {
+		this.reimbursementAmt = reimbursementAmt;
+	}
+
+	public java.sql.Timestamp getTimeSubmitted() {
+		return timeSubmitted;
+	}
+
+	public void setTimeSubmitted(java.sql.Timestamp timeSubmitted) {
+		this.timeSubmitted = timeSubmitted;
+	}
+
+	public java.sql.Timestamp getTimeResolved() {
+		return timeResolved;
+	}
+
+	public void setTimeResolved(java.sql.Timestamp timeResolved) {
+		this.timeResolved = timeResolved;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public User getEmployee() {
+		return employee;
+	}
+
+	public void setEmployee(User employee) {
+		this.employee = employee;
+	}
+
+	public User getManagerId() {
+		return managerId;
+	}
+
+	public void setManagerId(User managerId) {
+		this.managerId = managerId;
+	}
+	
+	
 }
