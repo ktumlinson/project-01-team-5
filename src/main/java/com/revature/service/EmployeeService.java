@@ -8,7 +8,7 @@ import com.revature.models.Employee;
 
 public class EmployeeService {
 
-	EmployeeDao edao;
+	EmployeeDao edao; // this will probably have to change a bit due to the new stuff
 	
 	public EmployeeService(EmployeeDao edao) {
 		this.edao = edao;
