@@ -5,13 +5,17 @@ import java.util.Objects;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
+
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+
 
 @Entity
 @Table(name="ers_users")
@@ -36,169 +40,57 @@ public class User {
 	@Column(name="user_email")
 	private String email;
 	
-	
-	@ManyToOne(targetEntity=UserRole.class, optional=false)
-	private UserRole role;
 
+
+
+	@Enumerated(EnumType.STRING)
+	private EUserRole role;
+
+	
 	@Column(name="user_information") @Basic(optional=true)
 	private String userInfo;
-	
-	
+
+
+
+	public User(int id, String username, String password, String firstname, String lastname, String email,
+			EUserRole role, String userInfo) {
+
+		super();
+		this.id = id;
+		this.username = username;
+		this.password = password;
+		this.firstname = firstname;
+		this.lastname = lastname;
+		this.email = email;
+		this.role = role;
+		this.userInfo = userInfo;
+	}
+
+
+
+	public User(String username, String password, String firstname, String lastname, String email, EUserRole role,
+			String userInfo) {
+
+		super();
+		this.username = username;
+		this.password = password;
+		this.firstname = firstname;
+		this.lastname = lastname;
+		this.email = email;
+		this.role = role;
+		this.userInfo = userInfo;
+	}
+
+
 	public User() {
 		super();
 	}
 
 
-
-
-	public User(String username, String password, String firstname, String lastname, String email, int roleId, String userInfo) {
-		super();
-		this.username = username;
-		this.password = password;
-		this.firstname = firstname;
-		this.lastname = lastname;
-		this.email = email;
-		this.roleId = roleId;
-		this.userInfo = userInfo;
-	}
-
-
-
-
-	public User(int ers_users_id, String username, String password, String firstname, String lastname, String email,
-			int roleId, String userInfo) {
-		super();
-		this.userInfo = userInfo;
-		this.id = ers_users_id;
-		this.username = username;
-		this.password = password;
-		this.firstname = firstname;
-		this.lastname = lastname;
-		this.email = email;
-		this.roleId = roleId;
-	}
-
-
-
-
-	public String getUserInfo() {
-		return userInfo;
-	}
-
-
-
-
-	public void setUserInfo(String userInfo) {
-		this.userInfo = userInfo;
-	}
-
-
-
-
-	public int getId() {
-		return id;
-	}
-
-
-
-
-	public void setId(int ers_users_id) {
-		this.id = ers_users_id;
-	}
-
-
-
-
-	public String getUsername() {
-		return username;
-	}
-
-
-
-
-	public void setUsername(String username) {
-		this.username = username;
-	}
-
-
-
-
-	public String getPassword() {
-		return password;
-	}
-
-
-
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
-
-
-
-	public String getFirstname() {
-		return firstname;
-	}
-
-
-
-
-	public void setFirstname(String firstname) {
-		this.firstname = firstname;
-	}
-
-
-
-
-	public String getLastname() {
-		return lastname;
-	}
-
-
-
-
-	public void setLastname(String lastname) {
-		this.lastname = lastname;
-	}
-
-
-
-
-	public String getEmail() {
-		return email;
-	}
-
-
-
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-
-
-
-	public int getRoleId() {
-		return roleId;
-	}
-
-
-
-
-	public void setRoleId(int roleId) {
-		this.roleId = roleId;
-	}
-
-
-
-
 	@Override
 	public int hashCode() {
-		return Objects.hash(email, id, firstname, lastname, password, roleId, userInfo, username);
+		return Objects.hash(email, firstname, id, lastname, password, role, userInfo, username);
 	}
-
-
 
 
 	@Override
@@ -210,25 +102,104 @@ public class User {
 		if (getClass() != obj.getClass())
 			return false;
 		User other = (User) obj;
-		return Objects.equals(email, other.email) && id == other.id
-				&& Objects.equals(firstname, other.firstname) && Objects.equals(lastname, other.lastname)
-				&& Objects.equals(password, other.password) && roleId == other.roleId
-				&& Objects.equals(userInfo, other.userInfo) && Objects.equals(username, other.username);
+		return Objects.equals(email, other.email) && Objects.equals(firstname, other.firstname) && id == other.id
+				&& Objects.equals(lastname, other.lastname) && Objects.equals(password, other.password)
+				&& Objects.equals(role, other.role) && Objects.equals(userInfo, other.userInfo)
+				&& Objects.equals(username, other.username);
 	}
-
-
 
 
 	@Override
 	public String toString() {
-		return "Users [ers_users_id=" + id + ", username=" + username + ", password=" + password
-				+ ", firstname=" + firstname + ", lastname=" + lastname + ", email=" + email + ", roleId=" + roleId
-				+ ", userInfo=" + userInfo + "]";
+		return "User [id=" + id + ", username=" + username + ", password=" + password + ", firstname=" + firstname
+				+ ", lastname=" + lastname + ", email=" + email + ", role=" + role + ", userInfo=" + userInfo + "]";
 	}
-	
-	
-	
+
+
+	public int getId() {
+		return id;
+	}
+
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+
+	public String getUsername() {
+		return username;
+	}
+
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+
+	public String getPassword() {
+		return password;
+	}
+
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+
+	public String getFirstname() {
+		return firstname;
+	}
+
+
+	public void setFirstname(String firstname) {
+		this.firstname = firstname;
+	}
+
+
+	public String getLastname() {
+		return lastname;
+	}
+
+
+	public void setLastname(String lastname) {
+		this.lastname = lastname;
+	}
+
+
+	public String getEmail() {
+		return email;
+	}
+
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+
+	public EUserRole getRole() {
+		return role;
+	}
+
+
+	public void setRole(EUserRole role) {
+		this.role = role;
+	}
+
+
+
+
+
+
+
 	
 	
 	
 }
+	
+	
+	
+	
+	
+	
+	
+
