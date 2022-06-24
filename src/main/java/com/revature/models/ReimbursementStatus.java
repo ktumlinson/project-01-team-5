@@ -3,10 +3,11 @@ package com.revature.models;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -17,8 +18,9 @@ public class ReimbursementStatus {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 	
+	@Enumerated(EnumType.STRING)
 	@Column(name="reimb_status")
-	private String reimbursementStatus;
+	private ReimbursementStatusEnum reimbursementStatus;
 
 	
 	
@@ -26,12 +28,12 @@ public class ReimbursementStatus {
 		super();
 	}
 
-	public ReimbursementStatus(String reimbursementStatus) {
+	public ReimbursementStatus(ReimbursementStatusEnum reimbursementStatus) {
 		super();
 		this.reimbursementStatus = reimbursementStatus;
 	}
 
-	public ReimbursementStatus(int id, String reimbursementStatus) {
+	public ReimbursementStatus(int id, ReimbursementStatusEnum reimbursementStatus) {
 		super();
 		this.id = id;
 		this.reimbursementStatus = reimbursementStatus;
@@ -45,11 +47,11 @@ public class ReimbursementStatus {
 		this.id = id;
 	}
 
-	public String getReimbursementStatus() {
+	public ReimbursementStatusEnum getReimbursementStatus() {
 		return reimbursementStatus;
 	}
 
-	public void setReimbursementStatus(String reimbursementStatus) {
+	public void setReimbursementStatus(ReimbursementStatusEnum reimbursementStatus) {
 		this.reimbursementStatus = reimbursementStatus;
 	}
 	

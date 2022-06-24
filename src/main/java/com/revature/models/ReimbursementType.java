@@ -3,6 +3,8 @@ package com.revature.models;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -18,8 +20,9 @@ public class ReimbursementType {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 	
+	@Enumerated(EnumType.STRING)
 	@Column(name="reimb_type")
-	private String status;
+	private ReimbursementTypeEnum status;
 
 	
 	
@@ -27,12 +30,12 @@ public class ReimbursementType {
 		super();
 	}
 
-	public ReimbursementType(String status) {
+	public ReimbursementType(ReimbursementTypeEnum status) {
 		super();
 		this.status = status;
 	}
 
-	public ReimbursementType(int id, String status) {
+	public ReimbursementType(int id, ReimbursementTypeEnum status) {
 		super();
 		this.id = id;
 		this.status = status;
@@ -46,11 +49,11 @@ public class ReimbursementType {
 		this.id = reimb_type_id;
 	}
 
-	public String getStatus() {
+	public ReimbursementTypeEnum getStatus() {
 		return status;
 	}
 
-	public void setStatus(String status) {
+	public void setStatus(ReimbursementTypeEnum status) {
 		this.status = status;
 	}
 	
