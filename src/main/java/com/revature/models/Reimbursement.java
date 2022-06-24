@@ -1,15 +1,7 @@
 package com.revature.models;
 
-<<<<<<< HEAD
-import java.sql.Timestamp;
-
 import java.util.Objects;
 
-
-=======
-import java.util.Objects;
-
->>>>>>> 3ab5fcb
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -18,9 +10,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-
 import javax.persistence.ManyToOne;
-
 import javax.persistence.Table;
 
 @Entity
@@ -31,14 +21,6 @@ public class Reimbursement {
 	@Column(name = "reimb_id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	
-	@Column(name="reimb_type")
-	@Enumerated(EnumType.STRING)
-	private ReimbursementType type;
-	
-	@Column(name="reimb_status")
-	@Enumerated(EnumType.STRING)
-	private ReimbursementStatus status;
 
 	@Column(name = "reimb_amount")
 	private int reimbursementAmt;
@@ -59,218 +41,28 @@ public class Reimbursement {
 
 	// FK to UserId of Employee
 
+
 	@ManyToOne(targetEntity = User.class, optional = false)
 //	@JoinColumn(name="reimb_author", referencedColumnName="ers_users_id")
 	private User employee;
 
 	// FK to UserId of Manager resolver
+
 	@ManyToOne(targetEntity = User.class, optional = false)
 //	@JoinColumn(name="reimb_resolver", referencedColumnName="ers_users_id")
 	private User managerId;
 
-	public Reimbursement(int id, ReimbursementType type, ReimbursementStatus status, int reimbursementAmt,
-			Timestamp timeSubmitted, Timestamp timeResolved, String description, User employee, User managerId) {
-
-		super();
-		this.id = id;
-		this.type = type;
-		this.status = status;
-		this.reimbursementAmt = reimbursementAmt;
-		this.timeSubmitted = timeSubmitted;
-		this.timeResolved = timeResolved;
-		this.description = description;
-		this.employee = employee;
-		this.managerId = managerId;
-
-	}
-
-	public Reimbursement(ReimbursementType type, ReimbursementStatus status, int reimbursementAmt,
-			Timestamp timeSubmitted, Timestamp timeResolved, String description, User employee, User managerId) {
-
-		super();
-		this.type = type;
-		this.status = status;
-		this.reimbursementAmt = reimbursementAmt;
-		this.timeSubmitted = timeSubmitted;
-		this.timeResolved = timeResolved;
-		this.description = description;
-		this.employee = employee;
-		this.managerId = managerId;
-
-	}
-
-	public Reimbursement() {
-		super();
-	}
-
-	@Override
-	public int hashCode() {
-		return Objects.hash(description, employee, id, managerId, reimbursementAmt, status, timeResolved, timeSubmitted,
-				type);
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Reimbursement other = (Reimbursement) obj;
-		return Objects.equals(description, other.description) && Objects.equals(employee, other.employee)
-				&& id == other.id && Objects.equals(managerId, other.managerId)
-				&& reimbursementAmt == other.reimbursementAmt && status == other.status
-				&& Objects.equals(timeResolved, other.timeResolved)
-				&& Objects.equals(timeSubmitted, other.timeSubmitted) && type == other.type;
-	}
-
-	@Override
-	public String toString() {
-		return "Reimbursement [id=" + id + ", type=" + type + ", status=" + status + ", reimbursementAmt="
-				+ reimbursementAmt + ", timeSubmitted=" + timeSubmitted + ", timeResolved=" + timeResolved
-				+ ", description=" + description + ", employee=" + employee + ", managerId=" + managerId + "]";
-
-	}
-
-
-
-
-
-
-
-
-	public int getId() {
-		return id;
-	}
-
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	public ReimbursementType getType() {
-		return type;
-	}
-
-	public void setType(ReimbursementType type) {
-		this.type = type;
-	}
-
-	public ReimbursementStatus getStatus() {
-		return status;
-	}
-
-	public void setStatus(ReimbursementStatus status) {
-		this.status = status;
-
-	}
-
-
-
-
-
-
-
-
-	public int getReimbursementAmt() {
-		return reimbursementAmt;
-	}
-
-
-
-
-
-
-
-
-	public void setReimbursementAmt(int reimbursementAmt) {
-		this.reimbursementAmt = reimbursementAmt;
-	}
-
-
-
-
-
-
-
-
-	public java.sql.Timestamp getTimeSubmitted() {
-		return timeSubmitted;
-	}
-
-
-
-
-
-
-
-
-	public void setTimeSubmitted(java.sql.Timestamp timeSubmitted) {
-		this.timeSubmitted = timeSubmitted;
-	}
-
-
-
-
-
-
-
-
-	public java.sql.Timestamp getTimeResolved() {
-		return timeResolved;
-	}
-
-
-
-
-
-
-
-
-	public void setTimeResolved(java.sql.Timestamp timeResolved) {
-		this.timeResolved = timeResolved;
-	}
-
-
-
-
-
-
-
-
-	public String getDescription() {
-		return description;
-	}
-
-
-
-
-
-
-
-
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
-
-
-	public User getEmployee() {
-		return employee;
-	}
-
-
-
-	public void setEmployee(User employee) {
-		this.employee = employee;
-	}
-
-
-
-	public User getManagerId() {
-		return managerId;
-	}
+	// FK to reim_type_status
+	@ManyToOne(targetEntity = ReimbursementStatus.class, optional = false)
+	@Enumerated(EnumType.STRING)
+//	@JoinColumn(name="reimb_status_id", referencedColumnName="reimb_status_id")
+	private ReimbursementStatus status;
+
+	// FK to reim_type_id
+	@ManyToOne(targetEntity = ReimbursementType.class, optional = false)
+	@Enumerated(EnumType.STRING)
+//	@JoinColumn(name="reimb_type_id", referencedColumnName="reimb_type_id")
+	private ReimbursementType reimbursementType;
 
 	public int getId() {
 		return id;
@@ -374,9 +166,6 @@ public class Reimbursement {
 				+ ", managerId=" + managerId + ", status=" + status + ", reimbursementType=" + reimbursementType + "]";
 	}
 
-<<<<<<< HEAD
-=======
 	
 	
->>>>>>> 3ab5fcb
 }

@@ -1,5 +1,6 @@
 package com.revature.dao;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 
@@ -8,9 +9,16 @@ import org.hibernate.Transaction;
 
 import com.revature.models.Reimbursement;
 import com.revature.models.User;
+import com.revature.models.UserRole;
 import com.revature.util.HibernateUtil;
 
 public class UserDaoImpl implements IUserDao{
+	
+	public static HashMap<UserRole, Integer> map = new HashMap<>();
+	{
+		map.put(UserRole.EMPLOYEE, 0);
+		map.put(UserRole.MANAGER, 1);
+	}
 
 	@Override
 	public int insert(User u) {

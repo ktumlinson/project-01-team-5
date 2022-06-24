@@ -10,7 +10,6 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -41,24 +40,16 @@ public class User {
 	private String email;
 	
 
-
-
+	
+	@ManyToOne(targetEntity=UserRole.class, optional=false)
 	@Enumerated(EnumType.STRING)
 	private UserRole role;
 
-	
+
 	@Column(name="user_information") @Basic(optional=true)
 	private String userInfo;
 
 
-<<<<<<< HEAD
-
-	public User(int id, String username, String password, String firstname, String lastname, String email,
-			UserRole role, String userInfo) {
-
-		super();
-		this.id = id;
-=======
 	
 	
 	public User() {
@@ -69,7 +60,6 @@ public class User {
 	public User(String username, String password, String firstname, String lastname, String email, UserRole role,
 			String userInfo) {
 		super();
->>>>>>> 3ab5fcb
 		this.username = username;
 		this.password = password;
 		this.firstname = firstname;
@@ -80,18 +70,10 @@ public class User {
 	}
 
 
-<<<<<<< HEAD
-
-	public User(String username, String password, String firstname, String lastname, String email, UserRole role,
-			String userInfo) {
-
-		super();
-=======
 	public User(int id, String username, String password, String firstname, String lastname, String email,
 			UserRole role, String userInfo) {
 		super();
 		this.id = id;
->>>>>>> 3ab5fcb
 		this.username = username;
 		this.password = password;
 		this.firstname = firstname;
@@ -102,43 +84,6 @@ public class User {
 	}
 
 
-<<<<<<< HEAD
-	public User() {
-		super();
-	}
-
-
-	@Override
-	public int hashCode() {
-		return Objects.hash(email, firstname, id, lastname, password, role, userInfo, username);
-	}
-
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		User other = (User) obj;
-		return Objects.equals(email, other.email) && Objects.equals(firstname, other.firstname) && id == other.id
-				&& Objects.equals(lastname, other.lastname) && Objects.equals(password, other.password)
-				&& Objects.equals(role, other.role) && Objects.equals(userInfo, other.userInfo)
-				&& Objects.equals(username, other.username);
-	}
-
-
-	@Override
-	public String toString() {
-		return "User [id=" + id + ", username=" + username + ", password=" + password + ", firstname=" + firstname
-				+ ", lastname=" + lastname + ", email=" + email + ", role=" + role + ", userInfo=" + userInfo + "]";
-	}
-
-
-=======
->>>>>>> 3ab5fcb
 	public int getId() {
 		return id;
 	}
@@ -209,13 +154,6 @@ public class User {
 	}
 
 
-<<<<<<< HEAD
-
-
-
-
-
-=======
 	public String getUserInfo() {
 		return userInfo;
 	}
@@ -254,10 +192,10 @@ public class User {
 				&& Objects.equals(username, other.username);
 	}
 	
->>>>>>> 3ab5fcb
 	
 	
 	
+
 }
 	
 	
@@ -266,4 +204,3 @@ public class User {
 	
 	
 	
-

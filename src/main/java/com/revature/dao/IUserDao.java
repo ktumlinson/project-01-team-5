@@ -1,12 +1,16 @@
 package com.revature.dao;
 
 
+import java.util.HashMap;
 import java.util.List;
 
 import com.revature.models.User;
+import com.revature.models.UserRole;
 
 public interface IUserDao {
 	// CRUD
+	
+	
 	
 	// create
 	public int insert(User u);
