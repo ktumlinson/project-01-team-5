@@ -1,6 +1,6 @@
 package com.revature.models;
 
-public enum EReimbursementType {
+public enum ReimbursementType {
 	LODGING,
 	TRAVEL,
 	FOOD,

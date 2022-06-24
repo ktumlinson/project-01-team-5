@@ -29,11 +29,11 @@ public class Reimbursement {
 	
 	@Column(name="reimb_type")
 	@Enumerated(EnumType.STRING)
-	private EReimbursementType type;
+	private ReimbursementType type;
 	
 	@Column(name="reimb_status")
 	@Enumerated(EnumType.STRING)
-	private EReimbursementStatus status;
+	private ReimbursementStatus status;
 
 	@Column(name = "reimb_amount")
 	private int reimbursementAmt;
@@ -63,7 +63,7 @@ public class Reimbursement {
 //	@JoinColumn(name="reimb_resolver", referencedColumnName="ers_users_id")
 	private User managerId;
 
-	public Reimbursement(int id, EReimbursementType type, EReimbursementStatus status, int reimbursementAmt,
+	public Reimbursement(int id, ReimbursementType type, ReimbursementStatus status, int reimbursementAmt,
 			Timestamp timeSubmitted, Timestamp timeResolved, String description, User employee, User managerId) {
 
 		super();
@@ -79,7 +79,7 @@ public class Reimbursement {
 
 	}
 
-	public Reimbursement(EReimbursementType type, EReimbursementStatus status, int reimbursementAmt,
+	public Reimbursement(ReimbursementType type, ReimbursementStatus status, int reimbursementAmt,
 			Timestamp timeSubmitted, Timestamp timeResolved, String description, User employee, User managerId) {
 
 		super();
@@ -144,19 +144,19 @@ public class Reimbursement {
 		this.id = id;
 	}
 
-	public EReimbursementType getType() {
+	public ReimbursementType getType() {
 		return type;
 	}
 
-	public void setType(EReimbursementType type) {
+	public void setType(ReimbursementType type) {
 		this.type = type;
 	}
 
-	public EReimbursementStatus getStatus() {
+	public ReimbursementStatus getStatus() {
 		return status;
 	}
 
-	public void setStatus(EReimbursementStatus status) {
+	public void setStatus(ReimbursementStatus status) {
 		this.status = status;
 
 	}

@@ -44,7 +44,7 @@ public class User {
 
 
 	@Enumerated(EnumType.STRING)
-	private EUserRole role;
+	private UserRole role;
 
 	
 	@Column(name="user_information") @Basic(optional=true)
@@ -53,7 +53,7 @@ public class User {
 
 
 	public User(int id, String username, String password, String firstname, String lastname, String email,
-			EUserRole role, String userInfo) {
+			UserRole role, String userInfo) {
 
 		super();
 		this.id = id;
@@ -68,7 +68,7 @@ public class User {
 
 
 
-	public User(String username, String password, String firstname, String lastname, String email, EUserRole role,
+	public User(String username, String password, String firstname, String lastname, String email, UserRole role,
 			String userInfo) {
 
 		super();
@@ -176,12 +176,12 @@ public class User {
 	}
 
 
-	public EUserRole getRole() {
+	public UserRole getRole() {
 		return role;
 	}
 
 
-	public void setRole(EUserRole role) {
+	public void setRole(UserRole role) {
 		this.role = role;
 	}
 

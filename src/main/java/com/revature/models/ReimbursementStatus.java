@@ -1,6 +1,6 @@
 package com.revature.models;
 
-public enum EReimbursementStatus {
+public enum ReimbursementStatus {
 	REJECTED,
 	APPROVED,
 	PENDING

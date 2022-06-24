@@ -43,19 +43,13 @@
       <property name="hibernate.show_sql">true</property>
       
       <!-- List of persistent classes -->
-<<<<<<< HEAD
-		<mapping class = "com.revature.models.Employee"/> 
-      <mapping class = "com.revature.models.Reimbursement"/>
+		
+      <mapping class = "com.revature.models.Employee"/>
       <mapping class = "com.revature.models.ReimbursementStatus"/>
       <mapping class = "com.revature.models.ReimbursementType"/>
       <mapping class = "com.revature.models.UserRole"/>
-=======
-      <mapping class = "com.revature.models.Employee"/>
-      <mapping class = "com.revature.models.EReimbursementStatus"/>
-      <mapping class = "com.revature.models.EReimbursementType"/>
-      <mapping class = "com.revature.models.EUserRole"/>
       <mapping class = "com.revature.models.Reimbursement"/>
->>>>>>> main
+
       <mapping class = "com.revature.models.User"/>
       
    </session-factory>
