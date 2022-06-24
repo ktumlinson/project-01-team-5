@@ -20,7 +20,6 @@ public class User {
 
 	@Id @Column(name="ers_users_id")
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@OneToMany(mappedBy="ers_users")
 	private int id;
 	
 	@Column(name="ers_username")

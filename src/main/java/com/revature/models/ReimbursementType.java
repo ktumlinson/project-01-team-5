@@ -16,7 +16,6 @@ public class ReimbursementType {
 	
 	@Id @Column(name="reimb_type_id")
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@OneToMany(mappedBy="ers_reimbursement_types")
 	private int id;
 	
 	@Column(name="reimb_type")
