@@ -17,4 +17,4 @@ buildNumber.properties
 **/logs/*
 .vscode
 .metadata/
-src/main/resources/hibernate.cfg.xml
+/src/main/resources/hibernate.cfg.xml
