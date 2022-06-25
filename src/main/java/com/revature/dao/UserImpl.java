@@ -49,8 +49,10 @@ public class UserImpl implements IUserDao{
 			return false;
 		}
 		Session ses = HibernateUtil.getSession();
+		Transaction tx = ses.getTransaction();
 		ses.merge(u.getId());
 		User current = findUserById(u.getId());
+		tx.commit();
 		
 		// if the user and current have the same values then return true
 		return (u.toString().equals(current.toString()) ? true : false);
@@ -62,7 +64,9 @@ public class UserImpl implements IUserDao{
 			return false;
 		}
 		Session ses = HibernateUtil.getSession();
+		Transaction tx = ses.getTransaction();
 		ses.remove(u.getId());
+		tx.commit();
 		User current = findUserById(u.getId());
 		
 		return (current.getId() == 0 ? true : false);

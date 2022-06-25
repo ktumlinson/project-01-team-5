@@ -41,7 +41,9 @@ public class ReimbursementImpl implements IReimbursementDao{
 			return false;
 		}
 		Session ses = HibernateUtil.getSession();
+		Transaction tx = ses.getTransaction();
 		ses.merge(r.getId());
+		tx.commit();
 		Reimbursement current = findReimbursementById(r.getId());
 		
 		// if the user and current have the same values then return true
@@ -54,7 +56,9 @@ public class ReimbursementImpl implements IReimbursementDao{
 			return false;
 		}
 		Session ses = HibernateUtil.getSession();
+		Transaction tx = ses.getTransaction();
 		ses.remove(r.getId());
+		tx.commit();
 		Reimbursement current = findReimbursementById(r.getId());
 		
 		return (current.getId() == 0 ? true : false);
