@@ -1,0 +1,29 @@
+<!-- super simple for now will update when have color scheme done -->
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>File new reimbursement</title>
+</head>
+<body>
+	<h1>Please fill out this form for a reimbursement request</h1>
+	<form method="POST" action="new-reimbursement">
+		<label>Username</label>
+		<input type="text" name="username"><br>
+		<label>Amount</label>
+		<input type="number" name="amount" placeholder="0.00"><br>
+		<label>Description</label>
+		<select name="type">
+			<option value="lodging">Lodging</option>
+			<option value="travel">Travel</option>
+			<option value="food">Food</option>
+			<option value="other">Other</option>
+		</select>
+		<br>
+		<textarea name="description" rows="4" cols="50" placeholder="What is the reimbursement for?"></textarea>
+		<br>
+		<input type="submit" value="Request">
+	</form>
+</body>
+</html>

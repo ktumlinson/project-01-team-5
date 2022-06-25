@@ -18,6 +18,10 @@ public class UserService {
 		return (attempt.getPassword().equals(password) ? attempt : new User());
 	}
 	
+	public User findUserByUsername(String username) {
+		return udao.findUserByUsername(username);
+	}
+	
 	public int registerUser(User u) {
 		return udao.insert(u);
 	}
