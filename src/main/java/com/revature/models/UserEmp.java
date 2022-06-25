@@ -14,11 +14,17 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.TypeDef;
+
 
 
 @Entity
 @Table(name="ers_users")
-public class User {
+@TypeDef(
+	    name = "pgsql_enum",
+	    typeClass = PostgreSQLEnumType.class
+)
+public class UserEmp {
 
 	@Id @Column(name="ers_users_id")
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -39,9 +45,7 @@ public class User {
 	@Column(name="user_email")
 	private String email;
 	
-
-	
-	@ManyToOne(targetEntity=UserRole.class, optional=false)
+	@Column(columnDefinition = "user_role")
 	@Enumerated(EnumType.STRING)
 	private UserRole role;
 
@@ -52,12 +56,12 @@ public class User {
 
 	
 	
-	public User() {
+	public UserEmp() {
 		super();
 	}
 
 
-	public User(String username, String password, String firstname, String lastname, String email, UserRole role,
+	public UserEmp(String username, String password, String firstname, String lastname, String email, UserRole role,
 			String userInfo) {
 		super();
 		this.username = username;
@@ -70,7 +74,7 @@ public class User {
 	}
 
 
-	public User(int id, String username, String password, String firstname, String lastname, String email,
+	public UserEmp(int id, String username, String password, String firstname, String lastname, String email,
 			UserRole role, String userInfo) {
 		super();
 		this.id = id;
@@ -185,14 +189,16 @@ public class User {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		User other = (User) obj;
+		UserEmp other = (UserEmp) obj;
 		return Objects.equals(email, other.email) && Objects.equals(firstname, other.firstname) && id == other.id
 				&& Objects.equals(lastname, other.lastname) && Objects.equals(password, other.password)
 				&& Objects.equals(role, other.role) && Objects.equals(userInfo, other.userInfo)
 				&& Objects.equals(username, other.username);
 	}
 	
-	
+	public enum UserRole {
+		MANAGER, EMPLOYEE
+	}
 	
 	
 

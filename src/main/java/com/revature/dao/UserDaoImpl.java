@@ -8,65 +8,61 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import com.revature.models.Reimbursement;
-import com.revature.models.User;
-import com.revature.models.UserRole;
+import com.revature.models.UserEmp;
+
 import com.revature.util.HibernateUtil;
 
 public class UserDaoImpl implements IUserDao{
 	
-	public static HashMap<UserRole, Integer> map = new HashMap<>();
-	{
-		map.put(UserRole.EMPLOYEE, 0);
-		map.put(UserRole.MANAGER, 1);
-	}
+
 
 	@Override
-	public int insert(User u) {
+	public int insert(UserEmp u) {
 		Session ses = HibernateUtil.getSession();
 		Transaction tx = ses.getTransaction();
+		int pk = (int) ses.save(u);
 		tx.commit();
-		return (int) ses.save(u);
+		return pk;
 	}
 
 	@Override
-	public List<User> findAllUsers() {
+	public List<UserEmp> findAllUsers() {
 		Session ses = HibernateUtil.getSession();
-		return ses.createQuery("from User", User.class).list();
+		return ses.createQuery("from User", UserEmp.class).list();
 	}
 
 	@Override
-	public User findUserById(int id) {
+	public UserEmp findUserById(int id) {
 		Session ses = HibernateUtil.getSession();
-		return (User)ses.createQuery("from User where id=:id")
+		return (UserEmp)ses.createQuery("from User where id=:id")
 				.setParameter("id", id).getSingleResult();
 	}
 
 	@Override
-	public User findUserByUsername(String username) {
-		Optional<User> foundUser = findAllUsers().stream()
+	public UserEmp findUserByUsername(String username) {
+		Optional<UserEmp> foundUser = findAllUsers().stream()
 				.filter((u -> u.getUsername() == username))
 				.findFirst();
-		return (foundUser.isPresent() ? foundUser.get() : new User());
+		return (foundUser.isPresent() ? foundUser.get() : new UserEmp());
 	}
 
 	@Override
 	// this will need to take in a user that already has a Id other than 0
-	public boolean update(User u) { // this may or may not work
+	public boolean update(UserEmp u) { // this may or may not work
 		if(u.getId() == 0) {
 			// throw an exception here for an unfound user if we have time to make exceptions
 			return false;
 		}
 		Session ses = HibernateUtil.getSession();
 		Transaction tx = ses.getTransaction();
-		User current = new User();
-		current = (User) ses.merge(u.getId());
-		tx.commit();
+		UserEmp current = new UserEmp();
+		current = (UserEmp) ses.merge(u.getId());
 		// if the user and current have the same values then return true
 		return current.getId() != 0;
 	}
 
 	@Override
-	public boolean delete(User u) {
+	public boolean delete(UserEmp u) {
 		if(u.getId() == 0) {
 			return false;
 		}
@@ -74,7 +70,6 @@ public class UserDaoImpl implements IUserDao{
 		Transaction tx = ses.getTransaction();
 		
 		ses.remove(u);
-		tx.commit();
 		return true;
 	}
 

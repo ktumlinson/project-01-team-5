@@ -4,8 +4,8 @@ package com.revature.dao;
 import java.util.HashMap;
 import java.util.List;
 
-import com.revature.models.User;
-import com.revature.models.UserRole;
+import com.revature.models.UserEmp;
+import com.revature.models.UserRole2;
 
 public interface IUserDao {
 	// CRUD
@@ -13,16 +13,16 @@ public interface IUserDao {
 	
 	
 	// create
-	public int insert(User u);
+	public int insert(UserEmp u);
 	
 	// read
-	public List<User> findAllUsers();
-	public User findUserById(int id);
-	public User findUserByUsername(String username);
+	public List<UserEmp> findAllUsers();
+	public UserEmp findUserById(int id);
+	public UserEmp findUserByUsername(String username);
 	
 	// update
-	public boolean update(User u);
+	public boolean update(UserEmp u);
 	
 	// delete
-	public boolean delete(User u);
+	public boolean delete(UserEmp u);
 }

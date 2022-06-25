@@ -13,8 +13,15 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Type;
+import org.hibernate.annotations.TypeDef;
+
 @Entity
 @Table(name = "ers_reimbursement")
+@TypeDef(
+	    name = "pgsql_enum",
+	    typeClass = PostgreSQLEnumType.class
+)
 public class Reimbursement {
 
 	@Id
@@ -42,25 +49,27 @@ public class Reimbursement {
 	// FK to UserId of Employee
 
 
-	@ManyToOne(targetEntity = User.class, optional = false)
+	@ManyToOne(targetEntity = UserEmp.class, optional = false)
 //	@JoinColumn(name="reimb_author", referencedColumnName="ers_users_id")
-	private User employee;
+	private UserEmp employee;
 
 	// FK to UserId of Manager resolver
 
-	@ManyToOne(targetEntity = User.class, optional = false)
+	@ManyToOne(targetEntity = UserEmp.class, optional = false)
 //	@JoinColumn(name="reimb_resolver", referencedColumnName="ers_users_id")
-	private User managerId;
+	private UserEmp managerId;
 
 	// FK to reim_type_status
-	@ManyToOne(targetEntity = ReimbursementStatus.class, optional = false)
 	@Enumerated(EnumType.STRING)
+	@Column(columnDefinition = "reimb_status")
+	@Type( type = "pgsql_enum" )
 //	@JoinColumn(name="reimb_status_id", referencedColumnName="reimb_status_id")
 	private ReimbursementStatus status;
 
 	// FK to reim_type_id
-	@ManyToOne(targetEntity = ReimbursementType.class, optional = false)
 	@Enumerated(EnumType.STRING)
+	@Column(columnDefinition = "reimb_type")
+	@Type( type = "pgsql_enum" )
 //	@JoinColumn(name="reimb_type_id", referencedColumnName="reimb_type_id")
 	private ReimbursementType reimbursementType;
 
@@ -104,19 +113,19 @@ public class Reimbursement {
 		this.description = description;
 	}
 
-	public User getEmployee() {
+	public UserEmp getEmployee() {
 		return employee;
 	}
 
-	public void setEmployee(User employee) {
+	public void setEmployee(UserEmp employee) {
 		this.employee = employee;
 	}
 
-	public User getManagerId() {
+	public UserEmp getManagerId() {
 		return managerId;
 	}
 
-	public void setManagerId(User managerId) {
+	public void setManagerId(UserEmp managerId) {
 		this.managerId = managerId;
 	}
 
@@ -167,5 +176,17 @@ public class Reimbursement {
 	}
 
 	
+	public enum ReimbursementType {
+		LODGING,
+		TRAVEL,
+		FOOD,
+		OTHER
+	}
+	
+	public enum ReimbursementStatus {
+		REJECTED,
+		APPROVED,
+		PENDING
+	}
 	
 }

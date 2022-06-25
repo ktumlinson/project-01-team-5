@@ -1,10 +1,11 @@
 package com.revature.service;
 
-import com.revature.dao.UserImpl;
+import com.revature.dao.UserDaoImpl;
+
 
 public class FinanceManagerService extends UserService{
 
-	public FinanceManagerService(UserImpl udao) {
+	public FinanceManagerService(UserDaoImpl udao) {
 		super(udao);
 	}
 	
