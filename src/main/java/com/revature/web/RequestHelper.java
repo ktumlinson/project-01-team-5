@@ -37,7 +37,7 @@ public class RequestHelper {
 		out.println(jsonString);
 	}
 	
-	public static int processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+	public static void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 		String username = request.getParameter("username");
 		Double amount = Double.parseDouble(request.getParameter("amount"));
 		Timestamp ts = new Timestamp(System.currentTimeMillis());
@@ -64,10 +64,24 @@ public class RequestHelper {
 		}
 		
 		Reimbursement newReim = new Reimbursement(type, EReimbursementStatus.PENDING, amount, ts, null, description, creator, null);
-		return eservs.newReimbursementRequest(newReim);
+		int pk = eservs.newReimbursementRequest(newReim);
+		if(pk > 0) {
+			newReim.setId(pk);
+			HttpSession ses = request.getSession();
+			ses.setAttribute("the-reimbursement", newReim);
+			request.getRequestDispatcher("completed-request.html").forward(request, response);
+		}
+		else {
+			PrintWriter out = response.getWriter();
+			response.setContentType("text/html");
+			out.println("<h1>Sorry ubable to complete request</h1>");
+			out.println("<a href=\"index.html\">Back</a>");
+		}
 	}
 	
 	public static void processRegistration(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// change to do both employee and manager
+		
 		// extract all values
 		String firstName = request.getParameter("firstname");
 		String lastName = request.getParameter("lastname");
