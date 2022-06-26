@@ -14,8 +14,12 @@ public class UserService {
 	
 	// what every user will be able to do(login, etc...)
 	public User confirmLogin(String username, String password) {
+		
 		User attempt = udao.findUserByUsername(username);
-		return (attempt.getPassword().equals(password) ? attempt : new User());
+		if(attempt == null) {
+			return new User();
+		}
+		return attempt;
 	}
 	
 	public User findUserByUsername(String username) {

@@ -1,6 +1,7 @@
 package com.revature.service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import com.revature.dao.ReimbursementImpl;
 import com.revature.dao.UserImpl;
@@ -23,18 +24,20 @@ public class EmployeeServices extends UserService{
 	
 	public List<Reimbursement> myPendingRequests(User u){
 		return rdao.findAllReimbersements().stream()
-				.filter(r-> (r.getEmployee().getId() == u.getId() && r.getStatus().equals(EReimbursementStatus.PENDING)))
-				.toList();
+				.filter(r-> (r.getEmployee().getId() == u.getId() && r.getStatus().equals("pending")))
+				.collect(Collectors.toList());
 	}
 	
 	public List<Reimbursement> myResolvedRequests(User u){
 		return rdao.findAllReimbersements().stream()
-				.filter(r-> (r.getEmployee().getId() == u.getId() && !r.getStatus().equals(EReimbursementStatus.PENDING)))
-				.toList();
+				.filter(r-> (r.getEmployee().getId() == u.getId() && !r.getStatus().equals("pending")))
+				.collect(Collectors.toList());
 	}
 	
-	public void myInfo(User u) {
+	public String myInfo(User u) {
 		// display the users information on a table
+		return u.getUserInfo();
+		
 	}
 	
 	public boolean updateInfo(User u) {
