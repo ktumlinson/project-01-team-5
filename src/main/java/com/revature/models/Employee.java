@@ -82,7 +82,7 @@ public class Employee {
 		this.id = id;
 	}
 
-	public String getFistName() {
+	public String getFirstName() {
 		return firstName;
 	}
 

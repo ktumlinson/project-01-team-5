@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.query.Query;
 
 import com.revature.models.Reimbursement;
 import com.revature.models.User;
@@ -12,56 +13,58 @@ import com.revature.util.HibernateUtil;
 
 public class ReimbursementImpl implements IReimbursementDao{
 
+	// tested and works
 	@Override
 	public int insert(Reimbursement r) {
 		Session ses = HibernateUtil.getSession();
 		Transaction tx = ses.getTransaction();
+		tx.begin();
+		int pk = (int)ses.save(r);
 		tx.commit();
-		return (int) ses.save(r);
+		return pk;
 	}
 
+	// tested and works
 	@Override
 	public List<Reimbursement> findAllReimbersements() {
 		Session ses = HibernateUtil.getSession();
 		return ses.createQuery("from Reimbursement", Reimbursement.class).list();
 	}
 
+	// tested and works
 	@Override
 	public Reimbursement findReimbursementById(int id) {
-		Optional<Reimbursement> returnReimbursement = findAllReimbersements().stream()
-				.filter(r -> r.getId() == id)
-				.findFirst();
-		return (returnReimbursement.isPresent() ? returnReimbursement.get() : new Reimbursement());
+		Session ses = HibernateUtil.getSession();
+		
+		Reimbursement reimb = (Reimbursement)ses.createQuery("from Reimbursement where id=:id").setParameter("id", id).getSingleResult();
+
+		return reimb;
 	}
 
+	
+	// tested and works
 	@Override
 	public boolean update(Reimbursement r) {
-		if(r.getId() == 0) {
-			// throw an exception here for an unfound user if we have time to make exceptions
-			return false;
-		}
 		Session ses = HibernateUtil.getSession();
-		Transaction tx = ses.getTransaction();
-		ses.merge(r.getId());
-		tx.commit();
-		Reimbursement current = findReimbursementById(r.getId());
+		Transaction tx = ses.beginTransaction();
+		ses.update(r);
 		
-		// if the user and current have the same values then return true
-		return (r.toString().equals(current.toString()) ? true : false);
+		tx.commit();
+		return true;
 	}
 
+	// tested and works
 	@Override
 	public boolean delete(Reimbursement r) {
-		if(r.getId() == 0) {
-			return false;
-		}
 		Session ses = HibernateUtil.getSession();
-		Transaction tx = ses.getTransaction();
-		ses.remove(r.getId());
-		tx.commit();
-		Reimbursement current = findReimbursementById(r.getId());
+		// begin a tx
+		Transaction tx = ses.beginTransaction();
 		
-		return (current.getId() == 0 ? true : false);
+		Query query = ses.createQuery("delete from Reimbursement where id=:id").setParameter("id", r.getId());
+		int result = query.executeUpdate();
+		
+		tx.commit();
+		return result==1;
 	}
 
 }

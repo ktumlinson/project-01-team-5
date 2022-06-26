@@ -10,10 +10,19 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>FrontController</servlet-name>
-    
     <url-pattern>/login</url-pattern>
     <url-pattern>/employees</url-pattern>
     <url-pattern>/managers</url-pattern>
     <url-pattern>/register</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>EmployeeService</display-name>
+    <servlet-name>EmployeeService</servlet-name>
+    <servlet-class>com.revature.web.EmployeeService</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>EmployeeService</servlet-name>
+    <url-pattern>/EmployeeService</url-pattern>
   </servlet-mapping>
 </web-app>

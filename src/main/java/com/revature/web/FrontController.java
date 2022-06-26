@@ -15,7 +15,7 @@ public class FrontController extends HttpServlet {
 		final String URI = request.getRequestURI().replace("/employee-servlet-app/", "");
 		switch(URI) {
 		case "login":// edit to take to the proper page after registration
-			RequestHelper.processLogin(request, response);
+			RequestHelper.processManagerLogin(request, response);
 			break;
 		case "employees": // change to the employee page
 			RequestHelper.processEmployees(request, response);
@@ -25,7 +25,7 @@ public class FrontController extends HttpServlet {
 			break;
 		case "new-reimbursement":
 			// make a new reimbursement
-			RequestHelper.processRequest(request, response);
+			RequestHelper.processReimbursementRequest(request, response);
 			break;
 		}
 	}

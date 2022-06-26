@@ -21,23 +21,38 @@ import com.revature.models.Reimbursement;
 import com.revature.models.User;
 import com.revature.service.EmployeeService;
 import com.revature.service.EmployeeServices;
+import com.revature.service.FinanceManagerService;
 
 public class RequestHelper {
 	private static EmployeeService eserv = new EmployeeService(new EmployeeDao());
 	private static EmployeeServices eservs = new EmployeeServices(new UserImpl(), new ReimbursementImpl());
+	private static FinanceManagerService mservs = new FinanceManagerService(new UserImpl(), new ReimbursementImpl());
 	private static ObjectMapper om = new ObjectMapper();
 	
+	/* This is Sophia's App */
+//	public static void processEmployees(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+//		// the new version of this will simply take them to the page so not sure how this will work
+//		
+//		response.setContentType("text/html");
+//		List<Employee> employees = eserv.getAll();
+//		String jsonString = om.writeValueAsString(employees);
+//		PrintWriter out = response.getWriter();
+//		out.println(jsonString);
+//	}
+	
 	public static void processEmployees(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
-		// the new version of this will simply take them to the page so not sure how this will work
-		
-		response.setContentType("text/html");
-		List<Employee> employees = eserv.getAll();
-		String jsonString = om.writeValueAsString(employees);
+		UserImpl udao = new UserImpl();
+		response.setContentType("application/json");
+		//int insert = udao.insert(new User("arh49", "password", "andy", "h", "andyh@jkd.com", new EUserRole(1, "Employee"), ""));
 		PrintWriter out = response.getWriter();
-		out.println(jsonString);
+		User u = eservs.findUserByUsername("arh1109");
+		Reimbursement r = mservs.allPendingReinbursements().get(0);
+		out.println(mservs.approveReimbursement(r, u));
+		
 	}
 	
-	public static void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+	/* This is our App */
+	public static void processReimbursementRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 		String username = request.getParameter("username");
 		Double amount = Double.parseDouble(request.getParameter("amount"));
 		Timestamp ts = new Timestamp(System.currentTimeMillis());
@@ -50,20 +65,20 @@ public class RequestHelper {
 		// switch needed based on typeString for now will use a default type
 		switch(typeString) {
 		case "lodging":
-			type = EReimbursementType.LODGING;
+			type = new EReimbursementType(1, "lodging");
 			break;
 		case "travel":
-			type = EReimbursementType.TRAVEL;
+			type = new EReimbursementType(2, "travel");
 			break;
 		case "food":
-			type = EReimbursementType.FOOD;
+			type = new EReimbursementType(3, "food");
 			break;
 		default:
-			type = EReimbursementType.OTHER;
+			type = new EReimbursementType(4, "other");
 			break;
 		}
 		
-		Reimbursement newReim = new Reimbursement(type, EReimbursementStatus.PENDING, amount, ts, null, description, creator, null);
+		Reimbursement newReim = new Reimbursement(type, new EReimbursementStatus(1, "pending"), amount, ts, null, description, creator, null);
 		int pk = eservs.newReimbursementRequest(newReim);
 		if(pk > 0) {
 			newReim.setId(pk);
@@ -79,6 +94,7 @@ public class RequestHelper {
 		}
 	}
 	
+	/* This is Sophia's App */
 	public static void processRegistration(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// change to do both employee and manager
 		
@@ -114,6 +130,9 @@ public class RequestHelper {
 	}
 	
 	
+	
+	
+	/* This is Sophia's App But we can duplicate into our App */
 	public static void processLogin(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException{
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
@@ -125,7 +144,7 @@ public class RequestHelper {
 			sess.setAttribute("the-user", e);
 			PrintWriter out = response.getWriter();
 			response.setContentType("text/html");
-			out.println("<h1>Welcome " + e.getFistName() + "</h1");
+			out.println("<h1>Welcome " + e.getFirstName() + "</h1");
 			out.println("<h3>You have successfully logged in!</h3>");
 			
 			String jsonString = om.writeValueAsString(e);
@@ -137,4 +156,63 @@ public class RequestHelper {
 		}
 		// if it is an employee then go to the employees page if it is a manager go to managers page
 	}
+
+	public static void processEmployeeLogin(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException{
+		UserImpl udao = new UserImpl();
+		
+		String username = request.getParameter("username");
+		String password = request.getParameter("password");
+		System.out.println(username+ "\n\n");
+		User e = eservs.confirmLogin(username, password);
+		
+		if(e.getId() > 0) {
+			HttpSession sess = request.getSession();
+			sess.setAttribute("the-user", e);
+			PrintWriter out = response.getWriter();
+			response.setContentType("text/html");
+			out.println("<h1>Welcome " + e.getFirstname() + "</h1");
+			out.println("<h3>You have successfully logged in!</h3>");
+			
+			String jsonString = om.writeValueAsString(e);
+			out.println(jsonString);
+		} else {
+			PrintWriter out = response.getWriter();
+			response.setContentType("text/html");
+			out.println("No user found, sorry");
+		}
+		// if it is an employee then go to the employees page if it is a manager go to managers page
+	}
+
+
+	
+	public static void processManagerLogin(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException{
+		UserImpl udao = new UserImpl();
+		
+		String username = request.getParameter("username");
+		String password = request.getParameter("password");
+		System.out.println(username+ "\n\n");
+		User e = eservs.confirmLogin(username, password);
+		
+		if(e.getId() > 0 && e.getRole().getId() == 2) {		// we are authenticated
+			HttpSession sess = request.getSession();
+			sess.setAttribute("the-user", e);
+			PrintWriter out = response.getWriter();
+			response.setContentType("text/html");
+			out.println("<h1>Welcome " + e.getFirstname() + "</h1");
+			out.println("<h3>You have successfully logged in!</h3>");
+			
+			String jsonString = om.writeValueAsString(e);
+			out.println(jsonString);
+		} else {
+			PrintWriter out = response.getWriter();
+			response.setContentType("text/html");
+			out.println("No user found, sorry");
+		}
+		// if it is an employee then go to the employees page if it is a manager go to managers page
+	}
+
+
+	
+	
+
 }

@@ -1,75 +1,82 @@
 package com.revature.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.query.Query;
 
+import com.revature.models.Employee;
 import com.revature.models.User;
 import com.revature.util.HibernateUtil;
 
 public class UserImpl implements IUserDao{
 
+	// tested and works
 	@Override
 	public int insert(User u) {
 		Session ses = HibernateUtil.getSession();
 		Transaction tx = ses.getTransaction();
-		tx.commit();
-		return (int) ses.save(u);
+		int pk = (int)ses.save(u);
+		return pk;
 	}
 
+	// tesetd and works
 	@Override
 	public List<User> findAllUsers() {
 		Session ses = HibernateUtil.getSession();
-		return ses.createQuery("from User", User.class).list();
+		List<User> users = ses.createQuery("from User", User.class).list();
+		
+		return users;
 	}
 
+	// tested and works
 	@Override
-	public User findUserById(int id) {
-		Optional<User> foundUser = findAllUsers().stream()
-				.filter((u -> u.getId() == id))
-				.findFirst();
-		return (foundUser.isPresent() ? foundUser.get() : new User());
+	public User findUserById(int id) {	
+		Session ses = HibernateUtil.getSession();
+		
+		User user = (User)ses.createQuery("from User where id=:id").setParameter("id", id).getSingleResult();
+
+		return user;
+		
 	}
 
+	// tested and works
 	@Override
 	public User findUserByUsername(String username) {
-		Optional<User> foundUser = findAllUsers().stream()
-				.filter((u -> u.getUsername() == username))
-				.findFirst();
-		return (foundUser.isPresent() ? foundUser.get() : new User());
+		Session ses = HibernateUtil.getSession();
+		
+		User user = (User)ses.createQuery("from User where username=:username").setParameter("username", username).getSingleResult();
+
+		return user;
 	}
 
+	// tested and works
 	@Override
 	// this will need to take in a user that already has a Id other than 0
 	public boolean update(User u) { // this may or may not work
-		if(u.getId() == 0) {
-			// throw an exception here for an unfound user if we have time to make exceptions
-			return false;
-		}
 		Session ses = HibernateUtil.getSession();
-		Transaction tx = ses.getTransaction();
-		ses.merge(u.getId());
-		User current = findUserById(u.getId());
-		tx.commit();
+		Transaction tx = ses.beginTransaction();
+		ses.update(u);
 		
-		// if the user and current have the same values then return true
-		return (u.toString().equals(current.toString()) ? true : false);
+		tx.commit();
+		return true;
 	}
 
+	// tested and works
 	@Override
 	public boolean delete(User u) {
-		if(u.getId() == 0) {
-			return false;
-		}
 		Session ses = HibernateUtil.getSession();
-		Transaction tx = ses.getTransaction();
-		ses.remove(u.getId());
-		tx.commit();
-		User current = findUserById(u.getId());
+		// begin a tx
+		Transaction tx = ses.beginTransaction();
 		
-		return (current.getId() == 0 ? true : false);
+		Query query = ses.createQuery("delete from User where id=:id").setParameter("id", u.getId());
+		int result = query.executeUpdate();
+		
+		tx.commit();
+		return result==1;
 	}
 
 }

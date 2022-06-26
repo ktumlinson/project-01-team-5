@@ -11,6 +11,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -23,12 +24,12 @@ public class Reimbursement {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
-	@Column(name="reimb_type")
-	@Enumerated(EnumType.STRING)
+	@ManyToOne
+	@JoinColumn(name="reimb_type_id")
 	private EReimbursementType type;
 	
-	@Column(name="reimb_status")
-	@Enumerated(EnumType.STRING)
+	@ManyToOne()
+	@JoinColumn(name="reimb_status_id")
 	private EReimbursementStatus status;
 
 	@Column(name = "reimb_amount")
@@ -37,7 +38,7 @@ public class Reimbursement {
 	@Column(name = "reimb_submitted")
 	private java.sql.Timestamp timeSubmitted;
 
-	@Column(name = "reimb_resolved")
+	@Column(name = "reimb_resolved") 
 	@Basic(optional = true)
 	private java.sql.Timestamp timeResolved;
 
