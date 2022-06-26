@@ -32,7 +32,7 @@ public class Reimbursement {
 	private EReimbursementStatus status;
 
 	@Column(name = "reimb_amount")
-	private int reimbursementAmt;
+	private double reimbursementAmt;
 
 	@Column(name = "reimb_submitted")
 	private java.sql.Timestamp timeSubmitted;
@@ -58,7 +58,7 @@ public class Reimbursement {
 //	@JoinColumn(name="reimb_resolver", referencedColumnName="ers_users_id")
 	private User managerId;
 
-	public Reimbursement(int id, EReimbursementType type, EReimbursementStatus status, int reimbursementAmt,
+	public Reimbursement(int id, EReimbursementType type, EReimbursementStatus status, double reimbursementAmt,
 			Timestamp timeSubmitted, Timestamp timeResolved, String description, User employee, User managerId) {
 		super();
 		this.id = id;
@@ -72,7 +72,7 @@ public class Reimbursement {
 		this.managerId = managerId;
 	}
 
-	public Reimbursement(EReimbursementType type, EReimbursementStatus status, int reimbursementAmt,
+	public Reimbursement(EReimbursementType type, EReimbursementStatus status, double reimbursementAmt,
 			Timestamp timeSubmitted, Timestamp timeResolved, String description, User employee, User managerId) {
 		super();
 		this.type = type;
@@ -142,7 +142,7 @@ public class Reimbursement {
 		this.status = status;
 	}
 
-	public int getReimbursementAmt() {
+	public double getReimbursementAmt() {
 		return reimbursementAmt;
 	}
 

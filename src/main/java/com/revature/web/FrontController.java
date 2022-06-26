@@ -14,14 +14,18 @@ public class FrontController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		final String URI = request.getRequestURI().replace("/employee-servlet-app/", "");
 		switch(URI) {
-		case "login":
+		case "login":// edit to take to the proper page after registration
 			RequestHelper.processLogin(request, response);
 			break;
-		case "employees":
+		case "employees": // change to the employee page
 			RequestHelper.processEmployees(request, response);
 			break;
-		case "register":
+		case "register": // edit to take to the proper page after registration
 			RequestHelper.processRegistration(request, response);
+			break;
+		case "new-reimbursement":
+			// make a new reimbursement
+			RequestHelper.processRequest(request, response);
 			break;
 		}
 	}
