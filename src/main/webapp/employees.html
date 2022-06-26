@@ -1,10 +1,21 @@
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="ISO-8859-1">
-<title>Insert title here</title>
-</head>
-<body>
-
-</body>
+  <head>
+    <meta charset="ISO-8859-1" />
+    <title>Employee Login Page</title>
+  </head>
+  <body>
+    <h1>Welcome Employee!</h1>
+    <h3>Please Login</h3>
+    <form method="POST" action="employees">
+      <!--  adds /login -->
+      <label>Username:</label>
+      <input type="text" name="username" placeholder="Enter a username" /><br />
+      <label>Password:</label>
+      <input type="password" name="password" placeholder="Enter the password" />
+      <input type="submit" value="Login" />
+    </form>
+    <br />
+    <br />
+  </body>
 </html>

@@ -20,9 +20,11 @@ public class FrontController extends HttpServlet {
 		case "employees": // change to the employee page
 			RequestHelper.processEmployees(request, response);
 			break;
-		case "register": // edit to take to the proper page after registration
-			RequestHelper.processRegistration(request, response);
+		case "managers": // edit to take to the proper page after registration
+			RequestHelper.processManagers(request, response);
 			break;
+		case "managers-home":
+			RequestHelper.processManagerForward(request, response);
 		case "new-reimbursement":
 			// make a new reimbursement
 			RequestHelper.processReimbursementRequest(request, response);
@@ -32,7 +34,18 @@ public class FrontController extends HttpServlet {
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		doGet(request, response);
+		
+		//doGet(request, response);
+		final String URI = request.getRequestURI().replace("/employee-servlet-app/", "");
+		switch(URI) {
+			case "employees": // handles Post Requests done on employee login screen, redirect to Employee's homepage
+				RequestHelper.processEmployeeLogin(request, response);
+				break;
+			case "managers": // handles Post Requests done on manager login screen, redirect to Manager's homepage
+				System.out.println("\n\nInside Manager's POst path");
+				RequestHelper.processManagerForward(request, response);
+				break;
+		}
 	}
 
 }

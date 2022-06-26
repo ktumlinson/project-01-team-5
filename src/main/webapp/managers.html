@@ -1,16 +1,21 @@
-<!-- this is the manager homepage -->
-
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="ISO-8859-1">
-<title>Insert title here</title>
-</head>
-<body>
-	<!-- options: list employees
-				  list all resolved reimbursements
-				  list all pending reimbursements
-				  approve or disprove a reimbursement
-				  view all reimbursements by an employee-->
-</body>
+  <head>
+    <meta charset="ISO-8859-1" />
+    <title>Manager Login Page</title>
+  </head>
+  <body>
+    <h1>Welcome Manager!</h1>
+    <h3>Please Login</h3>
+    <form method="POST" action="managers">
+      <!--  adds /login -->
+      <label>Username:</label>
+      <input type="text" name="username" placeholder="Enter a username" /><br />
+      <label>Password:</label>
+      <input type="password" name="password" placeholder="Enter the password" />
+      <input type="submit" value="Login" />
+    </form>
+    <br />
+    <br />
+  </body>
 </html>

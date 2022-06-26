@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://Java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
   <display-name>project-01</display-name>
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>
@@ -14,15 +14,26 @@
     <url-pattern>/employees</url-pattern>
     <url-pattern>/managers</url-pattern>
     <url-pattern>/register</url-pattern>
+    <url-pattern>/managers-home</url-pattern>
   </servlet-mapping>
-  <servlet>
+  <!-- <servlet>
     <description></description>
     <display-name>EmployeeService</display-name>
     <servlet-name>EmployeeService</servlet-name>
-    <servlet-class>com.revature.web.EmployeeService</servlet-class>
+    <servlet-class>com.revature.web.EmployeeServices</servlet-class>
+  </servlet>
+  <servlet>
+    <description></description>
+    <display-name>ManagerService</display-name>
+    <servlet-name>ManagerService</servlet-name>
+    <servlet-class>com.revature.web.FinanceManagerService</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>EmployeeService</servlet-name>
-    <url-pattern>/EmployeeService</url-pattern>
+    <url-pattern>/employees</url-pattern>
   </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>ManagerService</servlet-name>
+    <url-pattern>/managers</url-pattern>
+  </servlet-mapping> -->
 </web-app>
