@@ -13,7 +13,7 @@ import javax.persistence.Table;
 @Table(name="ers_reimbursement_status")
 public class EReimbursementStatus {
 	
-	@Id @Column(name="erimb_status_id")
+	@Id @Column(name="reimb_status_id")
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 	
@@ -38,6 +38,31 @@ public class EReimbursementStatus {
 	public EReimbursementStatus(int id, String status) {
 		super();
 		this.id = id;
+		this.status = status;
+	}
+
+	
+
+
+	public int getId() {
+		return id;
+	}
+
+
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+
+
+	public String getStatus() {
+		return status;
+	}
+
+
+
+	public void setStatus(String status) {
 		this.status = status;
 	}
 

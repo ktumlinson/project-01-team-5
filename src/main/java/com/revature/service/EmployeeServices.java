@@ -18,19 +18,22 @@ public class EmployeeServices extends UserService{
 		this.rdao = rdao;
 	}
 	
+	// tested and works
 	public int newReimbursementRequest(Reimbursement r) {
 		return rdao.insert(r);
 	}
 	
+	// tested and works
 	public List<Reimbursement> myPendingRequests(User u){
 		return rdao.findAllReimbersements().stream()
-				.filter(r-> (r.getEmployee().getId() == u.getId() && r.getStatus().equals("pending")))
+				.filter(r-> (r.getEmployee().getId() == u.getId() && r.getStatus().getStatus().equals("pending")))
 				.collect(Collectors.toList());
 	}
 	
+	
 	public List<Reimbursement> myResolvedRequests(User u){
 		return rdao.findAllReimbersements().stream()
-				.filter(r-> (r.getEmployee().getId() == u.getId() && !r.getStatus().equals("pending")))
+				.filter(r-> (r.getEmployee().getId() == u.getId() && !r.getStatus().getStatus().equals("pending")))
 				.collect(Collectors.toList());
 	}
 	
@@ -40,7 +43,8 @@ public class EmployeeServices extends UserService{
 		
 	}
 	
-	public boolean updateInfo(User u) {
+	public boolean updateInfo(User u, String description) {
+		u.setUserInfo(description);
 		return udao.update(u);
 	}
 	

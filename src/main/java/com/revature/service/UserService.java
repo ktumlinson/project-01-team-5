@@ -12,6 +12,7 @@ public class UserService {
 		this.udao = udao;
 	}
 	
+	// tested and works
 	// what every user will be able to do(login, etc...)
 	public User confirmLogin(String username, String password) {
 		
@@ -22,10 +23,12 @@ public class UserService {
 		return attempt;
 	}
 	
+	// tested and works
 	public User findUserByUsername(String username) {
 		return udao.findUserByUsername(username);
 	}
 	
+	// tested and works
 	public int registerUser(User u) {
 		return udao.insert(u);
 	}

@@ -16,16 +16,17 @@ import com.revature.dao.ReimbursementImpl;
 import com.revature.dao.UserImpl;
 import com.revature.models.EReimbursementStatus;
 import com.revature.models.EReimbursementType;
-import com.revature.models.EUserRole;
 import com.revature.models.Employee;
 import com.revature.models.Reimbursement;
 import com.revature.models.User;
 import com.revature.service.EmployeeService;
 import com.revature.service.EmployeeServices;
+import com.revature.service.FinanceManagerService;
 
 public class RequestHelper {
 	private static EmployeeService eserv = new EmployeeService(new EmployeeDao());
 	private static EmployeeServices eservs = new EmployeeServices(new UserImpl(), new ReimbursementImpl());
+	private static FinanceManagerService mservs = new FinanceManagerService(new UserImpl(), new ReimbursementImpl());
 	private static ObjectMapper om = new ObjectMapper();
 	
 	/* This is Sophia's App */
@@ -44,11 +45,10 @@ public class RequestHelper {
 		response.setContentType("application/json");
 		//int insert = udao.insert(new User("arh49", "password", "andy", "h", "andyh@jkd.com", new EUserRole(1, "Employee"), ""));
 		PrintWriter out = response.getWriter();
-		User u = udao.findUserByUsername("arh1109");
+		User u = eservs.findUserByUsername("arh1109");
+		Reimbursement r = mservs.allPendingReinbursements().get(0);
+		out.println(mservs.approveReimbursement(r, u));
 		
-		u.setFirstname("Brian");
-		
-		out.println(udao.delete(u));
 	}
 	
 	/* This is our App */
