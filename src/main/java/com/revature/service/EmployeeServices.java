@@ -43,8 +43,7 @@ public class EmployeeServices extends UserService{
 		
 	}
 	
-	public boolean updateInfo(User u, String description) {
-		u.setUserInfo(description);
+	public boolean updateInfo(User u) {
 		return udao.update(u);
 	}
 	

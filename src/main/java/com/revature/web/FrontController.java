@@ -21,7 +21,7 @@ public class FrontController extends HttpServlet {
 			RequestHelper.processEmployees(request, response);
 			break;
 		case "managers": // edit to take to the proper page after registration
-			RequestHelper.processManagers(request, response);
+			RequestHelper.processManagerLogin(request, response);
 			break;
 		case "managers-home":
 			RequestHelper.processManagerForward(request, response);
@@ -43,7 +43,7 @@ public class FrontController extends HttpServlet {
 				break;
 			case "managers": // handles Post Requests done on manager login screen, redirect to Manager's homepage
 				System.out.println("\n\nInside Manager's POst path");
-				RequestHelper.processManagerForward(request, response);
+				RequestHelper.processManagerLogin(request, response);
 				break;
 		}
 	}
