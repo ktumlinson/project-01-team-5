@@ -1,0 +1,12 @@
+form#manager-login{
+    float: left;
+    margin-left: 20%;
+}
+form#employee-login{
+    float: right;
+    margin-right: 20%;
+}
+form#register{
+    float: left;
+    margin-left: 20%;
+}

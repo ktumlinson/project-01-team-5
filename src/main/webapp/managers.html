@@ -9,6 +9,7 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
 
 <link rel="stylesheet" href="css\stylesheet.css">
+<link rel="stylesheet" href="css\manager-view.css">
 </head>
 <body>
 	<!-- options: list employees
@@ -23,13 +24,14 @@
 				<div class="card-header">
 					<h1>What Would You Like To Do?</h1>
 				</div>
+
 				<div class="card-body">
 					<h6>Review Reimbursement</h6>
-					<form method="Post" action="review-reimbursement.html">
+					<form id="review" method="Post" action="review-reimbursement.html">
 						<label>ID:</label>
 						<input type="number" name="reimbursement-id" placeholder="00"><!--note that if it gives a decimal you need to specify that it will not allow it on the error message-->
 						<input type="submit" value="Review">
-					</form><br><br>
+					</form><br>
 					<h6>Find Employee Reimbursements</h6>
 					<form method="POST" action="reimbursement-by-user">
 						<label>Username:</label>
@@ -41,18 +43,25 @@
 					<h6>View Information</h6>
 					<table id="buttons">
 						<tr>
-							<th class="largeth" id="manager"><button id="manager-employees-button">All Employees</button></th>
-							<th  class="largeth" id="manager"><button id="manager-reimbursements-button">All reimbursements</button></th>
+							<th id="manager">
+								<button class="btn btn-light" id="manager-employees-button">View all Employees</button>
+							</th>
+							<th id="manager">
+								<button class="btn btn-light" id="manager-reimbursements-button">View all reimbursements</button>
+							</th>
 						</tr>
 						<tr>
-							<th  class="largeth" id="manager"><button id="manager-pending-button">Open Reimbursements</button></th>
-							<th  class="largeth" id="manager"><button id="manager-resolved-button">Closed Reimbursements</button></th>
+							<th id="manager">
+								<button class="btn btn-light" id="manager-pending-button">View open Reimbursements</button>
+							</th>
+							<th id="manager">
+								<button class="btn btn-light" id="manager-resolved-button">View closed Reimbursements</button>
+							</th>
 						</tr>
 					</table>
 					
 					<!--This will be dynamic and use a switch case for the color of the variant table as seen here https://getbootstrap.com/docs/4.1/content/tables/ under "Contextual Classes" and will change the switch based on if it is All reimbursemnents or pending/resolved ex: in all table pending will be a "Danger" class so the row will be red and in resolved lodging types will be "Primary" class so they will be a blue-->
 					<table id="manager-table"></table> 
-					
 				</div>
 			</div>
 		</div>

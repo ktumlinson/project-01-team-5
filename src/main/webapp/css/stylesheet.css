@@ -1,82 +1,39 @@
 @charset "ISO-8859-1";
 
-/*there will be general settings but many pages also have specific settings*/
-/*index page*/
-form#manager-login{
-    float: left;
-    margin-left: 20%;
+table{
+    margin-left: auto;
+    margin-right: auto;
 }
-form#employee-login{
-    float: right;
-    margin-right: 20%;
-}
-form#register{
-    float: left;
-    margin-left: 20%;
-}
-
-/* manager and employee views*/
-form#employee-left{
-    float: left;
-    margin-left: 25%;
-}
-
-form#employee-right{
-    float: right;
-    margin-right: 25%;
-}
-table#buttons-employees{
-    margin-left: 25%;
-}
-
-table#buttons-managers{
-    margin-left: 10%;
-}
-
-th#manager{
-    display: inline-block;
-    margin-left:60px;
-    width: 150px;
-}
-
-.largeth{
-    font-size: 12px;
-}
-
-/* reimbursement form*/
-.description-container * {
-    vertical-align: top;
-}
-p#select{
-    float: left;
-    margin-left: 90px;
-    padding-top: 1%;
-}
-
-
-
-/*general style*/
 body{
     background-color: rgb(90, 89, 89);
     padding-top: 70px;
 }
 
-.card{
-    background-color: rgb(196, 107, 0);
-    padding: 1%
-}
-.card-head{
-    text-align: center;
-}
-.card-body{
-    text-align: center;
-}
-
 label{
     display: inline-block;
+    text-align: right;
     width: 6em;
 }
 input{
     margin-top: .5%;
 }
 
+p{
+    margin-top: .5%;
+}
+
+.btn{
+    border-radius: 0%;
+    width: 300px;
+}
+
+.card{
+    background-color: rgb(196, 107, 0);
+    padding: 1%
+}
+.card-header{
+    text-align: center;
+}
+.card-body{
+    text-align: center;
+}

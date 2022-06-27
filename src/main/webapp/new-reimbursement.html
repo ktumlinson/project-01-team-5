@@ -9,6 +9,7 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
 
 <link rel="stylesheet" href="css\stylesheet.css">
+<link rel="stylesheet" href="css\reimbursement.css">
 </head>
 <body>
 
@@ -24,20 +25,20 @@
 						<input type="text" name="username"><br>
 						<label>Amount:</label>
 						<input type="number" name="amount" placeholder="0.00"><br>
-						<p id="select">
-							<label>Type:</label>
-							<select name="type">
-								<option value="lodging">Lodging</option>
-								<option value="travel">Travel</option>
-								<option value="food">Food</option>
-								<option value="other">Other</option>
-							</select>
-						</p>
-						<br><br>
-						<p class="description-container">
+						<p id="description-container">
 							<label for="textarea">Description:</label>
 							<textarea id="textarea" name="description" rows="3" cols="23" placeholder="What is the reimbursement for?"></textarea>
-						</p><br>
+						</p>
+						<p id="select">
+							<label>Type:</label>
+							<select  class="form-select-sm mb-4" name="type">
+								<option value="1">Lodging</option>
+								<option value="2">Travel</option>
+								<option value="3">Food</option>
+								<option value="4">Other</option>
+							</select><br>
+						</p>
+						
 						<input type="submit" value="Request">
 					</form>
 				</div>

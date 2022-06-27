@@ -7,6 +7,7 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
 
 <link rel="stylesheet" href="css\stylesheet.css">
+<link rel="stylesheet" href="css\employee-view.css">
 </head>
 <body>
     <!-- options
@@ -25,18 +26,18 @@
                 <div class="card-body">
                     <h6>Forms</h6>
                     <form method="GET" action="new-reimbursement.html" id="employee-left">
-                        <input type="submit" value="New Request">
+                        <input class="btn btn-light"type="submit" value="New Request">
                     </form>
                     <form method="GET" action="update-user-info.html" id="employee-right">
-                        <input type="submit" value="Update Info">
+                        <input class="btn btn-light" type="submit" value="Update Info">
                     </form><br><br><br>
                     
                     <h6>View Information</h6>
                     <table id="buttons-employees">
                         <tr>
-                            <th id="employee"><button>User Info</button></th>
-                            <th id="employee"><button>Requests</button></th>
-                            <th id="employee"><button>Resolved</button></th>
+                            <th id="employee"><button class="btn btn-light">View user information</button></th>
+                            <th id="employee"><button class="btn btn-light">View open requests</button></th>
+                            <th id="employee"><button class="btn btn-light">View resolved requests</button></th>
                         </tr>
                     </table>
 
