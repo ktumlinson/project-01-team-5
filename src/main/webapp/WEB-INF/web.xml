@@ -10,11 +10,13 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>FrontController</servlet-name>
-    <url-pattern>/login</url-pattern>
+    <url-pattern>/employees/view-user-info</url-pattern>
     <url-pattern>/employees</url-pattern>
     <url-pattern>/managers</url-pattern>
     <url-pattern>/register</url-pattern>
-    <url-pattern>/managers-home</url-pattern>
+    <url-pattern>/manager-home</url-pattern>
+    <url-pattern>/employee-login</url-pattern>
+    <url-pattern>/employees-home</url-pattern>
   </servlet-mapping>
   <!-- <servlet>
     <description></description>
