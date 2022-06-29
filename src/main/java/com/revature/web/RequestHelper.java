@@ -70,7 +70,9 @@ public class RequestHelper {
 	
 	
 	/* This is action performed by EmployeeServices */
-	public static void processReimbursementRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+	public static void postReimbursementRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+		// need to authenticate the session here or create new session
+		
 		String username = request.getParameter("username");
 		Double amount = Double.parseDouble(request.getParameter("amount"));
 		Timestamp ts = new Timestamp(System.currentTimeMillis());
@@ -241,6 +243,7 @@ public class RequestHelper {
 	}
 	
 	
+	
 	/* This action is performed by EmployeeServices */
 	public static void processEmployeeLogin(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException{
 		
@@ -285,20 +288,34 @@ public class RequestHelper {
 		
 		response.setContentType("application/json");
 		PrintWriter out = response.getWriter();
-		out.println(u.getUserInfo());
+		out.println(u);
+		
+	}
+	
+	public static void roleCheckReimbursementsById(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException{
+		HttpSession sess = request.getSession();
+		User u = (User) sess.getAttribute("the-user");
+		User m = (User) sess.getAttribute("the-man");
+		response.setContentType("application/json");
+		PrintWriter out = response.getWriter();
+		String queryString = request.getQueryString();
+		if(u != null) {
+			// we should go to employee's path
+			String id = u.getId() + "";
+			RequestHelperEmployees.getReimbursementById(request, response, id);
+		}
+		else if(m != null) {
+			// we should go to manager's path
+			RequestHelperManagers.getReimbursementById(request, response, queryString);
+		} else {
+			RequestHelperManagers.getReimbursementById(request, response, queryString);
+		}
 		
 	}
 	
 	public static void getAllRequests(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException{
 		
-		HttpSession sess = request.getSession();
-		User u = (User) sess.getAttribute("the-user");
-		List<Reimbursement> list1 = eservs.myPendingRequests(u);
-		List<Reimbursement> list2 = eservs.myResolvedRequests(u);
-		list1.addAll(list2);
-		response.setContentType("application/json");
-		PrintWriter out = response.getWriter();
-		out.println(list1);
+		RequestHelperManagers.getAllReimbursements(request, response);
 	}
 	
 	public static void getAllResolvedRequests(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException{
@@ -312,7 +329,7 @@ public class RequestHelper {
 	}
 	
 	public static void updateUserInfo(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException{
-		
+		System.out.println(request.getParameterNames());
 		HttpSession sess = request.getSession();
 		User u = (User) sess.getAttribute("the-user");
 		// get the data from the request body
@@ -320,6 +337,10 @@ public class RequestHelper {
 		String lastname = request.getParameter("lastname");
 		String password = request.getParameter("password");
 		String email = request.getParameter("email");
+		firstname = firstname.equals("") ? u.getFirstname() : firstname;
+		lastname = lastname.equals("") ? u.getLastname() : lastname;
+		email = email.equals("") ? u.getEmail() : email;
+		password = password.equals("") ? u.getPassword() : password;
 		u.setEmail(email);
 		u.setFirstname(firstname);
 		u.setLastname(lastname);
@@ -328,7 +349,7 @@ public class RequestHelper {
 		
 		response.setContentType("application/json");
 		PrintWriter out = response.getWriter();
-		out.println(u.getUserInfo());
+		out.println(u);
 		
 	}
 	
@@ -370,31 +391,7 @@ public class RequestHelper {
 		
 	}
 	
-	public static void processManagerForward(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException{
-		System.out.println(request.getCookies());
-		HttpSession sess = request.getSession();
-		Cookie[] cookies = request.getCookies();
-		
-		// unable to get User from Session Right here!!!!!!
-		User u = (User) sess.getAttribute(sess.getId());
-		System.out.println("User object stored " + u);
-		
-		PrintWriter out = response.getWriter();
-		out.println(u);
-		boolean valid = false;
-		for(int i = 0; i < cookies.length; i++) {
-			out.println(cookies[i].getName() + " " + cookies[i].getValue());
-			if(cookies[i].getValue().equals(sess.getId())) {
-				valid = true;
-				out.println("Successfully sent Cookie!");
-			}
-		}
-		if(!valid) {
-			out.println("Logged in but Cookie not sent");
-			
-		}
-		
-	}
+	
 
 
 	/* This action is perfoirmed by ManagerServices */

@@ -18,6 +18,11 @@ public class EmployeeServices extends UserService{
 		this.rdao = rdao;
 	}
 	
+	public EmployeeServices() {
+		super(new UserImpl());
+		this.rdao = new ReimbursementImpl();
+	}
+	
 	// tested and works
 	public int newReimbursementRequest(Reimbursement r) {
 		return rdao.insert(r);
@@ -30,6 +35,13 @@ public class EmployeeServices extends UserService{
 				.collect(Collectors.toList());
 	}
 	
+	// tested and works
+		public List<Reimbursement> allRequests(User u){
+			return rdao.findAllReimbersements().stream()
+					.filter(r-> (r.getEmployee().getId() == u.getId()))
+					.collect(Collectors.toList());
+		}
+	
 	
 	public List<Reimbursement> myResolvedRequests(User u){
 		return rdao.findAllReimbersements().stream()
@@ -39,11 +51,12 @@ public class EmployeeServices extends UserService{
 	
 	public String myInfo(User u) {
 		// display the users information on a table
-		return u.getUserInfo();
+		return u.toString();
 		
 	}
 	
 	public boolean updateInfo(User u) {
+		this.udao = new UserImpl();
 		return udao.update(u);
 	}
 	

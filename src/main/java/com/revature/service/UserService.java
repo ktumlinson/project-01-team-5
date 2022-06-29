@@ -28,9 +28,17 @@ public class UserService {
 		return udao.findUserByUsername(username);
 	}
 	
+	public User findUserById(int id) {
+		return udao.findUserById(id);
+	}
+	
 	// tested and works
 	public int registerUser(User u) {
 		return udao.insert(u);
+	}
+	
+	public User returnDefaultManager() {
+		return User.managerGenerator();
 	}
 	
 	// logout will return to login page
