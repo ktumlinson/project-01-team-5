@@ -10,11 +10,12 @@ import com.revature.models.Reimbursement;
 import com.revature.models.User;
 
 public class EmployeeServices extends UserService{
-	private UserImpl udao;
+
 	private ReimbursementImpl rdao;
 	
 	public EmployeeServices(UserImpl udao, ReimbursementImpl rdao) {
 		super(udao);
+
 		this.rdao = rdao;
 	}
 	

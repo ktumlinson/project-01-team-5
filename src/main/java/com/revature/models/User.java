@@ -87,7 +87,7 @@ public class User {
 
 
 	public static User managerGenerator() {
-		return new User(6, "manager", "password", "blah", "blah", "blah@yahoo.com", EUserRole.roleGenerator("Manager"));
+		return new User(2, "manager", "password", "blah", "blah", "blah@yahoo.com", EUserRole.roleGenerator("Manager"));
 	}
 
 

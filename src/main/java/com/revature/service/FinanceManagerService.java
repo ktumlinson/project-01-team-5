@@ -13,7 +13,7 @@ import com.revature.models.User;
 
 public class FinanceManagerService extends UserService{
 	private ReimbursementImpl rdao;
-	private UserImpl udao;
+
 
 	public FinanceManagerService(UserImpl udao, ReimbursementImpl rdao) {
 		super(udao);
