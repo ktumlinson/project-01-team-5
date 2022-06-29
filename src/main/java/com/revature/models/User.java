@@ -44,13 +44,37 @@ public class User {
 	@JoinColumn(name="ers_user_roles")
 	private EUserRole role;
 
+	
+	
 
-	@Column(name="user_information") @Basic(optional=true)
-	private String userInfo;
+
+
+	public User() {
+		super();
+	}
+
+
+
+
+
+
+	public User(String username, String password, String firstname, String lastname, String email, EUserRole role) {
+		super();
+		this.username = username;
+		this.password = password;
+		this.firstname = firstname;
+		this.lastname = lastname;
+		this.email = email;
+		this.role = role;
+	}
+
+
+
+
 
 
 	public User(int id, String username, String password, String firstname, String lastname, String email,
-			EUserRole role, String userInfo) {
+			EUserRole role) {
 		super();
 		this.id = id;
 		this.username = username;
@@ -59,32 +83,149 @@ public class User {
 		this.lastname = lastname;
 		this.email = email;
 		this.role = role;
-		this.userInfo = userInfo;
 	}
 
 
-	public User(String username, String password, String firstname, String lastname, String email, EUserRole role,
-			String userInfo) {
-		super();
+	public static User managerGenerator() {
+		return new User(6, "manager", "password", "blah", "blah", "blah@yahoo.com", EUserRole.roleGenerator("Manager"));
+	}
+
+
+
+	public int getId() {
+		return id;
+	}
+
+
+
+
+
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+
+
+
+
+
+	public String getUsername() {
+		return username;
+	}
+
+
+
+
+
+
+	public void setUsername(String username) {
 		this.username = username;
+	}
+
+
+
+
+
+
+	public String getPassword() {
+		return password;
+	}
+
+
+
+
+
+
+	public void setPassword(String password) {
 		this.password = password;
+	}
+
+
+
+
+
+
+	public String getFirstname() {
+		return firstname;
+	}
+
+
+
+
+
+
+	public void setFirstname(String firstname) {
 		this.firstname = firstname;
+	}
+
+
+
+
+
+
+	public String getLastname() {
+		return lastname;
+	}
+
+
+
+
+
+
+	public void setLastname(String lastname) {
 		this.lastname = lastname;
+	}
+
+
+
+
+
+
+	public String getEmail() {
+		return email;
+	}
+
+
+
+
+
+
+	public void setEmail(String email) {
 		this.email = email;
+	}
+
+
+
+
+
+
+	public EUserRole getRole() {
+		return role;
+	}
+
+
+
+
+
+
+	public void setRole(EUserRole role) {
 		this.role = role;
-		this.userInfo = userInfo;
 	}
 
 
-	public User() {
-		super();
-	}
+
+
 
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(email, firstname, id, lastname, password, role, userInfo, username);
+		return Objects.hash(email, firstname, id, lastname, password, role, username);
 	}
+
+
+
+
 
 
 	@Override
@@ -98,96 +239,24 @@ public class User {
 		User other = (User) obj;
 		return Objects.equals(email, other.email) && Objects.equals(firstname, other.firstname) && id == other.id
 				&& Objects.equals(lastname, other.lastname) && Objects.equals(password, other.password)
-				&& Objects.equals(role, other.role) && Objects.equals(userInfo, other.userInfo)
-				&& Objects.equals(username, other.username);
+				&& Objects.equals(role, other.role) && Objects.equals(username, other.username);
 	}
+
+
+
+
 
 
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", username=" + username + ", password=" + password + ", firstname=" + firstname
-				+ ", lastname=" + lastname + ", email=" + email + ", role=" + role + ", userInfo=" + userInfo + "]";
+				+ ", lastname=" + lastname + ", email=" + email + ", role=" + role + "]";
 	}
 
 
-	public int getId() {
-		return id;
-	}
 
 
-	public void setId(int id) {
-		this.id = id;
-	}
-
-
-	public String getUsername() {
-		return username;
-	}
-
-
-	public void setUsername(String username) {
-		this.username = username;
-	}
-
-
-	public String getPassword() {
-		return password;
-	}
-
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
-
-	public String getFirstname() {
-		return firstname;
-	}
-
-
-	public void setFirstname(String firstname) {
-		this.firstname = firstname;
-	}
-
-
-	public String getLastname() {
-		return lastname;
-	}
-
-
-	public void setLastname(String lastname) {
-		this.lastname = lastname;
-	}
-
-
-	public String getEmail() {
-		return email;
-	}
-
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-
-	public EUserRole getRole() {
-		return role;
-	}
-
-
-	public void setRole(EUserRole role) {
-		this.role = role;
-	}
-
-
-	public String getUserInfo() {
-		return userInfo;
-	}
-
-
-	public void setUserInfo(String userInfo) {
-		this.userInfo = userInfo;
-	}
+	
 	
 	
 	

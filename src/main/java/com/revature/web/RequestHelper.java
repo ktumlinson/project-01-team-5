@@ -3,9 +3,13 @@ package com.revature.web;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Timestamp;
+import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -40,19 +44,35 @@ public class RequestHelper {
 //		out.println(jsonString);
 //	}
 	
+	// This method serves no purpose other than testing right now
 	public static void processEmployees(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 		UserImpl udao = new UserImpl();
 		response.setContentType("application/json");
 		//int insert = udao.insert(new User("arh49", "password", "andy", "h", "andyh@jkd.com", new EUserRole(1, "Employee"), ""));
 		PrintWriter out = response.getWriter();
 		User u = eservs.findUserByUsername("arh1109");
-		Reimbursement r = mservs.allPendingReinbursements().get(0);
-		out.println(mservs.approveReimbursement(r, u));
+		
+		out.println(u);
 		
 	}
 	
-	/* This is our App */
-	public static void processReimbursementRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+	// This method serves no purpose other than testing right now
+	public static void processManagers(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+//		UserImpl udao = new UserImpl();
+//		response.setContentType("application/json");
+//		//int insert = udao.insert(new User("arh49", "password", "andy", "h", "andyh@jkd.com", new EUserRole(1, "Employee"), ""));
+//		PrintWriter out = response.getWriter();
+//		User u = eservs.findUserByUsername("arh1109");
+//		
+//		out.println(u);
+		
+	}
+	
+	
+	/* This is action performed by EmployeeServices */
+	public static void postReimbursementRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+		// need to authenticate the session here or create new session
+		
 		String username = request.getParameter("username");
 		Double amount = Double.parseDouble(request.getParameter("amount"));
 		Timestamp ts = new Timestamp(System.currentTimeMillis());
@@ -157,24 +177,100 @@ public class RequestHelper {
 		// if it is an employee then go to the employees page if it is a manager go to managers page
 	}
 
-	public static void processEmployeeLogin(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException{
-		UserImpl udao = new UserImpl();
+	// we would put this in front of an authenticated path
+	// edited this to just check if client has Cookie set
+	public static boolean checkForLoginToken(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException  {
+		HttpSession sess = request.getSession();
+		Cookie[] cookies = request.getCookies();
 		
+		for(Cookie cookie : cookies) {
+			if(cookie.getName().equals("JSESSIONID")) {
+				System.out.println("YESSSS\n\n\n");
+				// they may be authenticated
+//				User possibleUser = (User) sess.getAttribute("the-user");
+//				if(possibleUser != null && possibleUser.getUsername().equals(cookie.getValue())) {
+//					// we are authenticated
+//					return true;
+//				}
+				return true;
+				
+			}
+		}
+		return false;
+	}
+	
+	public static String getUsernameFromCookie(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException  {
+		
+		HttpSession sess = request.getSession();
+		Cookie[] cookies = request.getCookies();
+		
+		for(Cookie cookie : cookies) {
+			if(cookie.getName().equals("JSESSIONID")) {
+				System.out.println("YESSSS\n\n\n");
+				// they may be authenticated
+//				User possibleUser = (User) sess.getAttribute("the-user");
+//				if(possibleUser != null && possibleUser.getUsername().equals(cookie.getValue())) {
+//					// we are authenticated
+//					return true;
+//				}
+				return cookie.getValue();
+				
+			}
+		}
+		return "";
+		
+	}
+	
+	public static void sendEmployeeHomepage(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+		if(checkForLoginToken(request, response)) {
+			System.out.println("Should be on employees-home\n\n");
+			RequestDispatcher home = request.getRequestDispatcher("employees.html");
+			home.forward(request, response);
+		}
+		
+		System.out.println("\n\nPrints After the Forwrad so the Session and Request is still valid");
+	}
+	
+	public static void checkForSSO(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException{
+		HttpSession sess = request.getSession();
+		if(!checkForLoginToken(request, response)) {
+			response.sendRedirect("employee-login.html");
+			System.out.println("Done with Redirect");
+			return;
+		}
+		System.out.println("Should be on employee's home");
+		response.sendRedirect("employees-home");
+	}
+	
+	
+	
+	/* This action is performed by EmployeeServices */
+	public static void processEmployeeLogin(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException{
+		
+
+		HttpSession sess = request.getSession();
+	//	checkForLoginToken(request, response); 
+		
+		UserImpl udao = new UserImpl();	// this can be moved
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
-		System.out.println(username+ "\n\n");
+		
 		User e = eservs.confirmLogin(username, password);
 		
 		if(e.getId() > 0) {
-			HttpSession sess = request.getSession();
-			sess.setAttribute("the-user", e);
-			PrintWriter out = response.getWriter();
-			response.setContentType("text/html");
-			out.println("<h1>Welcome " + e.getFirstname() + "</h1");
-			out.println("<h3>You have successfully logged in!</h3>");
+			// Here we know User has entered correct username/pw combo
+			sess.setAttribute(sess.getId(), e);
+			response.addCookie(new Cookie("JSESSIONID", e.getUsername()));
+			sendEmployeeHomepage(request, response);
+			return;
 			
-			String jsonString = om.writeValueAsString(e);
-			out.println(jsonString);
+//			PrintWriter out = response.getWriter();
+//			response.setContentType("text/html");
+//			out.println("<h1>Welcome " + e.getFirstname() + "</h1");
+//			out.println("<h3>You have successfully logged in!</h3>");
+//			
+//			String jsonString = om.writeValueAsString(e);
+//			out.println(jsonString);
 		} else {
 			PrintWriter out = response.getWriter();
 			response.setContentType("text/html");
@@ -182,27 +278,144 @@ public class RequestHelper {
 		}
 		// if it is an employee then go to the employees page if it is a manager go to managers page
 	}
-
-
 	
+	/* Methods included on Employee Homepage */
+	
+	public static void viewUserInfo(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException{
+		String username = getUsernameFromCookie(request, response);
+		System.out.println(username);
+		User u = mservs.findUserByUsername(username);
+		
+		response.setContentType("application/json");
+		PrintWriter out = response.getWriter();
+		out.println(u);
+		
+	}
+	
+	public static void roleCheckReimbursementsById(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException{
+		HttpSession sess = request.getSession();
+		User u = (User) sess.getAttribute("the-user");
+		User m = (User) sess.getAttribute("the-man");
+		response.setContentType("application/json");
+		PrintWriter out = response.getWriter();
+		String queryString = request.getQueryString();
+		if(u != null) {
+			// we should go to employee's path
+			String id = u.getId() + "";
+			RequestHelperEmployees.getReimbursementById(request, response, id);
+		}
+		else if(m != null) {
+			// we should go to manager's path
+			RequestHelperManagers.getReimbursementById(request, response, queryString);
+		} else {
+			RequestHelperManagers.getReimbursementById(request, response, queryString);
+		}
+		
+	}
+	
+	public static void getAllRequests(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException{
+		
+		RequestHelperManagers.getAllReimbursements(request, response);
+	}
+	
+	public static void getAllResolvedRequests(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException{
+		
+		HttpSession sess = request.getSession();
+		User u = (User) sess.getAttribute("the-user");
+		List<Reimbursement> list2 = eservs.myResolvedRequests(u);
+		response.setContentType("application/json");
+		PrintWriter out = response.getWriter();
+		out.println(list2);
+	}
+	
+	public static void updateUserInfo(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException{
+		System.out.println(request.getParameterNames());
+		HttpSession sess = request.getSession();
+		User u = (User) sess.getAttribute("the-user");
+		// get the data from the request body
+		String firstname = request.getParameter("firstname");
+		String lastname = request.getParameter("lastname");
+		String password = request.getParameter("password");
+		String email = request.getParameter("email");
+		firstname = firstname.equals("") ? u.getFirstname() : firstname;
+		lastname = lastname.equals("") ? u.getLastname() : lastname;
+		email = email.equals("") ? u.getEmail() : email;
+		password = password.equals("") ? u.getPassword() : password;
+		u.setEmail(email);
+		u.setFirstname(firstname);
+		u.setLastname(lastname);
+		u.setPassword(password);
+		eservs.updateInfo(u);
+		
+		response.setContentType("application/json");
+		PrintWriter out = response.getWriter();
+		out.println(u);
+		
+	}
+	
+	/* End of Employee Homepage Methods */
+	
+	public static void createNewRequest(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException{
+		System.out.println("Inside createNewRequest Method");
+		HttpSession sess = request.getSession();
+		User u = (User) sess.getAttribute("the-user");
+		System.out.println(u);
+		String username = request.getParameter("username");
+		double amount = Double.parseDouble(request.getParameter("amount"));
+		String type  = request.getParameter("type");
+		EReimbursementType reimbType = null;
+		switch(type) {
+			case "lodging":
+				reimbType = new EReimbursementType(1, "lodging");
+				break;
+			case "travel":
+				reimbType = new EReimbursementType(2, "travel");
+				break;
+			case "food":
+				reimbType = new EReimbursementType(3, "food");
+				break;
+			default:
+				reimbType = new EReimbursementType(4, "other");
+				break;
+		}
+		String description = request.getParameter("description");
+		EReimbursementStatus reimbStatus = new EReimbursementStatus(1, "Pending");
+		Timestamp now = new Timestamp(System.currentTimeMillis());
+		User manager = mservs.findUserByUsername("manager");
+		Reimbursement r = new Reimbursement(reimbType, reimbStatus, amount, now, null, description, u, manager);
+		eservs.newReimbursementRequest(r);
+		
+		response.setContentType("application/json");
+		PrintWriter out = response.getWriter();
+		out.println(r);
+		
+	}
+	
+	
+
+
+	/* This action is perfoirmed by ManagerServices */
 	public static void processManagerLogin(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException{
 		UserImpl udao = new UserImpl();
 		
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
-		System.out.println(username+ "\n\n");
-		User e = eservs.confirmLogin(username, password);
+		System.out.println("\n\nInside Manager Login Methd\n\n");
+		User e = mservs.confirmLogin(username, password);
 		
 		if(e.getId() > 0 && e.getRole().getId() == 2) {		// we are authenticated
 			HttpSession sess = request.getSession();
-			sess.setAttribute("the-user", e);
+			sess.setAttribute(sess.getId(), e);
 			PrintWriter out = response.getWriter();
-			response.setContentType("text/html");
-			out.println("<h1>Welcome " + e.getFirstname() + "</h1");
-			out.println("<h3>You have successfully logged in!</h3>");
-			
-			String jsonString = om.writeValueAsString(e);
-			out.println(jsonString);
+			response.addCookie(new Cookie("JSESSIONID", sess.getId()));
+			RequestDispatcher rd = request.getRequestDispatcher("managers.html");
+			rd.forward(request, response);
+			System.out.println("\n\n\nForward dididn't work!\n\n");
+//			out.println("<h1>Welcome " + e.getFirstname() + "</h1");
+//			out.println("<h3>You have successfully logged in!</h3>");
+//			
+//			String jsonString = om.writeValueAsString(e);
+//			out.println(jsonString);
 		} else {
 			PrintWriter out = response.getWriter();
 			response.setContentType("text/html");

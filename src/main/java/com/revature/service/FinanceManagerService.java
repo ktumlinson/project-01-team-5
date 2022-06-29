@@ -13,10 +13,17 @@ import com.revature.models.User;
 
 public class FinanceManagerService extends UserService{
 	private ReimbursementImpl rdao;
+	private UserImpl udao;
 
 	public FinanceManagerService(UserImpl udao, ReimbursementImpl rdao) {
 		super(udao);
 		this.rdao = rdao;
+	}
+	
+	public FinanceManagerService() {
+		super(new UserImpl());
+		this.rdao = new ReimbursementImpl();
+		
 	}
 	
 	// specifics to FM(approve and deny Reimbursements
@@ -42,10 +49,20 @@ public class FinanceManagerService extends UserService{
 				.filter(r -> (r.getEmployee().getUsername().equals(employeeUsername))).collect(Collectors.toList());
 	}
 	
+	public List<Reimbursement> allReimbursementsById(int employeeId){
+		return allReimbursements().stream()
+				.filter(r -> (r.getEmployee().getId()==employeeId)).collect(Collectors.toList());
+	}
+	
 	// tested and works
 	public List<User> allEmployees(){
 		return udao.findAllUsers().stream()
-				.filter(u -> (u.getRole().getId() == 1)).collect(Collectors.toList());
+			//	.filter(u -> (u.getRole().getId() == 1))
+				.collect(Collectors.toList());
+	}
+	
+	public Reimbursement findReimbursementById(int id) {
+		return rdao.findReimbursementById(id);
 	}
 	
 	// tested and works

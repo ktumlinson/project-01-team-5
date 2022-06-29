@@ -41,7 +41,25 @@ public class EReimbursementStatus {
 		this.status = status;
 	}
 
-	
+	public static EReimbursementStatus generater(String status) {
+		String statusString = "";
+		int id = 0;
+		switch(status) {
+		case "approved":
+			statusString = "approved";
+			id = 2;
+			break;
+		case "rejected":
+			statusString = "rejected";
+			id = 3;
+			break;
+		default:
+			statusString = "pending";
+			id = 1;
+			break;
+		}
+		return new EReimbursementStatus(id, statusString);
+	}
 
 
 	public int getId() {

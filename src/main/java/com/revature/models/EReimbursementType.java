@@ -34,6 +34,30 @@ public class EReimbursementType {
 		this.id = id;
 		this.type = type;
 	}
+	
+	public static EReimbursementType generater(String type) {
+		String typeString = "";
+		int id = 0;
+		switch(type) {
+		case "lodging":
+			typeString = "lodging";
+			id = 1;
+			break;
+		case "travel":
+			typeString = "travel";
+			id = 2;
+			break;
+		case "food":
+			typeString = "lodging";
+			id = 3;
+			break;
+		default:
+			typeString = "other";
+			id = 4;
+			break;
+		}
+		return new EReimbursementType(id, typeString);
+	}
 
 	
 

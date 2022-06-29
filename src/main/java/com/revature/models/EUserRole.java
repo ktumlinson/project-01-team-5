@@ -38,6 +38,22 @@ public class EUserRole {
 		this.id = id;
 		this.role = role;
 	}
+	
+	public static EUserRole roleGenerator(String role) {
+		int id = 0;
+		String newRole = "";
+		switch(role) {
+		case "Manager":
+			newRole = "Manager";
+			id = 2;
+			break;
+			default:
+				id = 1;
+				newRole = "Employee";
+				break;
+		}
+		return new EUserRole(id, newRole);
+	}
 
 	public int getId() {
 		return id;
