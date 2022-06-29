@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://Java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://Java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
   <display-name>project-01</display-name>
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>
@@ -17,25 +17,24 @@
     <url-pattern>/emp-login</url-pattern>
     <url-pattern>/manager-login</url-pattern>
   </servlet-mapping>
-  
-  <!-- <servlet>
-    <description></description>
-    <display-name>EmployeeService</display-name>
-    <servlet-name>EmployeeService</servlet-name>
-    <servlet-class>com.revature.web.EmployeeServices</servlet-class>
-  </servlet>
   <servlet>
     <description></description>
-    <display-name>ManagerService</display-name>
-    <servlet-name>ManagerService</servlet-name>
-    <servlet-class>com.revature.web.FinanceManagerService</servlet-class>
+    <display-name>LoginEmployees</display-name>
+    <servlet-name>LoginEmployees</servlet-name>
+    <servlet-class>com.revature.web.LoginEmployees</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>EmployeeService</servlet-name>
-    <url-pattern>/employees</url-pattern>
+    <servlet-name>LoginEmployees</servlet-name>
+    <url-pattern>/LoginEmployees</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>LoginManagers</display-name>
+    <servlet-name>LoginManagers</servlet-name>
+    <servlet-class>com.revature.web.LoginManagers</servlet-class>
+  </servlet>
   <servlet-mapping>
-    <servlet-name>ManagerService</servlet-name>
-    <url-pattern>/managers</url-pattern>
-  </servlet-mapping> -->
+    <servlet-name>LoginManagers</servlet-name>
+    <url-pattern>/LoginManagers</url-pattern>
+  </servlet-mapping>
 </web-app>
