@@ -25,14 +25,19 @@ public class RequestHelperManagers {
 	
 	public static void getReimbursementById(HttpServletRequest request, HttpServletResponse response, 
 			String queryString) throws IOException, ServletException{
+		response.setContentType("application/json");
+		response.addHeader("Access-Control-Allow-Origin", "*");
 		
-		mservs.allReimbursementsById(Integer.parseInt(queryString));
-	
+		List<Reimbursement> reimbList = mservs.allReimbursementsByEmployeeId(Integer.parseInt(queryString));
+		String jsonString = new ObjectMapper().writeValueAsString(reimbList);
+		PrintWriter out = response.getWriter();
+		out.println(jsonString);
 	}
 	
 	public static void getAllReimbursements(HttpServletRequest request, HttpServletResponse response) 
 			throws IOException, ServletException{
-		
+		response.setContentType("application/json");
+		response.addHeader("Access-Control-Allow-Origin", "*");
 		List<Reimbursement> allReimb = mservs.allReimbursements();
 		String jsonString = new ObjectMapper().writeValueAsString(allReimb);
 		PrintWriter out = response.getWriter();
@@ -41,7 +46,8 @@ public class RequestHelperManagers {
 	
 	public static void getAllEmployees(HttpServletRequest request, HttpServletResponse response) 
 			throws IOException, ServletException{
-		
+		response.setContentType("application/json");
+		response.addHeader("Access-Control-Allow-Origin", "*");
 		List<User> allReimb = mservs.allEmployees();
 		String jsonString = new ObjectMapper().writeValueAsString(allReimb);
 		PrintWriter out = response.getWriter();
@@ -51,15 +57,15 @@ public class RequestHelperManagers {
 	// Need a way to track manager updates. Can't do it currently
 	public static void updateReimbursementById(HttpServletRequest request, HttpServletResponse response, 
 			String id) throws IOException, ServletException{
-			
+			response.setContentType("application/json");
+			response.addHeader("Access-Control-Allow-Origin", "*");
 			int idInt = Integer.parseInt(id);
 			// V This will be useful just not yet!!
 //			mservs.allReimbursementsById(Integer.parseInt(id));
 			PrintWriter out = response.getWriter();
 
-			response.setContentType("application/json");
 			String statusParam = request.getParameter("status");
-			System.out.println(statusParam);
+
 			Reimbursement r = mservs.findReimbursementById(idInt);
 			EReimbursementStatus status = null;
 			switch(statusParam) {
@@ -73,7 +79,6 @@ public class RequestHelperManagers {
 					status = EReimbursementStatus.generater("pending");
 					break;
 			}
-			System.out.println(status);
 			r.setStatus(status);
 			User m = User.managerGenerator();
 			if(status.getId() == 2) {

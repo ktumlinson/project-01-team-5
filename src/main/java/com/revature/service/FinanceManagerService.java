@@ -49,7 +49,7 @@ public class FinanceManagerService extends UserService{
 				.filter(r -> (r.getEmployee().getUsername().equals(employeeUsername))).collect(Collectors.toList());
 	}
 	
-	public List<Reimbursement> allReimbursementsById(int employeeId){
+	public List<Reimbursement> allReimbursementsByEmployeeId(int employeeId){
 		return allReimbursements().stream()
 				.filter(r -> (r.getEmployee().getId()==employeeId)).collect(Collectors.toList());
 	}

@@ -21,15 +21,15 @@ public class LoginEmployees extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		request.getRequestDispatcher("employees.html").include(request, response);
 
-		String name = request.getParameter("name");
+		String username = request.getParameter("username");
 		String password = request.getParameter("password");
 
 		if (password.equals("admin123")) {
-			out.print("Welcome, " + name);
+			out.write("Welcome, " + username);
 			HttpSession session = request.getSession();
-			session.setAttribute("name", name);
+			session.setAttribute("the-user", username);
 		} else {
-			out.print("Sorry, username or password error");
+			out.write("Sorry, username or password error");
 			request.getRequestDispatcher("employee-login.html").include(request, response);
 		}
 		out.close();

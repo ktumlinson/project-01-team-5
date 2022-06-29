@@ -19,13 +19,13 @@ public class LoginManagers extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		request.getRequestDispatcher("managers.html").include(request, response);
 		
-		String name = request.getParameter("name");
+		String username = request.getParameter("username");
 		String password = request.getParameter("password");
 		
 		if(password.equals("admin123")) {
-			out.print("Welcome, " + name);
+			
 			HttpSession session = request.getSession();
-			session.setAttribute("name", name);
+			session.setAttribute("name", username);
 		} else {
 			out.print("Sorry, username or password error");
 			request.getRequestDispatcher("manager-login.html").include(request, response);

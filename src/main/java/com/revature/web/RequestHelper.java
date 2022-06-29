@@ -158,7 +158,7 @@ public class RequestHelper {
 		String password = request.getParameter("password");
 		
 		Employee e = eserv.confirmLogin(username, password);
-		System.out.println(e.getId());
+		
 		if(e.getId() > 0) {
 			HttpSession sess = request.getSession();
 			sess.setAttribute("the-user", e);
@@ -185,7 +185,7 @@ public class RequestHelper {
 		
 		for(Cookie cookie : cookies) {
 			if(cookie.getName().equals("JSESSIONID")) {
-				System.out.println("YESSSS\n\n\n");
+				
 				// they may be authenticated
 //				User possibleUser = (User) sess.getAttribute("the-user");
 //				if(possibleUser != null && possibleUser.getUsername().equals(cookie.getValue())) {
@@ -206,7 +206,7 @@ public class RequestHelper {
 		
 		for(Cookie cookie : cookies) {
 			if(cookie.getName().equals("JSESSIONID")) {
-				System.out.println("YESSSS\n\n\n");
+				
 				// they may be authenticated
 //				User possibleUser = (User) sess.getAttribute("the-user");
 //				if(possibleUser != null && possibleUser.getUsername().equals(cookie.getValue())) {
@@ -223,22 +223,22 @@ public class RequestHelper {
 	
 	public static void sendEmployeeHomepage(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		if(checkForLoginToken(request, response)) {
-			System.out.println("Should be on employees-home\n\n");
+			
 			RequestDispatcher home = request.getRequestDispatcher("employees.html");
 			home.forward(request, response);
 		}
 		
-		System.out.println("\n\nPrints After the Forwrad so the Session and Request is still valid");
+		
 	}
 	
 	public static void checkForSSO(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException{
 		HttpSession sess = request.getSession();
 		if(!checkForLoginToken(request, response)) {
 			response.sendRedirect("employee-login.html");
-			System.out.println("Done with Redirect");
+			
 			return;
 		}
-		System.out.println("Should be on employee's home");
+		
 		response.sendRedirect("employees-home");
 	}
 	
@@ -283,7 +283,7 @@ public class RequestHelper {
 	
 	public static void viewUserInfo(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException{
 		String username = getUsernameFromCookie(request, response);
-		System.out.println(username);
+		
 		User u = mservs.findUserByUsername(username);
 		
 		response.setContentType("application/json");
@@ -329,7 +329,7 @@ public class RequestHelper {
 	}
 	
 	public static void updateUserInfo(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException{
-		System.out.println(request.getParameterNames());
+		
 		HttpSession sess = request.getSession();
 		User u = (User) sess.getAttribute("the-user");
 		// get the data from the request body
@@ -356,10 +356,10 @@ public class RequestHelper {
 	/* End of Employee Homepage Methods */
 	
 	public static void createNewRequest(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException{
-		System.out.println("Inside createNewRequest Method");
+		
 		HttpSession sess = request.getSession();
 		User u = (User) sess.getAttribute("the-user");
-		System.out.println(u);
+		
 		String username = request.getParameter("username");
 		double amount = Double.parseDouble(request.getParameter("amount"));
 		String type  = request.getParameter("type");
@@ -400,7 +400,7 @@ public class RequestHelper {
 		
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
-		System.out.println("\n\nInside Manager Login Methd\n\n");
+		
 		User e = mservs.confirmLogin(username, password);
 		
 		if(e.getId() > 0 && e.getRole().getId() == 2) {		// we are authenticated
@@ -410,7 +410,7 @@ public class RequestHelper {
 			response.addCookie(new Cookie("JSESSIONID", sess.getId()));
 			RequestDispatcher rd = request.getRequestDispatcher("managers.html");
 			rd.forward(request, response);
-			System.out.println("\n\n\nForward dididn't work!\n\n");
+			
 //			out.println("<h1>Welcome " + e.getFirstname() + "</h1");
 //			out.println("<h3>You have successfully logged in!</h3>");
 //			

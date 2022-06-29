@@ -37,6 +37,7 @@ public class RequestHelperEmployees {
 		PrintWriter out = response.getWriter();
 		int idInt = Integer.parseInt(id);
 		response.setContentType("application/json");
+		response.addHeader("Access-Control-Allow-Origin", "*");
 		
 		String queryString = request.getQueryString();
 		Reimbursement r = mservs.findReimbursementById(idInt);
@@ -51,6 +52,7 @@ public class RequestHelperEmployees {
 		PrintWriter out = response.getWriter();
 		int idInt = Integer.parseInt(id);
 		response.setContentType("application/json");
+		response.addHeader("Access-Control-Allow-Origin", "*");
 		User u = eservs.findUserById(idInt);
 		String queryString = request.getQueryString();
 		
@@ -76,6 +78,7 @@ public class RequestHelperEmployees {
 		Reimbursement r = new Reimbursement(reimbType, reimbStatus, amount, ts, null, description, u, User.managerGenerator());
 		eservs.newReimbursementRequest(r);
 		response.setContentType("application/json");
+		response.addHeader("Access-Control-Allow-Origin", "*");
 		
 		String queryString = request.getQueryString();
 		
@@ -91,8 +94,9 @@ public class RequestHelperEmployees {
 		
 		//String test = request.getReader().lines().collect(Collectors.joining(System.lineSeparator()));
 		//System.out.println(test);
-		System.out.println(request.getParameterNames());
+
 		response.setContentType("application/json");
+		response.addHeader("Access-Control-Allow-Origin", "*");
 		String firstname = request.getParameter("firstname");
 		String lastName = request.getParameter("lastname");
 		String password = request.getParameter("password");
