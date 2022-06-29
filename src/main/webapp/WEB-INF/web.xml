@@ -10,14 +10,14 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>FrontController</servlet-name>
-    <url-pattern>/employees/view-user-info</url-pattern>
+    <url-pattern>/employees/*</url-pattern>
+    <url-pattern>/reimbursements/*</url-pattern>
     <url-pattern>/employees</url-pattern>
-    <url-pattern>/managers</url-pattern>
-    <url-pattern>/register</url-pattern>
-    <url-pattern>/manager-home</url-pattern>
-    <url-pattern>/employee-login</url-pattern>
-    <url-pattern>/employees-home</url-pattern>
+    <url-pattern>/reimbursements</url-pattern>
+    <url-pattern>/emp-login</url-pattern>
+    <url-pattern>/manager-login</url-pattern>
   </servlet-mapping>
+  
   <!-- <servlet>
     <description></description>
     <display-name>EmployeeService</display-name>
