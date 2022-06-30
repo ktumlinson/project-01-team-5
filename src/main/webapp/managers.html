@@ -1,77 +1,106 @@
 <!DOCTYPE html>
 <html>
+  <head>
+    <meta charset="ISO-8859-1" />
+    <title>Manager View</title>
+    <!--bootstrap-->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor"
+      crossorigin="anonymous"
+    />
 
-<head>
-<meta charset="ISO-8859-1">
-<title>Manager View</title>
-<!--bootstrap-->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
-
-<link rel="stylesheet" href="css\stylesheet.css">
-<link rel="stylesheet" href="css\manager-view.css">
-</head>
-<body>
-	<!-- options: list employees
+    <link rel="stylesheet" href="css\stylesheet.css" />
+    <link rel="stylesheet" href="css\manager-view.css" />
+  </head>
+  <body>
+    <!-- options: list employees
 				  list all resolved reimbursements
 				  list all pending reimbursements
 				  approve or disprove a reimbursement
 				  view all reimbursements by an employee-->
-	
-	<div class="container">
-		<div class="card">
-			<div class="shadow-lg">
-				<div class="card-header">
-					<h1>What Would You Like To Do?</h1>
-				</div>
 
-				<div class="card-body">
-					<h6>Review Reimbursement</h6>
-					<form id="review" method="Post" action="review-reimbursement.html">
-						<label>ID:</label>
-						<input type="number" name="reimbursement-id" placeholder="00"><!--note that if it gives a decimal you need to specify that it will not allow it on the error message-->
-						<input type="submit" value="Review">
-					</form><br>
-					<h6>Find Employee Reimbursements</h6>
-					<form method="POST" action="reimbursement-by-user">
-						<label>Username:</label>
-						<input type="text" name="username" 
-						placeholder="Username">
-						<input type="submit" value="Find">
-					</form><br><br>
+    <div class="container">
+      <div class="card">
+        <div class="shadow-lg">
+          <div class="card-header">
+            <h1>What Would You Like To Do?</h1>
+          </div>
 
-					<h6>View Information</h6>
-					<table id="buttons">
-						<tr>
-							<th id="manager">
-								<button class="btn btn-light" id="manager-employees-button">View all Employees</button>
-							</th>
-							<th id="manager">
-								<button class="btn btn-light" id="manager-reimbursements-button">View all reimbursements</button>
-							</th>
-						</tr>
-						<tr>
-							<th id="manager">
-								<button class="btn btn-light" id="manager-pending-button">View open Reimbursements</button>
-							</th>
-							<th id="manager">
-								<button class="btn btn-light" id="manager-resolved-button">View closed Reimbursements</button>
-							</th>
-						</tr>
-					</table>
-					
-					<!--This will be dynamic and use a switch case for the color of the variant table as seen here https://getbootstrap.com/docs/4.1/content/tables/ under "Contextual Classes" and will change the switch based on if it is All reimbursemnents or pending/resolved ex: in all table pending will be a "Danger" class so the row will be red and in resolved lodging types will be "Primary" class so they will be a blue-->
-					<table id="manager-table"></table> 
-				</div>
-			</div>
-		</div>
-	</div>
-	
-	
-	
-	
-	
-	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js" integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk" crossorigin="anonymous"></script>
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.min.js" integrity="sha384-kjU+l4N0Yf4ZOJErLsIcvOU2qSb74wXpOhqTvwVx3OElZRweTnQ6d31fXEoRD1Jy" crossorigin="anonymous"></script>
-</body>
+          <div class="card-body">
+            <h6>Review Reimbursement</h6>
+            <div id="review">
+              <label>ID:</label>
+              <input
+                type="number"
+                name="reimbursement-id"
+                placeholder="00"
+              /><!--note that if it gives a decimal you need to specify that it will not allow it on the error message-->
+              <button id="review-reimbursement-btn">Review</button>
+            </div>
+            <br />
+            <h6>Find Employee Reimbursements</h6>
+            <div>
+              <label>Username:</label>
+              <input
+                type="text"
+                name="username"
+                placeholder="Username"
+                id="find-reimbursement-by-username-input"
+              />
+              <button id="find-reimbursement-by-username-button">Find</button>
+            </div>
+            <br /><br />
+
+            <h6>View Information</h6>
+            <table id="buttons">
+              <tr>
+                <th id="manager">
+                  <button class="btn btn-light" id="manager-employees-button">
+                    View all Employees
+                  </button>
+                </th>
+                <th id="manager">
+                  <button
+                    class="btn btn-light"
+                    id="manager-reimbursements-button"
+                  >
+                    View all reimbursements
+                  </button>
+                </th>
+              </tr>
+              <tr>
+                <th id="manager">
+                  <button class="btn btn-light" id="manager-pending-button">
+                    View open Reimbursements
+                  </button>
+                </th>
+                <th id="manager">
+                  <button class="btn btn-light" id="manager-resolved-button">
+                    View closed Reimbursements
+                  </button>
+                </th>
+              </tr>
+            </table>
+
+            <!--This will be dynamic and use a switch case for the color of the variant table as seen here https://getbootstrap.com/docs/4.1/content/tables/ under "Contextual Classes" and will change the switch based on if it is All reimbursemnents or pending/resolved ex: in all table pending will be a "Danger" class so the row will be red and in resolved lodging types will be "Primary" class so they will be a blue-->
+            <table id="manager-table"></table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js"
+      integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.min.js"
+      integrity="sha384-kjU+l4N0Yf4ZOJErLsIcvOU2qSb74wXpOhqTvwVx3OElZRweTnQ6d31fXEoRD1Jy"
+      crossorigin="anonymous"
+    ></script>
+    <script src="./js/managers-fetch.js"></script>
+  </body>
 </html>
-

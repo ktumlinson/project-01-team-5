@@ -23,12 +23,12 @@ public class RequestHelperManagers {
 	private static FinanceManagerService mservs = new FinanceManagerService(new UserImpl(), new ReimbursementImpl());
 	private static ObjectMapper om = new ObjectMapper();
 	
-	public static void getReimbursementById(HttpServletRequest request, HttpServletResponse response, 
-			String queryString) throws IOException, ServletException{
+	public static void getReimbursementByUsername(HttpServletRequest request, HttpServletResponse response, 
+			String username) throws IOException, ServletException{
 		response.setContentType("application/json");
 		response.addHeader("Access-Control-Allow-Origin", "*");
 		
-		List<Reimbursement> reimbList = mservs.allReimbursementsByEmployeeId(Integer.parseInt(queryString));
+		List<Reimbursement> reimbList = mservs.allReimbursementsByEmployee(username);
 		String jsonString = new ObjectMapper().writeValueAsString(reimbList);
 		PrintWriter out = response.getWriter();
 		out.println(jsonString);
@@ -39,6 +39,26 @@ public class RequestHelperManagers {
 		response.setContentType("application/json");
 		response.addHeader("Access-Control-Allow-Origin", "*");
 		List<Reimbursement> allReimb = mservs.allReimbursements();
+		String jsonString = new ObjectMapper().writeValueAsString(allReimb);
+		PrintWriter out = response.getWriter();
+		out.println(jsonString);
+	}
+	
+	public static void getAllOpenReimbursements(HttpServletRequest request, HttpServletResponse response) 
+			throws IOException, ServletException{
+		response.setContentType("application/json");
+		response.addHeader("Access-Control-Allow-Origin", "*");
+		List<Reimbursement> allReimb = mservs.allPendingReinbursements();
+		String jsonString = new ObjectMapper().writeValueAsString(allReimb);
+		PrintWriter out = response.getWriter();
+		out.println(jsonString);
+	}
+	
+	public static void getAllClosedReimbursements(HttpServletRequest request, HttpServletResponse response) 
+			throws IOException, ServletException{
+		response.setContentType("application/json");
+		response.addHeader("Access-Control-Allow-Origin", "*");
+		List<Reimbursement> allReimb = mservs.allResolvedReinbursements();
 		String jsonString = new ObjectMapper().writeValueAsString(allReimb);
 		PrintWriter out = response.getWriter();
 		out.println(jsonString);

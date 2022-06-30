@@ -1,10 +1,14 @@
 package com.revature.web;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import com.revature.models.User;
 
 /**
  * Servlet implementation class FrontController
@@ -20,6 +24,12 @@ public class FrontController extends HttpServlet {
 		case "reimbursements":		// manager gets all reimbursements
 			RequestHelperManagers.getAllReimbursements(request, response);
 			break;
+		case "reimbursements?status=open":
+			RequestHelperManagers.getAllOpenReimbursements(request, response);
+			break;
+		case "reimbursements?status=closed":
+			RequestHelperManagers.getAllOpenReimbursements(request, response);
+			break;	
 		// tested and works
 		case "employees":			// manager get all emps
 			RequestHelperManagers.getAllEmployees(request, response);
@@ -30,10 +40,31 @@ public class FrontController extends HttpServlet {
 			String id = URI.replace("employees/", "");
 			RequestHelperEmployees.getEmployeeById(request, response, id);
 		}
+		else if(URI.matches("employees/openrequests")) {		// User wants to view their open requests
+			HttpSession sess = request.getSession();
+			User u = (User) sess.getAttribute("the-user");
+			
+			
+			String username = URI.replace("employees/", "");
+			RequestHelperManagers.getReimbursementByUsername(request, response, u.getUsername());
+		}
+		else if(URI.matches("employees/closedrequests")) {		// User wants to view their open requests
+			HttpSession sess = request.getSession();
+			User u = (User) sess.getAttribute("the-user");
+			
+			
+			String username = URI.replace("employees/", "");
+			RequestHelperManagers.getReimbursementByUsername(request, response, u.getUsername());
+		}
+		else if(URI.matches("employees/*")) {		// User wants to view their info
+			String username = URI.replace("employees/", "");
+			RequestHelperEmployees.getEmployeeByUsername(request, response, username);
+		}
+		
 		// tested and works
-		else if(URI.matches("reimbursements/\\d+")) {
-			String id = URI.replace("reimbursements/", "");
-			RequestHelperEmployees.getReimbursementById(request, response, id);
+		else if(URI.matches("reimbursements/*")) {
+			String username = URI.replace("reimbursements/", "");
+			RequestHelperManagers.getReimbursementByUsername(request, response, username);
 		}
 	}
 	
@@ -57,12 +88,21 @@ public class FrontController extends HttpServlet {
 //			System.out.println("Post a new Employee");
 //			break;	
 		}
+		if(URI.matches("employees/update")) { // Employees will update their info
+			HttpSession sess = request.getSession();
+			User u = (User) sess.getAttribute("the-user");
+			
+			int id = u.getId();
+			RequestHelperEmployees.updateInfoByID(request, response, id);
+			
+		}
 		// tested and works
-		if(URI.matches("employees/\\d+")) { // Employees will edit their info
-			System.out.println("Put " + request.getParameter("firstname"));
+		else if(URI.matches("employees/\\d+")) { // Employees will edit their info
+			
 			
 			String id = URI.replace("employees/", "");
-			RequestHelperEmployees.updateInfoByID(request, response, id);
+			int idInt = Integer.parseInt(id);
+			RequestHelperEmployees.updateInfoByID(request, response, idInt);
 		}
 		// tested and works
 		else if(URI.matches("reimbursements/\\d+")) { // Manager will edit reimbs
