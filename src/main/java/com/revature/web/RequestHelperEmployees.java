@@ -61,6 +61,21 @@ public class RequestHelperEmployees {
 		
 	}
 	
+	public static void getEmployeeByUsername(HttpServletRequest request, HttpServletResponse response, 
+			String username) throws IOException, ServletException{
+		HttpSession sess = request.getSession();
+		PrintWriter out = response.getWriter();
+		
+		response.setContentType("application/json");
+		response.addHeader("Access-Control-Allow-Origin", "*");
+		User u = eservs.findUserByUsername(username);
+		String queryString = request.getQueryString();
+		
+			String jsonString = new ObjectMapper().writeValueAsString(u);
+			out.println(jsonString);
+		
+	}
+	
 	public static void createNewReimbursement(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException{
 		
 		HttpSession sess = request.getSession();
@@ -87,8 +102,8 @@ public class RequestHelperEmployees {
 		
 	}
 	
-	public static void updateInfoByID(HttpServletRequest request, HttpServletResponse response, String id) throws IOException, ServletException{
-		int idInt = Integer.parseInt(id);
+	public static void updateInfoByID(HttpServletRequest request, HttpServletResponse response, int id) throws IOException, ServletException{
+		
 		HttpSession sess = request.getSession();
 		PrintWriter out = response.getWriter();
 		
@@ -102,7 +117,43 @@ public class RequestHelperEmployees {
 		String password = request.getParameter("password");
 		String email = request.getParameter("email");
 		String queryString = request.getQueryString();
-		User u = mservs.findUserById(idInt);
+		User u = mservs.findUserById(id);
+		
+		if(!firstname.equals("")) {
+			u.setFirstname(firstname);
+		}
+		if(!lastName.equals("")) {
+			u.setLastname(lastName);
+		}
+		if(!password.equals("")) {
+			u.setPassword(password);
+		}
+		if(!email.equals("")) {
+			u.setEmail(email);
+		}
+		
+		eservs.updateInfo(u);
+		String jsonString = new ObjectMapper().writeValueAsString(u);
+		out.println(jsonString);
+		
+	}
+	
+	public static void updateInfoByUsername(HttpServletRequest request, HttpServletResponse response, String username) throws IOException, ServletException{
+		
+		HttpSession sess = request.getSession();
+		PrintWriter out = response.getWriter();
+		
+		//String test = request.getReader().lines().collect(Collectors.joining(System.lineSeparator()));
+		//System.out.println(test);
+
+		response.setContentType("application/json");
+		response.addHeader("Access-Control-Allow-Origin", "*");
+		String firstname = request.getParameter("firstname");
+		String lastName = request.getParameter("lastname");
+		String password = request.getParameter("password");
+		String email = request.getParameter("email");
+		String queryString = request.getQueryString();
+		User u = mservs.findUserByUsername(username);
 		
 		if(!firstname.equals("")) {
 			u.setFirstname(firstname);
