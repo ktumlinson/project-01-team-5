@@ -8,6 +8,7 @@
 
 <link rel="stylesheet" href="css\stylesheet.css">
 <link rel="stylesheet" href="css\employee-view.css">
+<script src="/js/employees.js" defer></script>
 </head>
 <body>
     <!-- options
@@ -16,8 +17,9 @@
            view resolved reimbursement requests
            view information
            change infromation -->
+    <div id="background"></div>
 
-    <div class="container" id="background.visible">
+    <div class="modal.visible container">
         <div class="card">
             <div class="shadow-lg">
                 <div class="card-header">
@@ -31,9 +33,9 @@
                     <h6>View Information</h6>
                     <table id="buttons-employees">
                         <tr>
-                            <th id="employee"><button class="btn btn-light">View user information</button></th>
-                            <th id="employee"><button class="btn btn-light">View open requests</button></th>
-                            <th id="employee"><button class="btn btn-light">View resolved requests</button></th>
+                            <th id="employee"><button class="btn btn-light" id="viewInfo">View user information</button></th>
+                            <th id="employee"><button class="btn btn-light" id="viewOpen">View open requests</button></th>
+                            <th id="employee"><button class="btn btn-light" id="viewResolved">View resolved requests</button></th>
                         </tr>
                     </table>
 
@@ -46,17 +48,64 @@
         </div>
     </div>
 
-    <div class="modal container">
+    <div class="modal container" id="reimbursementMenu">
         <div class="card">
-            <div class="shadow-lg">
-                <div class="card-header">
-                    <!-- bring in the new request stuff head here-->
-                </div>
-                <div class="card-body">
-                    <!-- bring in the new request body here-->
+			<div class="shadow-lg">
+				<div class="card-header">
+					<h1>Please fill out this form for a reimbursement request</h1>
+				</div>
+				<div class="card-body">
+					<form method="POST" action="new-reimbursement">
+						<label>Username:</label>
+						<input type="text" name="username"><br>
+						<label>Amount:</label>
+						<input type="number" name="amount" placeholder="0.00"><br>
+						<p id="description-container">
+							<label for="textarea">Description:</label>
+							<textarea id="textarea" name="description" rows="3" cols="23" placeholder="What is the reimbursement for?"></textarea>
+						</p>
+						<p id="select">
+							<label>Type:</label>
+							<select  class="form-select-sm mb-4" name="type">
+								<option value="1">Lodging</option>
+								<option value="2">Travel</option>
+								<option value="3">Food</option>
+								<option value="4">Other</option>
+							</select><br>
+						</p>
+						<input id="sumbitRequest" type="submit" value="Request">
+					</form>
+                    <input id="cancelRequest" type="submit" value="Cancel">
+				</div>
+			</div>
+		</div>
+    </div>
+
+    <div class="modal container" id="updateMenu">
+        <div class="card">
+			<div class="card">
+                <div class="shadow-lg">
+                    <div class="card-header">
+                        <h1>Please Update Form Below</h1>
+                    </div>
+                    <div class="card-body">
+                        <form method="POST" action="update-user">
+                            <label>First Name:</label>
+                            <input type="text" name="firstname" placeholder="First"><br>
+                            <label>Last Name:</label>
+                            <input type="text" name="lastname" placeholder="Last"><br>
+                            
+                            <label>Password:</label>
+                            <input type="password" name="password" placeholder="***"><br>
+                            <label>Email:</label>
+                            <input type="email" name="email" placeholder="123@yahoo.com"><br>
+                            <input id="submitUpdate" type="submit" value="Update">
+                        </form>
+                        <input id="cancelUpdate" type="submit" value="Cancel">
+                    </div>
                 </div>
             </div>
-        </div>
+		</div>
     </div>
 
 

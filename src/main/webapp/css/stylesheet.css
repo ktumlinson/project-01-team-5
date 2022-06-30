@@ -41,19 +41,24 @@ p{
 
 /*Modal stuff*/
 .modal{
+    background-color: rgb(90, 89, 89);
     position: fixed;
     z-index: 100;
-    background: white;
     border-radius: 10px;
-    width: 80%;
-    top: 30vh;
-    left: 10%;
+    width: 50%;
+    top: 5vh;
+    left: 25%;
+    padding-top: 1%;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
     display: none;
 }
 .modal.visible{
     display: block;
     animation: fade-slide-in 0.3s ease-out forwards;
+}
+
+.form{
+    background-color: rgb(90, 89, 89);
 }
 
 #background{

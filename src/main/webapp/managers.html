@@ -13,6 +13,7 @@
 
     <link rel="stylesheet" href="css\stylesheet.css" />
     <link rel="stylesheet" href="css\manager-view.css" />
+	<script src="/js/managers.js" defer></script>
   </head>
   <body>
     <!-- options: list employees
@@ -20,8 +21,10 @@
 				  list all pending reimbursements
 				  approve or disprove a reimbursement
 				  view all reimbursements by an employee-->
+
+	<div id="background"></div>
 	
-	<div class="container" id="background.visible">
+	<div class="container">
 		<div class="card">
 			<div class="shadow-lg">
 				<div class="card-header">
@@ -71,8 +74,9 @@
 					<form id="review" method="Post" action="review-reimbursement.html">
 						<label>ID:</label>
 						<input type="number" name="reimbursement-id" placeholder="00"><!--note that if it gives a decimal you need to specify that it will not allow it on the error message-->
-						<input type="submit" value="Review">
+						<input id="submitReview" type="submit" value="Review">
 					</form>
+					<input id="cancelReview" type="submit" value="Cancel">
 				</div>
 			</div>
 		</div>
@@ -89,8 +93,9 @@
 						<label>Username:</label>
 						<input type="text" name="username" 
 						placeholder="Username">
-						<input type="submit" value="Find">
+						<input id="submitSearch" type="submit" value="Find">
 					</form>
+					<input id="cancelSearch" type="submit" value="Cancel">
 				</div>
 			</div>
 		</div>
