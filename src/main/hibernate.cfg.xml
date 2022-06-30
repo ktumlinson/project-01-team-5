@@ -14,20 +14,21 @@
       
       <!-- Assume test is the database name -->
       <property name = "hibernate.connection.url"> <!--  this will need to change when we have access to a DB online -->
-        <!-- jdbc:postgresql://team-5.cvtq9j4axrge.us-east-1.rds.amazonaws.com:5432/postgres -->
-        jdbc:postgresql://localhost:5432/postgres?schema=project1
+        jdbc:postgresql://team-5.cvtq9j4axrge.us-east-1.rds.amazonaws.com:5432/postgres
+        <!-- jdbc:postgresql://localhost:5432/postgres?schema=project1 -->
       </property>
       
       <property name = "hibernate.connection.username">
-       <!-- postgres -->
-       andrewhughes
+       postgres
+       <!-- andrewhughes -->
       </property>
       
       <property name = "hibernate.connection.password">
         postgres
       </property>
       
-      <property name="hibernate.default_schema">project1</property>
+      <!-- <property name="hibernate.default_schema">project1</property> -->
+      <property name="hibernate.default_schema">public</property>
       
       <!-- CREATE will drop any existing tables and RE-CREATE our tables -->
       <property name="hibernate.hbm2ddl.auto">update</property>
