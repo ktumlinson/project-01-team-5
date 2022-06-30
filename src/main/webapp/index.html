@@ -21,34 +21,31 @@
 	<br>
 	<br> -->
 
-	<div class="container">
+	<div id ="background.visible" class="container">
 		<div class="card">
 			<div class="shadow-lg">
 				<div class="card-header">
 					<h1>Welcome</h1>
 				</div>
 				<div class="card-body">
-					<form method="GET" action="manager-login.html" id="manager-login">
-						<input type="submit" value="Manager Login">
-					</form>
-					<form method="Get" action="employee-login.html" id="employees-login">
-						<input type="submit" value="Employee Login">
-					</form>
-					<form id="register" method="GET" action="registration.html">
-						<input type="submit" value="Register New User">
-					</form>
+					<button class="btn btn-light" id="manager-login">Manager Login</button>
+					<button class="btn btn-light" id="employee-login">Employee Login</button><br><br>
+					<button class="btn btn-light" id="register">Register</button>
 				</div>
 			</div>
 		</div>
 	</div>
-	
-	<!-- <form method="GET" action="registration.html">
-		<input type="submit" value="Register">
-	</form> -->
-	
-	<!-- <form method="GET" action="employees">
-		<input type="submit" value="See all employees">
-	</form> -->
+	<div class="modal" id="managerModal">
+		<!-- move all the manager login stuff here-->
+		<h1>This is a test</h1>
+	</div>
+
+	<div class="modal" id="managerModal">
+		<!-- move all the employee login stuff here-->
+	</div>
+	<div class="modal" id="registerModal">
+		<!-- move all the register stuff here-->
+	</div>
 
 	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js" integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk" crossorigin="anonymous"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.min.js" integrity="sha384-kjU+l4N0Yf4ZOJErLsIcvOU2qSb74wXpOhqTvwVx3OElZRweTnQ6d31fXEoRD1Jy" crossorigin="anonymous"></script>

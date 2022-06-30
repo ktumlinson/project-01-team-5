@@ -17,7 +17,7 @@
            view information
            change infromation -->
 
-    <div class="container">
+    <div class="container" id="background.visible">
         <div class="card">
             <div class="shadow-lg">
                 <div class="card-header">
@@ -25,12 +25,8 @@
                 </div>
                 <div class="card-body">
                     <h6>Forms</h6>
-                    <form method="GET" action="new-reimbursement.html" id="employee-left">
-                        <input class="btn btn-light"type="submit" value="New Request">
-                    </form>
-                    <form method="GET" action="update-user-info.html" id="employee-right">
-                        <input class="btn btn-light" type="submit" value="Update Info">
-                    </form><br><br><br>
+                    <button class="btn btn-light" id="newReimbursement">New Reimbursement Request</button>
+                    <button class="btn btn-light" id="updateUser">Update User Information</button><br><br><br>
                     
                     <h6>View Information</h6>
                     <table id="buttons-employees">
@@ -41,13 +37,28 @@
                         </tr>
                     </table>
 
-                    <table id="employee-table">
+                    
+                    <table class="table-active" id="employee-table">
 
                     </table>
                 </div>
             </div>
         </div>
     </div>
+
+    <div class="modal container">
+        <div class="card">
+            <div class="shadow-lg">
+                <div class="card-header">
+                    <!-- bring in the new request stuff head here-->
+                </div>
+                <div class="card-body">
+                    <!-- bring in the new request body here-->
+                </div>
+            </div>
+        </div>
+    </div>
+
 
 	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js" integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk" crossorigin="anonymous"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.min.js" integrity="sha384-kjU+l4N0Yf4ZOJErLsIcvOU2qSb74wXpOhqTvwVx3OElZRweTnQ6d31fXEoRD1Jy" crossorigin="anonymous"></script>
