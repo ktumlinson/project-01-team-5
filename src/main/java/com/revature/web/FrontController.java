@@ -93,10 +93,11 @@ public class FrontController extends HttpServlet {
 		final String URI = request.getRequestURI().replace("/employee-servlet-app/", "");
 		
 		switch(URI) {
-		
+		// dont use these in app only api
 		case "emp-login":
 			RequestHelperLogin.loginEmployee(request, response);
 			break;
+		// don't use these in app only api
 		case "manager-login":
 			RequestHelperLogin.loginManager(request, response);
 			break;	
@@ -111,13 +112,15 @@ public class FrontController extends HttpServlet {
 //			System.out.println("Post a new Employee");
 //			break;	
 		}
+		
 		// Employees will update their info
 		if(URI.matches("employees/update")) { 
 			System.out.println("Hit the employees/update path");
 				RequestHelperEmployees.updateInfoByID(request, response);
 			
 		}
-		else if(URI.matches("employees/\\d+")) { // Employees will edit their info
+		// not used in app
+		else if(URI.matches("employees/\\d+")) { 
 			
 			
 			String id = URI.replace("employees/", "");
@@ -127,22 +130,12 @@ public class FrontController extends HttpServlet {
 		 // Manager will edit reimbursements by Id
 		else if(URI.matches("reimbursements/\\d+")) {
 			String id = URI.replace("reimbursements/", "");
-			HttpSession sess = request.getSession();
-			User u = (User) sess.getAttribute("the-man");
-			if(u.getUsername().equals("manager")) {
+			
 				RequestHelperManagers.updateReimbursementById(request, response, id);
-			}
+		
 		}
 	}
 	
-	protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		final String URI = request.getRequestURI().replace("/employee-servlet-app/", "");
-
-		
-
-		
-		
-	}
 	
 
 }
