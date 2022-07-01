@@ -82,4 +82,6 @@ public class FinanceManagerService extends UserService{
 		r.setManagerId(manager);
 		return rdao.update(r);
 	}
+	
+	
 }

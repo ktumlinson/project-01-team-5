@@ -19,8 +19,13 @@
       </property>
       
       <property name = "hibernate.connection.username">
+<<<<<<<< HEAD:main/resources/hibernate.cfg.xml
        postgres
        <!-- andrewhughes -->
+========
+        <!-- postgres -->
+        andrewhughes
+>>>>>>>> 25beb310fa136da8af1104711e00eaa859c031de:src/main/resources/hibernate.cfg.xml
       </property>
       
       <property name = "hibernate.connection.password">
@@ -44,11 +49,19 @@
       <property name="hibernate.show_sql">true</property>
       
       <!-- List of persistent classes -->
+<<<<<<<< HEAD:main/resources/hibernate.cfg.xml
       <mapping class = "com.revature.models.Employee"/>
       <mapping class = "com.revature.models.ReimbursementStatus"/>
       <mapping class = "com.revature.models.ReimbursementType"/>
       <mapping class = "com.revature.models.UserRole"/>
+========
 		<mapping class = "com.revature.models.Employee"/> 
+>>>>>>>> 25beb310fa136da8af1104711e00eaa859c031de:src/main/resources/hibernate.cfg.xml
+      <mapping class = "com.revature.models.Reimbursement"/>
+      <mapping class = "com.revature.models.ReimbursementStatus"/>
+      <mapping class = "com.revature.models.ReimbursementType"/>
+      <mapping class = "com.revature.models.UserRole"/>
+      <mapping class = "com.revature.models.User"/>
       
    </session-factory>
 </hibernate-configuration>

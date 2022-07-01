@@ -20,51 +20,74 @@ public class FrontController extends HttpServlet {
 		final String URI = request.getRequestURI().replace("/employee-servlet-app/", "");
 		
 		switch(URI) {
-		// tested and works
+			
+		// used on manager's homepage
 		case "reimbursements":		// manager gets all reimbursements
 			RequestHelperManagers.getAllReimbursements(request, response);
 			break;
-		case "reimbursements?status=open":
+		case "reimbursements?status=open":	// manager gets open reimbursements
 			RequestHelperManagers.getAllOpenReimbursements(request, response);
 			break;
-		case "reimbursements?status=closed":
+		case "reimbursements?status=closed":	// manager gets closed reimbursements
 			RequestHelperManagers.getAllOpenReimbursements(request, response);
 			break;	
-		// tested and works
-		case "employees":			// manager get all emps
+			// manager get all emps
+		case "employees":			
 			RequestHelperManagers.getAllEmployees(request, response);
 			break;	
 		}
-		// tested and works
+		// Path not really used in our app
 		if(URI.matches("employees/\\d+")) {		// Can be used by both managers and employees
 			String id = URI.replace("employees/", "");
 			RequestHelperEmployees.getEmployeeById(request, response, id);
 		}
-		else if(URI.matches("employees/openrequests")) {		// User wants to view their open requests
+		// User wants to view their open requests
+		else if(URI.matches("employees/openrequests")) {		
 			HttpSession sess = request.getSession();
 			User u = (User) sess.getAttribute("the-user");
-			
+			System.out.println("fetching user session for " + u);
 			
 			String username = URI.replace("employees/", "");
-			RequestHelperManagers.getReimbursementByUsername(request, response, u.getUsername());
+			RequestHelperManagers.getReimbursementsByUsername(request, response, u.getUsername());
 		}
+		// User wants to view their closed requests
 		else if(URI.matches("employees/closedrequests")) {		// User wants to view their open requests
 			HttpSession sess = request.getSession();
 			User u = (User) sess.getAttribute("the-user");
-			
+			System.out.println("fetching user session for " + u);
 			
 			String username = URI.replace("employees/", "");
-			RequestHelperManagers.getReimbursementByUsername(request, response, u.getUsername());
+			RequestHelperManagers.getReimbursementsByUsername(request, response, u.getUsername());
 		}
-		else if(URI.matches("employees/*")) {		// User wants to view their info
+		// User wants to view their own info
+		else if(URI.matches("employees/info")) {		// User wants to view their info
 			String username = URI.replace("employees/", "");
-			RequestHelperEmployees.getEmployeeByUsername(request, response, username);
+			HttpSession sess = request.getSession();
+			User u = (User) sess.getAttribute("the-user");
+			System.out.println("fetching user session for " + u);
+			RequestHelperEmployees.getEmployeeByUsername(request, response, u.getUsername());
+		}
+		// manager finds a reimbursement by reimbursement id
+		else if(URI.matches("reimbursements/\\d+")) { // ??????
+			String id = URI.replace("reimbursements/", "");
+			int idNum = Integer.parseInt(id);
+			HttpSession sess = request.getSession();
+			User u = (User) sess.getAttribute("the-man");
+			if(u.getUsername().equals("manager")) {
+				RequestHelperManagers.getReimbursementByReimbursementId(request, response, idNum);
+			}
 		}
 		
-		// tested and works
-		else if(URI.matches("reimbursements/*")) {
-			String username = URI.replace("reimbursements/", "");
-			RequestHelperManagers.getReimbursementByUsername(request, response, username);
+		// ready to test!
+		// manager finds all reimbursements by username. Haven't extracted query string correctly
+		else if(URI.matches("reimbursements?username=")) { // ??????
+			String username = URI.replace("reimbursements?username=", "");
+			HttpSession sess = request.getSession();
+			User u = (User) sess.getAttribute("the-man");
+			if(u.getUsername().equals("manager")) {
+				RequestHelperManagers.getReimbursementsByUsername(request, response, username);
+			}
+			
 		}
 	}
 	
@@ -72,53 +95,50 @@ public class FrontController extends HttpServlet {
 		final String URI = request.getRequestURI().replace("/employee-servlet-app/", "");
 		
 		switch(URI) {
-		// create a new reimbursement
+		// dont use these in app only api
 		case "emp-login":
+			System.out.println("hello world");
 			RequestHelperLogin.loginEmployee(request, response);
 			break;
+		// don't use these in app only api
 		case "manager-login":
 			RequestHelperLogin.loginManager(request, response);
 			break;	
-		case "reimbursements":		// Employee's make new reimb
-			// tested and works
-			RequestHelperEmployees.createNewReimbursement(request, response);
-			break;
+			// Employee create a new reimbursement
+		case "reimbursements":		
+			
+				RequestHelperEmployees.createNewReimbursement(request, response);
+				break;
+			
 		// maybe if we register a new user
 //		case "employees":			// manager get all emps
 //			System.out.println("Post a new Employee");
 //			break;	
 		}
-		if(URI.matches("employees/update")) { // Employees will update their info
-			HttpSession sess = request.getSession();
-			User u = (User) sess.getAttribute("the-user");
-			
-			int id = u.getId();
-			RequestHelperEmployees.updateInfoByID(request, response, id);
+		
+		// Employees will update their info
+		if(URI.matches("employees/update")) { 
+			System.out.println("Hit the employees/update path");
+				RequestHelperEmployees.updateInfoByID(request, response);
 			
 		}
-		// tested and works
-		else if(URI.matches("employees/\\d+")) { // Employees will edit their info
+		// not used in app
+		else if(URI.matches("employees/\\d+")) { 
 			
 			
 			String id = URI.replace("employees/", "");
 			int idInt = Integer.parseInt(id);
-			RequestHelperEmployees.updateInfoByID(request, response, idInt);
+			RequestHelperEmployees.updateInfoByID(request, response);
 		}
-		// tested and works
-		else if(URI.matches("reimbursements/\\d+")) { // Manager will edit reimbs
+		 // Manager will edit reimbursements by Id
+		else if(URI.matches("reimbursements/\\d+")) {
 			String id = URI.replace("reimbursements/", "");
-			RequestHelperManagers.updateReimbursementById(request, response, id);
+			
+				RequestHelperManagers.updateReimbursementById(request, response, id);
+		
 		}
 	}
 	
-	protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		final String URI = request.getRequestURI().replace("/employee-servlet-app/", "");
-
-		
-
-		
-		
-	}
 	
 
 }
