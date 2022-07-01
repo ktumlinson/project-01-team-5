@@ -20,7 +20,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.revature.dao.ReimbursementImpl;
 import com.revature.dao.UserImpl;
-import com.revature.models.EReimbursementStatus;
+import com.revature.models.ReimbursementStatus;
 import com.revature.models.Reimbursement;
 import com.revature.models.User;
 import com.revature.service.EmployeeServices;
@@ -122,18 +122,18 @@ public class RequestHelperManagers {
 				String statusString = jsonobj.get("status").getAsString();
 				Reimbursement r = mservs.findReimbursementById(idInt);
 
-				EReimbursementStatus status = null;
+				ReimbursementStatus status = null;
 				switch (statusString) {
 				case "approved":
-					status = EReimbursementStatus.generater("approved");
+					status = ReimbursementStatus.generater("approved");
 					mservs.approveReimbursement(r, u);
 					break;
 				case "rejected":
-					status = EReimbursementStatus.generater("rejected");
+					status = ReimbursementStatus.generater("rejected");
 					mservs.denyReimbursement(r, u);
 					break;
 				default:
-					status = EReimbursementStatus.generater("pending");
+					status = ReimbursementStatus.generater("pending");
 					break;
 				}
 

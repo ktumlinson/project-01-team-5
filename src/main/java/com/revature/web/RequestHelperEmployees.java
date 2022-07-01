@@ -22,9 +22,9 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.revature.dao.ReimbursementImpl;
 import com.revature.dao.UserImpl;
-import com.revature.models.EReimbursementStatus;
-import com.revature.models.EReimbursementType;
-import com.revature.models.EUserRole;
+import com.revature.models.ReimbursementStatus;
+import com.revature.models.ReimbursementType;
+import com.revature.models.UserRole;
 import com.revature.models.Reimbursement;
 import com.revature.models.User;
 import com.revature.service.EmployeeServices;
@@ -111,8 +111,8 @@ public class RequestHelperEmployees {
 				String type = jsonobj.get("type").getAsString();
 				String description = jsonobj.get("description").getAsString();
 
-				EReimbursementType reimbType = EReimbursementType.generater(type);
-				EReimbursementStatus reimbStatus = EReimbursementStatus.generater("pending");
+				ReimbursementType reimbType = ReimbursementType.generater(type);
+				ReimbursementStatus reimbStatus = ReimbursementStatus.generater("pending");
 				Timestamp ts = new Timestamp(System.currentTimeMillis());
 				Reimbursement r = new Reimbursement(reimbType, reimbStatus, amount, ts, null, description, u,
 						User.managerGenerator());

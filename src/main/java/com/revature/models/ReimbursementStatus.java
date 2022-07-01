@@ -11,7 +11,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="ers_reimbursement_status")
-public class EReimbursementStatus {
+public class ReimbursementStatus {
 	
 	@Id @Column(name="reimb_status_id")
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -22,26 +22,26 @@ public class EReimbursementStatus {
 
 	
 	
-	public EReimbursementStatus() {
+	public ReimbursementStatus() {
 		super();
 	}
 
 
 
-	public EReimbursementStatus(String status) {
+	public ReimbursementStatus(String status) {
 		super();
 		this.status = status;
 	}
 
 
 
-	public EReimbursementStatus(int id, String status) {
+	public ReimbursementStatus(int id, String status) {
 		super();
 		this.id = id;
 		this.status = status;
 	}
 
-	public static EReimbursementStatus generater(String status) {
+	public static ReimbursementStatus generater(String status) {
 		String statusString = "";
 		int id = 0;
 		switch(status) {
@@ -58,7 +58,7 @@ public class EReimbursementStatus {
 			id = 1;
 			break;
 		}
-		return new EReimbursementStatus(id, statusString);
+		return new ReimbursementStatus(id, statusString);
 	}
 
 
@@ -101,7 +101,7 @@ public class EReimbursementStatus {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		EReimbursementStatus other = (EReimbursementStatus) obj;
+		ReimbursementStatus other = (ReimbursementStatus) obj;
 		return id == other.id && Objects.equals(status, other.status);
 	}
 
