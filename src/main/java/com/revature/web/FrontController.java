@@ -21,6 +21,7 @@ public class FrontController extends HttpServlet {
 		
 		switch(URI) {
 			
+		// used on manager's homepage
 		case "reimbursements":		// manager gets all reimbursements
 			RequestHelperManagers.getAllReimbursements(request, response);
 			break;
@@ -30,11 +31,12 @@ public class FrontController extends HttpServlet {
 		case "reimbursements?status=closed":	// manager gets closed reimbursements
 			RequestHelperManagers.getAllOpenReimbursements(request, response);
 			break;	
-		case "employees":			// manager get all emps
+			// manager get all emps
+		case "employees":			
 			RequestHelperManagers.getAllEmployees(request, response);
 			break;	
 		}
-		// Path really used in our app
+		// Path not really used in our app
 		if(URI.matches("employees/\\d+")) {		// Can be used by both managers and employees
 			String id = URI.replace("employees/", "");
 			RequestHelperEmployees.getEmployeeById(request, response, id);
