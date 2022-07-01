@@ -95,6 +95,7 @@ public class FrontController extends HttpServlet {
 		switch(URI) {
 		// dont use these in app only api
 		case "emp-login":
+			System.out.println("hello world");
 			RequestHelperLogin.loginEmployee(request, response);
 			break;
 		// don't use these in app only api
