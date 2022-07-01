@@ -10,6 +10,7 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>FrontController</servlet-name>
+	<url-pattern>/employees/update</url-pattern>
     <url-pattern>/employees/*</url-pattern>
     <url-pattern>/reimbursements/*</url-pattern>
     <url-pattern>/employees</url-pattern>

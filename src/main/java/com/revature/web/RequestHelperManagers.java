@@ -23,13 +23,24 @@ public class RequestHelperManagers {
 	private static FinanceManagerService mservs = new FinanceManagerService(new UserImpl(), new ReimbursementImpl());
 	private static ObjectMapper om = new ObjectMapper();
 	
-	public static void getReimbursementByUsername(HttpServletRequest request, HttpServletResponse response, 
+	public static void getReimbursementsByUsername(HttpServletRequest request, HttpServletResponse response, 
 			String username) throws IOException, ServletException{
 		response.setContentType("application/json");
 		response.addHeader("Access-Control-Allow-Origin", "*");
 		
 		List<Reimbursement> reimbList = mservs.allReimbursementsByEmployee(username);
 		String jsonString = new ObjectMapper().writeValueAsString(reimbList);
+		PrintWriter out = response.getWriter();
+		out.println(jsonString);
+	}
+	
+	public static void getReimbursementByReimbursementId(HttpServletRequest request, HttpServletResponse response, 
+			int id) throws IOException, ServletException{
+		response.setContentType("application/json");
+		response.addHeader("Access-Control-Allow-Origin", "*");
+		
+		Reimbursement reimb = mservs.findReimbursementById(id);
+		String jsonString = new ObjectMapper().writeValueAsString(reimb);
 		PrintWriter out = response.getWriter();
 		out.println(jsonString);
 	}
