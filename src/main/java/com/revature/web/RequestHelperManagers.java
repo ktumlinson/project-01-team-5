@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.revature.dao.ReimbursementImpl;
 import com.revature.dao.UserImpl;
-import com.revature.models.EReimbursementStatus;
+import com.revature.models.ReimbursementStatus;
 import com.revature.models.Reimbursement;
 import com.revature.models.User;
 import com.revature.service.EmployeeServices;
@@ -87,16 +87,16 @@ public class RequestHelperManagers {
 			String statusParam = request.getParameter("status");
 
 			Reimbursement r = mservs.findReimbursementById(idInt);
-			EReimbursementStatus status = null;
+			ReimbursementStatus status = null;
 			switch(statusParam) {
 			case "2":
-				status = EReimbursementStatus.generater("approved");
+				status = ReimbursementStatus.generater("approved");
 				break;
 			case "3":
-				status = EReimbursementStatus.generater("rejected");
+				status = ReimbursementStatus.generater("rejected");
 				break;
 				default:
-					status = EReimbursementStatus.generater("pending");
+					status = ReimbursementStatus.generater("pending");
 					break;
 			}
 			r.setStatus(status);

@@ -6,8 +6,8 @@ import java.util.stream.Collectors;
 
 import com.revature.dao.ReimbursementImpl;
 import com.revature.dao.UserImpl;
-import com.revature.models.EReimbursementStatus;
-import com.revature.models.EUserRole;
+import com.revature.models.ReimbursementStatus;
+import com.revature.models.UserRole;
 import com.revature.models.Reimbursement;
 import com.revature.models.User;
 
@@ -67,7 +67,7 @@ public class FinanceManagerService extends UserService{
 	
 	// tested and works
 	public boolean denyReimbursement(Reimbursement r, User manager) {
-		r.setStatus(new EReimbursementStatus(3, "rejected"));
+		r.setStatus(new ReimbursementStatus(3, "rejected"));
 		Timestamp ts = new Timestamp(System.currentTimeMillis());
 		r.setTimeResolved(ts);
 		r.setManagerId(manager);
@@ -76,7 +76,7 @@ public class FinanceManagerService extends UserService{
 	
 	// tested and works
 	public boolean approveReimbursement(Reimbursement r, User manager) {
-		r.setStatus(new EReimbursementStatus(2, "approved"));
+		r.setStatus(new ReimbursementStatus(2, "approved"));
 		Timestamp ts = new Timestamp(System.currentTimeMillis());
 		r.setTimeResolved(ts);
 		r.setManagerId(manager);

@@ -11,7 +11,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="ers_user_roles")
-public class EUserRole {
+public class UserRole {
 	
 	@Id @Column(name="ers_user_role_id")
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -24,22 +24,22 @@ public class EUserRole {
 	
 	
 
-	public EUserRole() {
+	public UserRole() {
 		super();
 	}
 
-	public EUserRole(String role) {
+	public UserRole(String role) {
 		super();
 		this.role = role;
 	}
 
-	public EUserRole(int id, String role) {
+	public UserRole(int id, String role) {
 		super();
 		this.id = id;
 		this.role = role;
 	}
 	
-	public static EUserRole roleGenerator(String role) {
+	public static UserRole roleGenerator(String role) {
 		int id = 0;
 		String newRole = "";
 		switch(role) {
@@ -52,7 +52,7 @@ public class EUserRole {
 				newRole = "Employee";
 				break;
 		}
-		return new EUserRole(id, newRole);
+		return new UserRole(id, newRole);
 	}
 
 	public int getId() {
@@ -84,7 +84,7 @@ public class EUserRole {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		EUserRole other = (EUserRole) obj;
+		UserRole other = (UserRole) obj;
 		return id == other.id && Objects.equals(role, other.role);
 	}
 

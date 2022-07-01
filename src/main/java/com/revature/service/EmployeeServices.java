@@ -5,7 +5,7 @@ import java.util.stream.Collectors;
 
 import com.revature.dao.ReimbursementImpl;
 import com.revature.dao.UserImpl;
-import com.revature.models.EReimbursementStatus;
+import com.revature.models.ReimbursementStatus;
 import com.revature.models.Reimbursement;
 import com.revature.models.User;
 

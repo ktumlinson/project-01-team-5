@@ -26,11 +26,11 @@ public class Reimbursement {
 	
 	@ManyToOne
 	@JoinColumn(name="reimb_type_id")
-	private EReimbursementType type;
+	private ReimbursementType type;
 	
 	@ManyToOne()
 	@JoinColumn(name="reimb_status_id")
-	private EReimbursementStatus status;
+	private ReimbursementStatus status;
 
 	@Column(name = "reimb_amount")
 	private double reimbursementAmt;
@@ -59,7 +59,7 @@ public class Reimbursement {
 //	@JoinColumn(name="reimb_resolver", referencedColumnName="ers_users_id")
 	private User managerId;
 
-	public Reimbursement(int id, EReimbursementType type, EReimbursementStatus status, double reimbursementAmt,
+	public Reimbursement(int id, ReimbursementType type, ReimbursementStatus status, double reimbursementAmt,
 			Timestamp timeSubmitted, Timestamp timeResolved, String description, User employee, User managerId) {
 		super();
 		this.id = id;
@@ -73,7 +73,7 @@ public class Reimbursement {
 		this.managerId = managerId;
 	}
 
-	public Reimbursement(EReimbursementType type, EReimbursementStatus status, double reimbursementAmt,
+	public Reimbursement(ReimbursementType type, ReimbursementStatus status, double reimbursementAmt,
 			Timestamp timeSubmitted, Timestamp timeResolved, String description, User employee, User managerId) {
 		super();
 		this.type = type;
@@ -127,19 +127,19 @@ public class Reimbursement {
 		this.id = id;
 	}
 
-	public EReimbursementType getType() {
+	public ReimbursementType getType() {
 		return type;
 	}
 
-	public void setType(EReimbursementType type) {
+	public void setType(ReimbursementType type) {
 		this.type = type;
 	}
 
-	public EReimbursementStatus getStatus() {
+	public ReimbursementStatus getStatus() {
 		return status;
 	}
 
-	public void setStatus(EReimbursementStatus status) {
+	public void setStatus(ReimbursementStatus status) {
 		this.status = status;
 	}
 

@@ -42,7 +42,7 @@ public class User {
 
 	@ManyToOne()
 	@JoinColumn(name="ers_user_roles")
-	private EUserRole role;
+	private UserRole role;
 
 	
 	
@@ -58,7 +58,7 @@ public class User {
 
 
 
-	public User(String username, String password, String firstname, String lastname, String email, EUserRole role) {
+	public User(String username, String password, String firstname, String lastname, String email, UserRole role) {
 		super();
 		this.username = username;
 		this.password = password;
@@ -74,7 +74,7 @@ public class User {
 
 
 	public User(int id, String username, String password, String firstname, String lastname, String email,
-			EUserRole role) {
+			UserRole role) {
 		super();
 		this.id = id;
 		this.username = username;
@@ -87,7 +87,7 @@ public class User {
 
 
 	public static User managerGenerator() {
-		return new User(2, "manager", "password", "blah", "blah", "blah@yahoo.com", EUserRole.roleGenerator("Manager"));
+		return new User(2, "manager", "password", "blah", "blah", "blah@yahoo.com", UserRole.roleGenerator("Manager"));
 	}
 
 
@@ -200,7 +200,7 @@ public class User {
 
 
 
-	public EUserRole getRole() {
+	public UserRole getRole() {
 		return role;
 	}
 
@@ -209,7 +209,7 @@ public class User {
 
 
 
-	public void setRole(EUserRole role) {
+	public void setRole(UserRole role) {
 		this.role = role;
 	}
 

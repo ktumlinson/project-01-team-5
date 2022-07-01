@@ -7,14 +7,14 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
-import com.revature.models.EUserRole;
+import com.revature.models.UserRole;
 import com.revature.models.User;
 import com.revature.util.HibernateUtil;
 
 public class UserRoleDao implements IUserRoleDao {
 
 	@Override
-	public int insert(EUserRole r) {
+	public int insert(UserRole r) {
 		Session ses = HibernateUtil.getSession();
 		Transaction tx = ses.getTransaction();
 		int pk = (int)ses.save(r);
@@ -23,24 +23,24 @@ public class UserRoleDao implements IUserRoleDao {
 	}
 
 	@Override
-	public List<EUserRole> findAllRoles() {
+	public List<UserRole> findAllRoles() {
 		Session ses = HibernateUtil.getSession();
-		List<EUserRole> users = ses.createQuery("from EUserRole", EUserRole.class).list();
+		List<UserRole> users = ses.createQuery("from EUserRole", UserRole.class).list();
 		
 		return users;
 	}
 
 	@Override
-	public EUserRole findRoleById(int id) {
+	public UserRole findRoleById(int id) {
 		Session ses = HibernateUtil.getSession();
 		
-		EUserRole user = (EUserRole)ses.createQuery("from EUserRole where id=:id").setParameter("id", id).getSingleResult();
+		UserRole user = (UserRole)ses.createQuery("from EUserRole where id=:id").setParameter("id", id).getSingleResult();
 
 		return user;
 	}
 
 	@Override
-	public boolean update(EUserRole r) {
+	public boolean update(UserRole r) {
 		Session ses = HibernateUtil.getSession();
 		Transaction tx = ses.beginTransaction();
 		ses.update(r);
@@ -50,7 +50,7 @@ public class UserRoleDao implements IUserRoleDao {
 	}
 
 	@Override
-	public boolean delete(EUserRole r) {
+	public boolean delete(UserRole r) {
 		Session ses = HibernateUtil.getSession();
 		// begin a tx
 		Transaction tx = ses.beginTransaction();
