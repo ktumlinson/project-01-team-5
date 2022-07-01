@@ -2,7 +2,9 @@ th#employee{
     display: inline-block;
     margin-left: 10px;
 }
-
+#buttons-employees{
+    visibility: visible;
+}
 #description-container * {
     vertical-align: top;
     margin-left: 0.1%;

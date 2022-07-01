@@ -47,12 +47,15 @@
                 <div class="card-body">
                     <form method="POST" action="LoginManagers">
                         <label>Username:</label>
-                        <input type="text" name="username" placeholder="Username"><br>
+                        <input type="text" id="username" placeholder="Username"><br>
                         <label>Password:</label>
-                        <input type="text" name="password" placeholder="****"><br>
+                        <input type="text" id="password" placeholder="****"><br>
                         <input type="submit" value="Login" id="manager-login-button">
                     </form>
 					<input type="submit" value="Cancel" id="manager-cancel-button">
+					<div id="warningText">
+						
+					</div>
                 </div>
             </div>
         </div>
@@ -67,9 +70,9 @@
                 <div class="card-body">
                     <form method="POST" action="LoginEmployees">
                         <label>Username:</label>
-                        <input type="text" name="username" placeholder="Username"><br>
+                        <input type="text" id="employee-username" placeholder="Username"><br>
                         <label>Password:</label>
-                        <input type="text" name="password" placeholder="****"> <br>
+                        <input type="text" id="employee-password" placeholder="****"> <br>
                         <input type="submit" value="Login" id="employee-login-button">
                     </form>
 					<input type="submit" value="Cancel" id="employee-cancel-button">

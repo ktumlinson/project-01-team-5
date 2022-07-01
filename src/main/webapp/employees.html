@@ -41,7 +41,11 @@
 
                     
                     <table class="table-active" id="employee-table">
-
+                        <tr>
+                            <th>Company</th>
+                            <th>Contact</th>
+                            <th>Country</th>
+                        </tr>
                     </table>
                 </div>
             </div>
@@ -102,6 +106,32 @@
                             <input id="submitUpdate" type="submit" value="Update">
                         </form>
                         <input id="cancelUpdate" type="submit" value="Cancel">
+                    </div>
+                </div>
+            </div>
+		</div>
+    </div>
+
+    <div class="modal container" id="userInfo">
+        <div class="card">
+			<div class="card">
+                <div class="shadow-lg">
+                    <div class="card-header">
+                        <h1>Here Is What We Have On File For You</h1>
+                    </div>
+                    <div class="card-body">
+                        <form method="POST" action="update-user">
+                            <label>First Name:</label>
+                            <input type="text" name="firstname" disabled><br>
+                            <label>Last Name:</label>
+                            <input type="text" name="lastname" disabled><br>
+                            
+                            <label>Password:</label>
+                            <input type="password" name="password" disabled><br>
+                            <label>Email:</label>
+                            <input type="email" name="email" disabled><br>
+                        </form>
+                        <input id="cancelView" type="submit" value="Cancel">
                     </div>
                 </div>
             </div>

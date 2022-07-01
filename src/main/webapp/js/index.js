@@ -35,11 +35,108 @@ const toggleRegister = () =>{
     toggleBackground();
 }
 
+const managerAccountLogin = (ev) =>{
+    ev.preventDefault();
+
+    let username = document.getElementById('username').value;
+    let password = document.getElementById('password').value;
+    console.log(username);
+    console.log(password);
+
+    fetch('http://localhost:8080/employee-servlet-app/login',{
+        // make a post request to try to login with the given information
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            username: username,
+            password: password
+        })
+    }).then(function (response) {
+        if(!response.ok){
+            throw Error("Error");
+        }
+
+        let childDiv = document.getElementById('warningText');
+        childDiv.innerHTML = '<p style="color:red"><b>Username or Password is incorrect<b></p>'
+
+        return response.json;
+    }).then(function(data){
+        console.log(data);
+
+        if(data.id > 0){
+            console.log('Success');
+            // set the current user to be the ID of the manager returned
+            sessionStorage.setItem('currentUser', data.id);
+    
+            // go to the managers landing page
+            window.location.href = 'http://localhost:8080/employee-servlet-app/managers.html';
+        } else{
+            let childDiv = document.getElementById('warningText');
+            childDiv.innerHTML = '<p style="color:red"><b>Username or Password is incorrect<b></p>'
+        }
+    }).catch(error => {
+        console.log(error);
+    })
+}
+
+const employeeAccountLogin = (ev) =>{
+    ev.preventDefault();
+
+    let username = document.getElementById('employee-username').value;
+    let password = document.getElementById('employee-password').value;
+    console.log(username);
+    console.log(password);
+    fetch('http://localhost:8080/employee-servlet-app/login',{
+        // make a post request to try to login with the given information
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            username: username,
+            password: password
+        })
+    }).then(function (response) {
+        if(!response.ok){
+            throw Error("Error");
+        }
+        let childDiv = document.getElementById('warningText');
+        childDiv.innerHTML = '<p style="color:red"><b>Username or Password is incorrect<b></p>'
+
+        return response.json;
+    }).then(function(data){
+        console.log(data);
+
+        if(data.id > 0){
+            console.log('Success');
+            // set the current user to be the ID of the manager returned
+            sessionStorage.setItem('currentUser', data.id);
+    
+            // go to the employees landing page
+            window.location.href = 'http://localhost:8080/employee-servlet-app/employees.html';
+        } else{
+            let childDiv = document.getElementById('warningText');
+            childDiv.innerHTML = '<p style="color:red"><b>Username or Password is incorrect<b></p>'
+        }
+    }).catch(error => {
+        console.log(error);
+    })
+}
+
+const registerEmployee = () =>{
+    
+}
+
 managerLogin.addEventListener('click', toggleManagerLogin);
 cancel.addEventListener('click', toggleManagerLogin);
+login.addEventListener('click', managerAccountLogin);
 
 employeeLogin.addEventListener('click', toggleEmployeeLogin);
 empcancel.addEventListener('click', toggleEmployeeLogin);
+emplogin.addEventListener('click', employeeAccountLogin);
 
 register.addEventListener('click', toggleRegister);
 regcancel.addEventListener('click', toggleRegister);
+completeregister.addEventListener('click', registerEmployee);
