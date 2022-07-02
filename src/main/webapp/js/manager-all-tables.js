@@ -46,64 +46,19 @@ const viewEmps = ()=>{
 }
 
 const createEmpsHeader = () =>{
+
+    let tags = ['ID', 'Role', 'Username', 'Password', 'First Name', 'Last name', 'Email']
     let tr = document.createElement('thead');
     tr.classList.add("bg-primary");
-    let header = document.createElement('th');
-    let spacing = document.createElement('div');
-    spacing.classList.add('spacing');
-    let text = document.createTextNode('ID');
-    spacing.appendChild(text);
-    header.appendChild(spacing);
-    tr.appendChild(header);
-
-    header = document.createElement('th');
-    spacing = document.createElement('div');
-    spacing.classList.add('spacing');
-    text = document.createTextNode('Role');
-    spacing.appendChild(text);
-    header.appendChild(spacing);
-    tr.appendChild(header);
-
-    header = document.createElement('th');
-    spacing = document.createElement('div');
-    spacing.classList.add('spacing');
-    text = document.createTextNode('Username')
-    spacing.appendChild(text);
-    header.appendChild(spacing);
-    tr.appendChild(header);
-
-    header = document.createElement('th');
-    spacing = document.createElement('div');
-    spacing.classList.add('spacing');
-    text = document.createTextNode('Password')
-    spacing.appendChild(text);
-    header.appendChild(spacing);
-    tr.appendChild(header);
-
-    header = document.createElement('th');
-    spacing = document.createElement('div');
-    spacing.classList.add('spacing');
-    text = document.createTextNode('First Name');
-    spacing.appendChild(text);
-    header.appendChild(spacing);
-    tr.appendChild(header);
-
-    header = document.createElement('th');
-    spacing = document.createElement('div');
-    spacing.classList.add('spacing');
-    text = document.createTextNode('Last Name')
-    spacing.appendChild(text);
-    header.appendChild(spacing);
-    tr.appendChild(header);
-
-    header = document.createElement('th');
-    spacing = document.createElement('div');
-    spacing.classList.add('spacing');
-    text = document.createTextNode('email')
-    spacing.appendChild(text);
-    header.appendChild(spacing);
-    tr.appendChild(header);
-
+    tags.forEach(obj =>{
+        let header = document.createElement('th');
+        let spacing = document.createElement('div');
+        spacing.classList.add('spacing');
+        let text = document.createTextNode(obj);
+        spacing.appendChild(text);
+        header.appendChild(spacing);
+        tr.appendChild(header);
+    })
     managerTable.appendChild(tr);
 }
 
@@ -183,56 +138,19 @@ const viewReiembursements = () =>{
 
 const createReimbHeader = () =>{
     console.log('creating header')
-    let tr = document.createElement('tr');
-    tr.classList.add('bg-primary');
-    let header = document.createElement('th');
-    let spacing = document.createElement('div');
-    spacing.classList.add('spacing');
-    let text = document.createTextNode('ID');
-    spacing.appendChild(text);
-    header.appendChild(spacing);
-    tr.appendChild(header);
 
-    header = document.createElement('th');
-    spacing = document.createElement('div');
-    spacing.classList.add('spacing');
-    text = document.createTextNode('Type');
-    spacing.appendChild(text);
-    header.appendChild(spacing);
-    tr.appendChild(header);
-
-    header = document.createElement('th');
-    spacing = document.createElement('div');
-    spacing.classList.add('spacing');
-    text = document.createTextNode('Status');
-    spacing.appendChild(text);
-    header.appendChild(spacing);
-    tr.appendChild(header);
-
-    header = document.createElement('th');
-    spacing = document.createElement('div');
-    spacing.classList.add('spacing');
-    text = document.createTextNode('Description')
-    spacing.appendChild(text);
-    header.appendChild(spacing);
-    tr.appendChild(header);
-
-    header = document.createElement('th');
-    spacing = document.createElement('div');
-    spacing.classList.add('spacing');
-    text = document.createTextNode('Amount');
-    spacing.appendChild(text);
-    header.appendChild(spacing);
-    tr.appendChild(header);
-
-    header = document.createElement('th');
-    spacing = document.createElement('div');
-    spacing.classList.add('spacing');
-    text = document.createTextNode('Created By')
-    spacing.appendChild(text);
-    header.appendChild(spacing);
-    tr.appendChild(header);
-
+    let tags = ['ID', 'Type', 'Status', 'Description', 'Amount', 'Created by']
+    let tr = document.createElement('thead');
+    tr.classList.add("bg-primary");
+    tags.forEach(obj =>{
+        let header = document.createElement('th');
+        let spacing = document.createElement('div');
+        spacing.classList.add('spacing');
+        let text = document.createTextNode(obj);
+        spacing.appendChild(text);
+        header.appendChild(spacing);
+        tr.appendChild(header);
+    })
     managerTable.appendChild(tr);
 }
 
