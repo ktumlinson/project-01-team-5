@@ -35,6 +35,7 @@ const toggleRegister = () =>{
     toggleBackground();
 }
 
+/*
 const managerAccountLogin = (ev) =>{
     ev.preventDefault();
 
@@ -128,15 +129,18 @@ const employeeAccountLogin = (ev) =>{
 const registerEmployee = () =>{
     
 }
+*/
 
 managerLogin.addEventListener('click', toggleManagerLogin);
 cancel.addEventListener('click', toggleManagerLogin);
-login.addEventListener('click', managerAccountLogin);
+//login.addEventListener('click', managerAccountLogin);
 
 employeeLogin.addEventListener('click', toggleEmployeeLogin);
 empcancel.addEventListener('click', toggleEmployeeLogin);
-emplogin.addEventListener('click', employeeAccountLogin);
+//emplogin.addEventListener('click', employeeAccountLogin);
 
+/*
 register.addEventListener('click', toggleRegister);
 regcancel.addEventListener('click', toggleRegister);
 completeregister.addEventListener('click', registerEmployee);
+*/
