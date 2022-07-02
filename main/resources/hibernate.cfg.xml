@@ -48,7 +48,9 @@
       <mapping class = "com.revature.models.ReimbursementStatus"/>
       <mapping class = "com.revature.models.ReimbursementType"/>
       <mapping class = "com.revature.models.UserRole"/>
-		<mapping class = "com.revature.models.Employee"/> 
+      <mapping class = "com.revature.models.Employee"/>
+      <mapping class = "com.revature.models.User"/>
+      <mapping class = "com.revature.models.Reimbursement"/>
       
    </session-factory>
 </hibernate-configuration>

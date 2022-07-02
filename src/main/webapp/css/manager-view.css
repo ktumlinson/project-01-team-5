@@ -5,3 +5,6 @@ th#manager{
 #review{
     margin-left: 1.2%;
 }
+#buttons{
+    visibility: visible;
+}

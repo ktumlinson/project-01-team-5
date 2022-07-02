@@ -13,7 +13,9 @@
 
     <link rel="stylesheet" href="css\stylesheet.css" />
     <link rel="stylesheet" href="css\manager-view.css" />
-	<script src="/js/managers.js" defer></script>
+	<script src="js\managers.js" defer></script>
+	<script src="js\manager-all-tables.js" defer></script>
+	<script src="js\manager-specific-tables.js" defer></script>
   </head>
   <body>
     <!-- options: list employees
@@ -58,7 +60,7 @@
 					</table>
 					
 					<!--This will be dynamic and use a switch case for the color of the variant table as seen here https://getbootstrap.com/docs/4.1/content/tables/ under "Contextual Classes" and will change the switch based on if it is All reimbursemnents or pending/resolved ex: in all table pending will be a "Danger" class so the row will be red and in resolved lodging types will be "Primary" class so they will be a blue-->
-					<table class="table-active" id="manager-table"></table> 
+					<table id="manager-table"></table>
 				</div>
 			</div>
 		</div>

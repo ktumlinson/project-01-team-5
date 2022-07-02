@@ -43,7 +43,7 @@ const managerAccountLogin = (ev) =>{
     console.log(username);
     console.log(password);
 
-    fetch('http://localhost:8080/employee-servlet-app/login',{
+    fetch('http://localhost:8080/employee-servlet-app/manager-login',{
         // make a post request to try to login with the given information
         method: 'POST',
         headers: {
@@ -88,7 +88,7 @@ const employeeAccountLogin = (ev) =>{
     let password = document.getElementById('employee-password').value;
     console.log(username);
     console.log(password);
-    fetch('http://localhost:8080/employee-servlet-app/login',{
+    fetch('http://localhost:8080/employee-servlet-app/employee-login',{
         // make a post request to try to login with the given information
         method: 'POST',
         headers: {

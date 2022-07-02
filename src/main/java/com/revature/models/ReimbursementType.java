@@ -48,7 +48,7 @@ public class ReimbursementType {
 			id = 2;
 			break;
 		case "food":
-			typeString = "lodging";
+			typeString = "food";
 			id = 3;
 			break;
 		default:

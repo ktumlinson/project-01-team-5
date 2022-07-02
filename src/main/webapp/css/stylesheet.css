@@ -4,6 +4,7 @@ table{
     visibility: hidden;
     margin-left: auto;
     margin-right: auto;
+    margin-top: 2%;
 }
 body{
     background-color: rgb(90, 89, 89);
@@ -37,6 +38,9 @@ p{
 }
 .card-body{
     text-align: center;
+}
+.spacing{
+    min-width: 100px;
 }
 
 

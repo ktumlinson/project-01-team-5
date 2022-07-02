@@ -1,10 +1,6 @@
 // get buttons
 const reviewReimbursement = document.getElementById('reviewReimbursement');
 const viewByEmployee = document.getElementById('viewReimbursementByEmployee');
-const viewEmployees = document.getElementById('manager-employees-button');
-const viewAllReimbursements = document.getElementById('manager-reimbursements-button');
-const viewOpen = document.getElementById('manager-pending-button');
-const viewClosed = document.getElementById('manager-resolved-button');
 const submitReview = document.getElementById('submitReview');
 const cancelReview = document.getElementById('cancelReview');
 const submitSearch = document.getElementById('submitSearch');
@@ -29,6 +25,8 @@ const toggleFindByEmp = () =>{
     toggleBackground();
 }
 
+
+// add event listeners
 reviewReimbursement.addEventListener('click', toggleReview);
 cancelReview.addEventListener('click', toggleReview);
 
