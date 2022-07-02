@@ -1,16 +1,21 @@
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="ISO-8859-1">
-<title>Employee View</title>
-<!--bootstrap-->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+  <head>
+    <meta charset="ISO-8859-1" />
+    <title>Employee View</title>
+    <!--bootstrap-->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor"
+      crossorigin="anonymous"
+    />
 
-<link rel="stylesheet" href="css\stylesheet.css">
-<link rel="stylesheet" href="css\employee-view.css">
-<script src="/js/employees.js" defer></script>
-</head>
-<body>
+    <link rel="stylesheet" href="css\stylesheet.css" />
+    <link rel="stylesheet" href="css\employee-view.css" />
+    <script src="/js/employees.js" defer></script>
+  </head>
+  <body>
     <!-- options
            submit reimbursement request
            view pending reimbursement requests
@@ -20,126 +25,162 @@
     <div id="background"></div>
 
     <div class="modal.visible container">
-        <div class="card">
-            <div class="shadow-lg">
-                <div class="card-header">
-                    <h1>What Would You Like To Do?</h1>
-                </div>
-                <div class="card-body">
-                    <h6>Forms</h6>
-                    <button class="btn btn-light" id="newReimbursement">New Reimbursement Request</button>
-                    <button class="btn btn-light" id="updateUser">Update User Information</button><br><br><br>
-                    
-                    <h6>View Information</h6>
-                    <table id="buttons-employees">
-                        <tr>
-                            <th id="employee"><button class="btn btn-light" id="viewInfo">View user information</button></th>
-                            <th id="employee"><button class="btn btn-light" id="viewOpen">View open requests</button></th>
-                            <th id="employee"><button class="btn btn-light" id="viewResolved">View resolved requests</button></th>
-                        </tr>
-                    </table>
+      <div class="card">
+        <div class="shadow-lg">
+          <div class="card-header">
+            <h1>What Would You Like To Do?</h1>
+          </div>
+          <div class="card-body">
+            <h6>Forms</h6>
+            <button class="btn btn-light" id="newReimbursement">
+              New Reimbursement Request
+            </button>
+            <button class="btn btn-light" id="updateUser">
+              Update User Information</button
+            ><br /><br /><br />
 
-                    
-                    <table class="table-active" id="employee-table">
-                        <tr>
-                            <th>Company</th>
-                            <th>Contact</th>
-                            <th>Country</th>
-                        </tr>
-                    </table>
-                </div>
-            </div>
+            <h6>View Information</h6>
+            <table id="buttons-employees">
+              <tr>
+                <th id="employee">
+                  <button class="btn btn-light" id="viewInfo">
+                    View user information
+                  </button>
+                </th>
+                <th id="employee">
+                  <button class="btn btn-light" id="viewOpen">
+                    View open requests
+                  </button>
+                </th>
+                <th id="employee">
+                  <button class="btn btn-light" id="viewResolved">
+                    View resolved requests
+                  </button>
+                </th>
+              </tr>
+            </table>
+
+            <table class="table-active" id="employee-table">
+              <tr>
+                <th>Company</th>
+                <th>Contact</th>
+                <th>Country</th>
+              </tr>
+            </table>
+          </div>
         </div>
+      </div>
     </div>
 
     <div class="modal container" id="reimbursementMenu">
-        <div class="card">
-			<div class="shadow-lg">
-				<div class="card-header">
-					<h1>Please fill out this form for a reimbursement request</h1>
-				</div>
-				<div class="card-body">
-					<form method="POST" action="new-reimbursement">
-						<label>Username:</label>
-						<input type="text" name="username"><br>
-						<label>Amount:</label>
-						<input type="number" name="amount" placeholder="0.00"><br>
-						<p id="description-container">
-							<label for="textarea">Description:</label>
-							<textarea id="textarea" name="description" rows="3" cols="23" placeholder="What is the reimbursement for?"></textarea>
-						</p>
-						<p id="select">
-							<label>Type:</label>
-							<select  class="form-select-sm mb-4" name="type">
-								<option value="1">Lodging</option>
-								<option value="2">Travel</option>
-								<option value="3">Food</option>
-								<option value="4">Other</option>
-							</select><br>
-						</p>
-						<input id="sumbitRequest" type="submit" value="Request">
-					</form>
-                    <input id="cancelRequest" type="submit" value="Cancel">
-				</div>
-			</div>
-		</div>
+      <div class="card">
+        <div class="shadow-lg">
+          <div class="card-header">
+            <h1>Please fill out this form for a reimbursement request</h1>
+          </div>
+          <div class="card-body">
+            <div>
+              <label>Username:</label>
+              <input type="text" name="username" /><br />
+              <label>Amount:</label>
+              <input type="number" name="amount" placeholder="0.00" /><br />
+              <p id="description-container">
+                <label for="textarea">Description:</label>
+                <textarea
+                  id="textarea"
+                  name="description"
+                  rows="3"
+                  cols="23"
+                  placeholder="What is the reimbursement for?"
+                ></textarea>
+              </p>
+              <p id="select">
+                <label>Type:</label>
+                <select class="form-select-sm mb-4" name="type">
+                  <option value="1">Lodging</option>
+                  <option value="2">Travel</option>
+                  <option value="3">Food</option>
+                  <option value="4">Other</option></select
+                ><br />
+              </p>
+              <input id="sumbitRequest" type="submit" value="Request" />
+            </div>
+            <input id="cancelRequest" type="submit" value="Cancel" />
+          </div>
+        </div>
+      </div>
     </div>
 
     <div class="modal container" id="updateMenu">
+      <div class="card">
         <div class="card">
-			<div class="card">
-                <div class="shadow-lg">
-                    <div class="card-header">
-                        <h1>Please Update Form Below</h1>
-                    </div>
-                    <div class="card-body">
-                        <form method="POST" action="update-user">
-                            <label>First Name:</label>
-                            <input type="text" name="firstname" placeholder="First"><br>
-                            <label>Last Name:</label>
-                            <input type="text" name="lastname" placeholder="Last"><br>
-                            
-                            <label>Password:</label>
-                            <input type="password" name="password" placeholder="***"><br>
-                            <label>Email:</label>
-                            <input type="email" name="email" placeholder="123@yahoo.com"><br>
-                            <input id="submitUpdate" type="submit" value="Update">
-                        </form>
-                        <input id="cancelUpdate" type="submit" value="Cancel">
-                    </div>
-                </div>
+          <div class="shadow-lg">
+            <div class="card-header">
+              <h1>Please Update Form Below</h1>
             </div>
-		</div>
+            <div class="card-body">
+              <div>
+                <label>First Name:</label>
+                <input type="text" name="firstname" placeholder="First" /><br />
+                <label>Last Name:</label>
+                <input type="text" name="lastname" placeholder="Last" /><br />
+
+                <label>Password:</label>
+                <input
+                  type="password"
+                  name="password"
+                  placeholder="***"
+                /><br />
+                <label>Email:</label>
+                <input
+                  type="email"
+                  name="email"
+                  placeholder="123@yahoo.com"
+                /><br />
+                <input id="submitUpdate" type="submit" value="Update" />
+              </div>
+              <input id="cancelUpdate" type="submit" value="Cancel" />
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
 
     <div class="modal container" id="userInfo">
+      <div class="card">
         <div class="card">
-			<div class="card">
-                <div class="shadow-lg">
-                    <div class="card-header">
-                        <h1>Here Is What We Have On File For You</h1>
-                    </div>
-                    <div class="card-body">
-                        <form method="POST" action="update-user">
-                            <label>First Name:</label>
-                            <input type="text" name="firstname" disabled><br>
-                            <label>Last Name:</label>
-                            <input type="text" name="lastname" disabled><br>
-                            
-                            <label>Password:</label>
-                            <input type="password" name="password" disabled><br>
-                            <label>Email:</label>
-                            <input type="email" name="email" disabled><br>
-                        </form>
-                        <input id="cancelView" type="submit" value="Cancel">
-                    </div>
-                </div>
+          <div class="shadow-lg">
+            <div class="card-header">
+              <h1>Here Is What We Have On File For You</h1>
             </div>
-		</div>
+            <div class="card-body">
+              <form method="POST" action="update-user">
+                <label>First Name:</label>
+                <input type="text" name="firstname" disabled /><br />
+                <label>Last Name:</label>
+                <input type="text" name="lastname" disabled /><br />
+
+                <label>Password:</label>
+                <input type="password" name="password" disabled /><br />
+                <label>Email:</label>
+                <input type="email" name="email" disabled /><br />
+              </form>
+              <input id="cancelView" type="submit" value="Cancel" />
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
 
-
-	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js" integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk" crossorigin="anonymous"></script>
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.min.js" integrity="sha384-kjU+l4N0Yf4ZOJErLsIcvOU2qSb74wXpOhqTvwVx3OElZRweTnQ6d31fXEoRD1Jy" crossorigin="anonymous"></script>
-</body>
+    <script
+      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js"
+      integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.min.js"
+      integrity="sha384-kjU+l4N0Yf4ZOJErLsIcvOU2qSb74wXpOhqTvwVx3OElZRweTnQ6d31fXEoRD1Jy"
+      crossorigin="anonymous"
+    ></script>
+  </body>
 </html>

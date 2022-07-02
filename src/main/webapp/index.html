@@ -1,18 +1,22 @@
 <!DOCTYPE html>
 <html>
+  <head>
+    <meta charset="ISO-8859-1" />
+    <title>Project-01</title>
+    <!--bootstrap-->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor"
+      crossorigin="anonymous"
+    />
 
-<head>
-<meta charset="ISO-8859-1">
-<title>Project-01</title>
-<!--bootstrap-->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
-
-<link rel="stylesheet" href="css\stylesheet.css">
-<link rel="stylesheet" href="css\index.css">
-<script src="js\index.js" defer></script>
-</head>
-<body>
-	<!-- <form method="POST" action="login"> adds /login
+    <link rel="stylesheet" href="css\stylesheet.css" />
+    <link rel="stylesheet" href="css\index.css" />
+    <script src="js\index.js" defer></script>
+  </head>
+  <body>
+    <!-- <form method="POST" action="login"> adds /login
 		<label>Username:</label>
 		<input type="text" name="username" placeholder="Enter a username"><br>
 		<label>Password:</label>
@@ -22,105 +26,160 @@
 	<br>
 	<br> -->
 
-	<div id="background"></div>
-	<div class="modal.visible container">
-		<div class="card">
-			<div class="shadow-lg">
-				<div class="card-header">
-					<h1>Welcome</h1>
-				</div>
-				<div class="card-body">
-					<button class="btn btn-light" id="manager-login">Manager Login</button>
-					<button class="btn btn-light" id="employee-login">Employee Login</button><br><br>
-					<button class="btn btn-light" id="register">Register</button>
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="modal container" id="managerModal">
-		<!-- move all the manager login stuff here-->
-		<div class="card">
-            <div class="shadow-lg">
-                <div class="card-header">
-                    <h1>Please Login To Your Account</h1>
-                </div>
-                <div class="card-body">
-                    <form method="POST" action="LoginManagers">
-                        <label>Username:</label>
-                        <input type="text" id="username" placeholder="Username"><br>
-                        <label>Password:</label>
-                        <input type="text" id="password" placeholder="****"><br>
-                        <input type="submit" value="Login" id="manager-login-button">
-                    </form>
-					<input type="submit" value="Cancel" id="manager-cancel-button">
-					<div id="warningText">
-
-					</div>
-                </div>
-            </div>
+    <div id="background"></div>
+    <div class="modal.visible container">
+      <div class="card">
+        <div class="shadow-lg">
+          <div class="card-header">
+            <h1>Welcome</h1>
+          </div>
+          <div class="card-body">
+            <button class="btn btn-light" id="manager-login">
+              Manager Login
+            </button>
+            <button class="btn btn-light" id="employee-login">
+              Employee Login</button
+            ><br /><br />
+            <button class="btn btn-light" id="register">Register</button>
+          </div>
         </div>
-	</div>
-
-	<div class="modal container" id="employeeModal">
-		<div class="card">
-            <div class="shadow-lg">
-                <div class="card-header">
-                    <h1>Please Login To Your Account</h1>
-                </div>
-                <div class="card-body">
-                    <form method="POST" action="LoginEmployees">
-                        <label>Username:</label>
-                        <input type="text" id="employee-username" placeholder="Username"><br>
-                        <label>Password:</label>
-                        <input type="text" id="employee-password" placeholder="****"> <br>
-                        <input type="submit" value="Login" id="employee-login-button">
-                    </form>
-					<input type="submit" value="Cancel" id="employee-cancel-button">
-                </div>
-            </div>
+      </div>
+    </div>
+    <div class="modal container" id="managerModal">
+      <!-- move all the manager login stuff here-->
+      <div class="card">
+        <div class="shadow-lg">
+          <div class="card-header">
+            <h1>Please Login To Your Account</h1>
+          </div>
+          <div class="card-body">
+            <form method="POST" action="LoginManagers">
+              <label>Username:</label>
+              <input
+                type="text"
+                id="username"
+                placeholder="Username"
+                name="username"
+              /><br />
+              <label>Password:</label>
+              <input
+                type="password"
+                id="password"
+                placeholder="****"
+                name="password"
+              /><br />
+              <input type="submit" value="Login" id="manager-login-button" />
+            </form>
+            <input type="submit" value="Cancel" id="manager-cancel-button" />
+            <div id="warningText"></div>
+          </div>
         </div>
-	</div>
+      </div>
+    </div>
 
-	<div class="modal container" id="registerModal">
-		<!-- move all the register stuff here-->
-		<div class="card">
-			<div class="shadow-lg">
-				<div class="card-header">
-					<h1>Welcome New Employee!</h1>
-					<h3>Please Fill Out This Form</h3>
-				</div>
-				<div class="card-body">
-					<form method="POST" action="register">
-						<label>First Name:</label>
-						<input type="text" name="firstname" placeholder="Enter a first name"><br>
-						<label>Last Name:</label>
-						<input type="text" name="lastname" placeholder="Enter a last name"><br>
-					
-						<label>Username:</label>
-						<input type="text" name="username" placeholder="Enter a username"><br>
-						
-						<label>Password:</label>
-						<input type="password" name="password" placeholder="***"><br>
+    <div class="modal container" id="employeeModal">
+      <div class="card">
+        <div class="shadow-lg">
+          <div class="card-header">
+            <h1>Please Login To Your Account</h1>
+          </div>
+          <div class="card-body">
+            <form method="POST" action="LoginEmployees">
+              <label>Username:</label>
+              <input
+                type="text"
+                id="employee-username"
+                placeholder="Username"
+                name="username"
+              /><br />
+              <label>Password:</label>
+              <input
+                type="password"
+                id="employee-password"
+                placeholder="****"
+                name="password"
+              />
+              <br />
+              <input type="submit" value="Login" id="employee-login-button" />
+            </form>
+            <input type="submit" value="Cancel" id="employee-cancel-button" />
+          </div>
+        </div>
+      </div>
+    </div>
 
-						<label>Email:</label>
-						<input type="email" name="email" placeholder="123@yahoo.com"><br>
-						<p id="select">
-							<label>Role:</label>
-							<select class="form-select-sm mb-4" name="Role">
-								<option value="1">Employee</option>
-								<option value="2">Manager</option>
-							</select>
-						</p><br>
-						<input id="complete-registration" type="submit" value="Register">
-					</form>
-					<input id="registration-cancel-button" type="submit" value="Cancel">
-				</div>
-			</div>
-		</div>
-	</div>
+    <div class="modal container" id="registerModal">
+      <!-- move all the register stuff here-->
+      <div class="card">
+        <div class="shadow-lg">
+          <div class="card-header">
+            <h1>Welcome New Employee!</h1>
+            <h3>Please Fill Out This Form</h3>
+          </div>
+          <div class="card-body">
+            <form method="POST" action="register">
+              <label>First Name:</label>
+              <input
+                type="text"
+                name="firstname"
+                placeholder="Enter a first name"
+              /><br />
+              <label>Last Name:</label>
+              <input
+                type="text"
+                name="lastname"
+                placeholder="Enter a last name"
+              /><br />
 
-	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js" integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk" crossorigin="anonymous"></script>
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.min.js" integrity="sha384-kjU+l4N0Yf4ZOJErLsIcvOU2qSb74wXpOhqTvwVx3OElZRweTnQ6d31fXEoRD1Jy" crossorigin="anonymous"></script>
-</body>
+              <label>Username:</label>
+              <input
+                type="text"
+                name="username"
+                placeholder="Enter a username"
+              /><br />
+
+              <label>Password:</label>
+              <input type="password" name="password" placeholder="***" /><br />
+
+              <label>Email:</label>
+              <input
+                type="email"
+                name="email"
+                placeholder="123@yahoo.com"
+              /><br />
+              <p id="select">
+                <label>Role:</label>
+                <select class="form-select-sm mb-4" name="Role">
+                  <option value="1">Employee</option>
+                  <option value="2">Manager</option>
+                </select>
+              </p>
+              <br />
+              <input
+                id="complete-registration"
+                type="submit"
+                value="Register"
+              />
+            </form>
+            <input
+              id="registration-cancel-button"
+              type="submit"
+              value="Cancel"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js"
+      integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.min.js"
+      integrity="sha384-kjU+l4N0Yf4ZOJErLsIcvOU2qSb74wXpOhqTvwVx3OElZRweTnQ6d31fXEoRD1Jy"
+      crossorigin="anonymous"
+    ></script>
+  </body>
 </html>
-

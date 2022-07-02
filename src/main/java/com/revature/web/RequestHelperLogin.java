@@ -30,7 +30,8 @@ public class RequestHelperLogin {
 
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
-		System.out.println("got here");
+		System.out.println(username);
+		System.out.println(password);
 		
 		User u = empServs.confirmLogin(username, password);
 		if (u.getId() > 0) {
