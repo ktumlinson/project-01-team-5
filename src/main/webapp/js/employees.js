@@ -1,8 +1,6 @@
 // get the buttons
 const newReimbursement = document.getElementById('newReimbursement');
 const updateUser = document.getElementById('updateUser');
-const viewInfo = document.getElementById('viewInfo');
-const viewOpen = document.getElementById('viewOpen');
 const viewResolved = document.getElementById('viewResolved');
 const submitReimbursement = document.getElementById('submitRequest');
 const cancelReimbursement = document.getElementById('cancelRequest');
@@ -15,9 +13,6 @@ const background = document.getElementById('background');
 const reimbursementMenu = document.getElementById('reimbursementMenu');
 const updatInfoMenu = document.getElementById('updateMenu');
 const viewInfoMenu = document.getElementById('userInfo');
-
-// get the tables
-const employeeTable = document.getElementById('employee-open-table');
 
 const toggleBackground = () =>{
     background.classList.toggle('visible');
@@ -34,28 +29,33 @@ const toggleUpdateUser = () =>{
 }
 
 const toggleViewUser = ()=>{
+    let firstName = document.getElementById('view-first');
+    let lastName = document.getElementById('view-last');
+    let password = document.getElementById('view-pass');
+    let email = document.getElementById('view-email');
+
+    if(!viewInfoMenu.classList.contains('visible')){
+        fetch('http://localhost:8080/employee-servlet-app/employees/info',{
+            method: 'GET',
+            headers: {
+                "Content-Type":"application/json"
+            }
+        }).then(function(response) {
+            if(!response.ok){
+                throw Error("Unable to pull info from DB");
+            }
+            return response.json();
+        }).then(function(data){
+            console.log(data);
+            firstName.value = data.firstname;
+            lastName.value = data.lastname;
+            password.value = data.password;
+            email.value = data.email;
+        })
+    }
+    
     viewInfoMenu.classList.toggle('visible');
     toggleBackground();
-}
-
-const viewOpenTable = ()=>{
-    fillTableOpen();
-    employeeTable.style.visibility = 'visible';
-}
-
-const viewClosedTable = ()=>{
-    fillTableClosed();
-    employeeTable,style.visibility = 'visible';
-}
-
-
-const fillTableOpen = ()=>{
-    // this will be a get
-    fetch('https:// ourstuff.com')
-}
-
-const fillTableClosed = () =>{
-    fetch('httpsL// ourstuff.com')
 }
 
 newReimbursement.addEventListener('click', toggleReimbursement);
@@ -66,6 +66,3 @@ cancelUpdate.addEventListener('click', toggleUpdateUser);
 
 viewInfo.addEventListener('click', toggleViewUser);
 cancelView.addEventListener('click', toggleViewUser);
-
-viewOpen.addEventListener('click', viewOpenTable);
-viewResolved.addEventListener('click', viewClosedTable);

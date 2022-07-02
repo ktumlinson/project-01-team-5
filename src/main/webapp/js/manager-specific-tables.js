@@ -5,7 +5,7 @@ const viewClosed = document.getElementById('manager-resolved-button');
 const viewPending = () =>{
     managerTable.innerHTML = "";
     createPendingHeader();
-    fetch('http://localhost:8080/employee-servlet-app/reimbursements',{
+    fetch('http://localhost:8080/employee-servlet-app/reimbursements?status=open',{
         method: 'GET',
         headers: {
             "Content-Type" : "application/json"

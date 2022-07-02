@@ -35,7 +35,6 @@ const toggleRegister = () =>{
     toggleBackground();
 }
 
-/*
 const managerAccountLogin = (ev) =>{
     ev.preventDefault();
 
@@ -69,7 +68,7 @@ const managerAccountLogin = (ev) =>{
         if(data.id > 0){
             console.log('Success');
             // set the current user to be the ID of the manager returned
-            sessionStorage.setItem('currentUser', data.id);
+            sessionStorage.setItem('the-user', data.id);
     
             // go to the managers landing page
             window.location.href = 'http://localhost:8080/employee-servlet-app/managers.html';
@@ -113,7 +112,7 @@ const employeeAccountLogin = (ev) =>{
         if(data.id > 0){
             console.log('Success');
             // set the current user to be the ID of the manager returned
-            sessionStorage.setItem('currentUser', data.id);
+            sessionStorage.setItem('the-user', data.id);
     
             // go to the employees landing page
             window.location.href = 'http://localhost:8080/employee-servlet-app/employees.html';
@@ -129,7 +128,6 @@ const employeeAccountLogin = (ev) =>{
 const registerEmployee = () =>{
     
 }
-*/
 
 managerLogin.addEventListener('click', toggleManagerLogin);
 cancel.addEventListener('click', toggleManagerLogin);

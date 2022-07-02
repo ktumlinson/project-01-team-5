@@ -13,7 +13,8 @@
 
     <link rel="stylesheet" href="css\stylesheet.css" />
     <link rel="stylesheet" href="css\employee-view.css" />
-    <script src="/js/employees.js" defer></script>
+    <script src="js\employees.js" defer></script>
+    <script src="js\employees-reimbursement-tables.js" defer></script>
   </head>
   <body>
     <!-- options
@@ -156,14 +157,14 @@
             <div class="card-body">
               <form method="POST" action="update-user">
                 <label>First Name:</label>
-                <input type="text" name="firstname" disabled /><br />
+                <input id="view-first" type="text" name="firstname" disabled /><br />
                 <label>Last Name:</label>
-                <input type="text" name="lastname" disabled /><br />
+                <input id="view-last" type="text" name="lastname" disabled /><br />
 
                 <label>Password:</label>
-                <input type="password" name="password" disabled /><br />
+                <input id="view-pass" type="text" name="password" disabled /><br />
                 <label>Email:</label>
-                <input type="email" name="email" disabled /><br />
+                <input id="view-email" type="email" name="email" disabled /><br />
               </form>
               <input id="cancelView" type="submit" value="Cancel" />
             </div>
