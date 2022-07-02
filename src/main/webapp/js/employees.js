@@ -2,9 +2,7 @@
 const newReimbursement = document.getElementById('newReimbursement');
 const updateUser = document.getElementById('updateUser');
 const viewResolved = document.getElementById('viewResolved');
-const submitReimbursement = document.getElementById('submitRequest');
 const cancelReimbursement = document.getElementById('cancelRequest');
-const update = document.getElementById('submitUpdate');
 const cancelUpdate = document.getElementById('cancelUpdate');
 const cancelView = document.getElementById('cancelView');
 
@@ -24,6 +22,27 @@ const toggleReimbursement = () =>{
 }
 
 const toggleUpdateUser = () =>{
+    let firstName = document.getElementsByName('update-firstname');
+    let lastName = document.getElementsByName('update-lastname');
+    let password = document.getElementsByName('update-password');
+    let email = document.getElementsByName('update-email');
+    fetch('http://localhost:8080/employee-servlet-app/employees/info',{
+            method: 'GET',
+            headers: {
+                "Content-Type":"application/json"
+            }
+        }).then(function(response) {
+            if(!response.ok){
+                throw Error("Unable to pull info from DB");
+            }
+            return response.json();
+        }).then(function(data){
+            console.log(data);
+            firstName.value = data.firstname;
+            lastName.value = data.lastname;
+            password.value = data.password;
+            email.value = data.email;
+        })
     updatInfoMenu.classList.toggle('visible');
     toggleBackground();
 }

@@ -43,11 +43,11 @@ const pushReimbursementChange = (reimbursementToApprove) =>{
         method: 'POST',
         headers: {
             "Content-Type" : "application/json",
-            body: JSON.stringify({
-                id: reimbursementToApprove.id,
-                status: reimbursementToApprove.status
-            })
-        }
+        },
+        body: JSON.stringify({
+            id: reimbursementToApprove.id,
+            status: reimbursementToApprove.status
+        })
     }).then(function(response){
         response.json();
     }).then(function(json){

@@ -170,8 +170,8 @@ public class RequestHelperEmployees {
 				JsonObject jsonobj = root.getAsJsonObject();
 
 				u.setFirstname(jsonobj.get("firstname").getAsString());
+				u.setLastname(jsonobj.get("lastname").getAsString());
 				u.setPassword(jsonobj.get("password").getAsString());
-				u.setLastname(jsonobj.get("password").getAsString());
 				u.setEmail(jsonobj.get("email").getAsString());
 
 				// call the movie service's get movies by getMoviesByUserId();
