@@ -8,3 +8,6 @@ th#manager{
 #buttons{
     visibility: visible;
 }
+#approve, #deny{
+    visibility: hidden;
+}

@@ -16,6 +16,7 @@
     <script src="js\managers.js" defer></script>
     <script src="js\manager-all-tables.js" defer></script>
     <script src="js\manager-specific-tables.js" defer></script>
+    <script src="js\manager-review-reimbursement.js" defer></script>
   </head>
   <body>
     <!-- options: list employees
@@ -94,8 +95,11 @@
                 type="number"
                 name="reimbursement-id"
                 placeholder="00"
+                id="reimb-number"
               /><!--note that if it gives a decimal you need to specify that it will not allow it on the error message-->
-              <input id="submitReview" type="submit" value="Review" />
+              <input id="submitReview" type="submit" value="Review" /><br>
+              <input id="approve" type="submit" value="Approve"/>
+              <input id="deny" type="submit" value="Deny"/>
             </div>
             <input id="cancelReview" type="submit" value="Cancel" />
           </div>
@@ -111,9 +115,10 @@
           </div>
           <div class="card-body">
             <div>
-              <label>Username:</label>
-              <input type="text" name="username" placeholder="Username" />
+              <label>Employee ID:</label>
+              <input id="username" type="text" name="username" placeholder="User" />
               <input id="submitSearch" type="submit" value="Find" />
+              <table id="employee-Reimbursements-table"></table>
             </div>
             <input id="cancelSearch" type="submit" value="Cancel" />
           </div>

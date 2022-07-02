@@ -1,9 +1,7 @@
 // get buttons
 const reviewReimbursement = document.getElementById('reviewReimbursement');
 const viewByEmployee = document.getElementById('viewReimbursementByEmployee');
-const submitReview = document.getElementById('submitReview');
 const cancelReview = document.getElementById('cancelReview');
-const submitSearch = document.getElementById('submitSearch');
 const cancelSearch = document.getElementById('cancelSearch');
 
 // get modals

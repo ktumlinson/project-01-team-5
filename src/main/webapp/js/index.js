@@ -69,6 +69,7 @@ const managerAccountLogin = (ev) =>{
             console.log('Success');
             // set the current user to be the ID of the manager returned
             sessionStorage.setItem('the-user', data.id);
+            sessionStoreage.setItem('the-man', data.id);
     
             // go to the managers landing page
             window.location.href = 'http://localhost:8080/employee-servlet-app/managers.html';
