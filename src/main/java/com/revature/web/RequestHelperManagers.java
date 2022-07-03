@@ -146,6 +146,7 @@ public class RequestHelperManagers {
 				int idInt = Integer.parseInt(id);
 
 				String statusString = jsonobj.get("status").getAsString();
+				System.out.println(statusString);
 				
 				Reimbursement r = mservs.findReimbursementById(idInt);
 
