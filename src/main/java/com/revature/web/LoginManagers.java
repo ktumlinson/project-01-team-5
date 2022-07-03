@@ -27,15 +27,14 @@ public class LoginManagers extends HttpServlet {
 		String password = request.getParameter("password");
 		User u = empServs.confirmLogin(username, password);
 		
-		if (u != null && u.getId() > 0) {
+		if (u != null && u.getId() > 0 && u.getRole().getRole().equals("Manager")) {
 			HttpSession session = request.getSession();
 			
 			session.setAttribute("the-man", u);
 			
 			System.out.println("Session is set for " + u);} 
 		else {
-			out.print("Sorry, username or password error");
-			request.getRequestDispatcher("manager-login.html").include(request, response);
+			response.sendRedirect("index-err.html");
 		}
 		out.close();
 	}

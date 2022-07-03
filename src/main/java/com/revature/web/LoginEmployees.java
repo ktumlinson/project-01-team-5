@@ -22,7 +22,7 @@ public class LoginEmployees extends HttpServlet {
 		EmployeeServices empServs = new EmployeeServices();
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
-		request.getRequestDispatcher("employees.html").include(request, response);
+		
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
 		System.out.println(username + password);
@@ -34,10 +34,12 @@ public class LoginEmployees extends HttpServlet {
 			session.setAttribute("the-user", u);
 			
 			System.out.println("Session is set for " + u);
+			request.getRequestDispatcher("employees.html").include(request, response);
 		} else {
 			// could replace employee-login w/ employee-login-error or something
-			response.sendRedirect("employee-login.html");
-			out.write("Sorry, username or password error");
+			response.sendRedirect("index-err.html");
+			
+
 		}
 		out.close();
 	}
