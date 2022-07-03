@@ -88,6 +88,8 @@
             <div>
               <label>Amount:</label>
               <input type="number" id="amount" placeholder="0.00" /><br />
+              <label>Type:</label>
+              <input type="text" id="type" placeholder="other"/>
               <p id="description-container">
                 <label for="textarea">Description:</label>
                 <textarea
@@ -97,15 +99,6 @@
                   cols="23"
                   placeholder="What is the reimbursement for?"
                 ></textarea>
-              </p>
-              <p id="select">
-                <label>Type:</label>
-                <select class="form-select-sm mb-4" id="type">
-                  <option value="1">Lodging</option>
-                  <option value="2">Travel</option>
-                  <option value="3">Food</option>
-                  <option value="4">Other</option></select
-                ><br />
               </p>
               <input id="sumbitRequest" type="submit" value="Request" />
             </div>
