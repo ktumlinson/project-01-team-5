@@ -1,6 +1,7 @@
 package com.revature.web;
 
 import java.io.IOException;
+import java.util.HashMap;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -15,22 +16,60 @@ import com.revature.models.User;
  */
 public class FrontController extends HttpServlet {
 	
+	protected HashMap<String, String> extractQueryParams(String query) {
+		String[] splitted = query.split("=");
+		HashMap<String, String> map = new HashMap<>();
+		if(splitted.length== 0 || splitted.length % 2 == 1) {
+			return new HashMap<>();
+		}
+		int i = 0;
+		while(i < splitted.length / 2) {
+			map.put(splitted[i], splitted[i + 1]);
+			i+= 2;
+		}
+		System.out.println(map);
+		return map;
+	}
+	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		final String URI = request.getRequestURI().replace("/employee-servlet-app/", "");
+		String query = "";
+		HashMap<String, String> map = new HashMap<>();
+		if(request.getQueryString() != null) {
+			query = request.getQueryString();
+			map = extractQueryParams(query);
+		}
+		
 		
 		switch(URI) {
 			
 		// used on manager's homepage
+		
 		case "reimbursements":		// manager gets all reimbursements
+			// manager gets all open reimbursements
+			if(map.containsKey("status") && map.get("status").equals("open")) {
+				RequestHelperManagers.getAllOpenReimbursements(request, response);
+			}
+			// manager gets all closed reimburseements
+			else if(map.containsKey("status")) {
+				RequestHelperManagers.getAllClosedReimbursements(request, response);
+			}
+			// manager searches for reimbursement list by username
+			else if(map.containsKey("username")) { // ??????
+				HttpSession sess = request.getSession();
+				User u = (User) sess.getAttribute("the-man");
+				String username = map.get("username");
+					
+				if(u.getRole().getRole().equals("Manager")) {
+					RequestHelperManagers.getReimbursementsByUsername(request, response, username);
+				}
+				
+			}
+			else {
 			RequestHelperManagers.getAllReimbursements(request, response);
+			}
 			break;
-		case "reimbursements?status=open":	// manager gets open reimbursements
-			RequestHelperManagers.getAllOpenReimbursements(request, response);
-			break;
-		case "reimbursements?status=closed":	// manager gets closed reimbursements
-			RequestHelperManagers.getAllClosedReimbursements(request, response);
-			break;	
 			// manager get all emps
 		case "employees":			
 			RequestHelperManagers.getAllEmployees(request, response);
@@ -85,12 +124,16 @@ public class FrontController extends HttpServlet {
 		// ready to test!
 		// manager finds all reimbursements by username. Haven't extracted query string correctly
 		else if(URI.matches("reimbursements?username=")) { // ??????
-			String username = URI.replace("reimbursements?username=", "");
 			HttpSession sess = request.getSession();
 			User u = (User) sess.getAttribute("the-man");
-			if(u.getUsername().equals("manager")) {
-				RequestHelperManagers.getReimbursementsByUsername(request, response, username);
+			if(map.containsKey("username") ) {
+				String username = map.get("username");
+				
+				if(u.getUsername().equals("manager")) {
+					RequestHelperManagers.getReimbursementsByUsername(request, response, username);
+				}
 			}
+			
 			
 		}
 	}
