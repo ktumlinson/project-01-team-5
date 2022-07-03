@@ -4,8 +4,7 @@ const employeeTable = document.getElementById('employee-Reimbursements-table');
 
 const getEmployeeReimbursements = () =>{
     employeeTable.innerHTML = "";
-    sessionStorage.setItem('the-user', document.getElementById('username').value);
-    let employeeId = sessionStorage.getItem('the-user');
+    let employeeId = document.getElementById('username').value;
     employeeHeader();
     fetch(`http://localhost:8080/reimbursements?username=${employeeId}`,{
         method: 'GET',
@@ -35,14 +34,15 @@ const getEmployeeReimbursements = () =>{
 
 const employeeHeader = () =>{
     let tags = ['ID', 'Status', 'Type', 'Description', 'Amount']
-    let tr = document.createElement('tr');
+    let tr = document.createElement('thead');
     tr.classList.add('bg-primary');
     tags.forEach(obj =>{
+        let header = document.createElement('th')
         let spacing = document.createElement('div');
         spacing.classList.add('spacing');
         let text = document.createTextNode(obj);
         spacing.appendChild(text);
-        let header = document.createElement('th').appendChild(spacing);
+        header.appendChild(spacing);
         tr.appendChild(header);
     })
     employeeTable.appendChild(tr);

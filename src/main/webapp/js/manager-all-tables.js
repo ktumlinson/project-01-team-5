@@ -1,4 +1,3 @@
-
 const viewEmployees = document.getElementById('manager-employees-button');
 const viewAllReimbursements = document.getElementById('manager-reimbursements-button');
 
