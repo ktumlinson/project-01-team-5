@@ -27,7 +27,7 @@ public class LoginManagers extends HttpServlet {
 		String password = request.getParameter("password");
 		User u = empServs.confirmLogin(username, password);
 		
-		if (u.getId() > 0) {
+		if (u != null && u.getId() > 0) {
 			HttpSession session = request.getSession();
 			
 			session.setAttribute("the-user", u);

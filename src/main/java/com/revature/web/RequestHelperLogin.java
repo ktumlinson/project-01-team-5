@@ -34,7 +34,7 @@ public class RequestHelperLogin {
 		System.out.println(password);
 		
 		User u = empServs.confirmLogin(username, password);
-		if (u.getId() > 0) {
+		if (u != null && u.getId() > 0) {
 			HttpSession session = request.getSession();
 			session.setAttribute("the-user", u);
 			
@@ -58,7 +58,7 @@ public class RequestHelperLogin {
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
 		User u = empServs.confirmLogin(username, password);
-		if (u.getId() > 0) {
+		if (u != null && u.getId() > 0) {
 			HttpSession session = request.getSession();
 			session.setAttribute("the-man", u);
 			
@@ -76,7 +76,6 @@ public class RequestHelperLogin {
 			throws IOException, ServletException {
 		HttpSession session = request.getSession();
 		session.invalidate();
-		System.out.println(session.getAttribute("the-man"));
 		response.sendRedirect("index.html");
 		
 		
