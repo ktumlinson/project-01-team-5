@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="ISO-8859-1" />
+    <title>Project-01</title>
+    <!--bootstrap-->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor"
+      crossorigin="anonymous"
+    />
+
+    <link rel="stylesheet" href="css\stylesheet.css" />
+    <link rel="stylesheet" href="css\index.css" />
+    <script src="js\index.js" defer></script>
+  </head>
+  <body>
+    <!-- <form method="POST" action="login"> adds /login
+		<label>Username:</label>
+		<input type="text" name="username" placeholder="Enter a username"><br>
+		<label>Password:</label>
+		<input type="password" name="password" placeholder="Enter the password">	
+		<input type="submit" value="Login">
+	</form>
+	<br>
+	<br> -->
+  <div class="alert alert-danger w-25 mx-auto" role="alert">
+    Incorrect Username/Password combo
+  </div>
+    <div id="background"></div>
+    <div class="modal.visible container">
+      <div class="card">
+        <div class="shadow-lg">
+          <div class="card-header">
+            <h1>Welcome</h1>
+          </div>
+          <div class="card-body">
+            <button class="btn btn-light" id="manager-login">
+              Manager Login
+            </button>
+            <button class="btn btn-light" id="employee-login">
+              Employee Login</button
+            ><br />
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal container" id="managerModal">
+      <!-- move all the manager login stuff here-->
+      <div class="card">
+        <div class="shadow-lg">
+          <div class="card-header">
+            <h1>Please Login To Your Account</h1>
+          </div>
+          <div class="card-body">
+            <form method="POST" action="LoginManagers">
+              <label>Username:</label>
+              <input
+                type="text"
+                id="username"
+                placeholder="Username"
+                name="username"
+              /><br />
+              <label>Password:</label>
+              <input
+                type="password"
+                id="password"
+                placeholder="****"
+                name="password"
+              /><br />
+              <input type="submit" value="Login" id="manager-login-button" />
+            </form>
+            <input type="submit" value="Cancel" id="manager-cancel-button" />
+            <div id="warningText"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal container" id="employeeModal">
+      <div class="card">
+        <div class="shadow-lg">
+          <div class="card-header">
+            <h1>Please Login To Your Account</h1>
+          </div>
+          <div class="card-body">
+            <form method="POST" action="LoginEmployees">
+              <label>Username:</label>
+              <input
+                type="text"
+                id="employee-username"
+                placeholder="Username"
+                name="username"
+              /><br />
+              <label>Password:</label>
+              <input
+                type="password"
+                id="employee-password"
+                placeholder="****"
+                name="password"
+              />
+              <br />
+              <input type="submit" value="Login" id="employee-login-button" />
+            </form>
+            <input type="submit" value="Cancel" id="employee-cancel-button" />
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js"
+      integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.min.js"
+      integrity="sha384-kjU+l4N0Yf4ZOJErLsIcvOU2qSb74wXpOhqTvwVx3OElZRweTnQ6d31fXEoRD1Jy"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>
