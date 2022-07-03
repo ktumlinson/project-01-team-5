@@ -14,7 +14,7 @@ const updateUserInfo = () => {
     email = document.getElementById('update-email').value;
 
     if (!checkEmptyFields()) {
-        fetch('http://localhost:8080/employee-servlet-app/employees/update', {
+        fetch('http://ec2-3-93-20-196.compute-1.amazonaws.com:8080/employee-servlet-app/employees/update', {
             method: 'POST',
             headers: {
                 "Content-Type": "application/json"
@@ -28,7 +28,7 @@ const updateUserInfo = () => {
         }).then(function (response) {
             if (!response.ok) {
                 updateText.classList.add('bg-info');
-            updateText.innerHTML = `<p style="color: red"><b>Unable to update your information</b></p>`
+                updateText.innerHTML = `<p style="color: red"><b>Unable to update your information</b></p>`
                 throw Error("Unable to update user information");
             }
             return response.json();

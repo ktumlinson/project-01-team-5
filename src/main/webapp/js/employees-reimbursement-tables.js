@@ -4,22 +4,22 @@ const viewOpen = document.getElementById('viewOpen');
 // get the table
 const employeeTable = document.getElementById('employee-table');
 
-const viewOpenTable = ()=>{
+const viewOpenTable = () => {
     employeeTable.innerHTML = "";
     createOpenHeader();
-    fetch('http://localhost:8080/employee-servlet-app/employees/openrequests',{
+    fetch('http://ec2-3-93-20-196.compute-1.amazonaws.com:8080/employee-servlet-app/employees/openrequests', {
         method: 'GET',
-        headers:{
+        headers: {
             'Content-Type': 'application/json'
         }
-    }).then(function(response){
-        if(!response.ok){
+    }).then(function (response) {
+        if (!response.ok) {
             throw Error('Error retreiving open requests from DB');
         }
         return response.json();
-    }).then(function(data){
+    }).then(function (data) {
         console.log(data);
-        data.forEach(obj =>{
+        data.forEach(obj => {
             let newReimbursement = {
                 id: obj.id,
                 status: obj.status.status,
@@ -34,7 +34,7 @@ const viewOpenTable = ()=>{
     employeeTable.style.visibility = 'visible';
 }
 
-const createOpenHeader = () =>{
+const createOpenHeader = () => {
 
     const openTags = ['ID', 'Type', 'Description', 'Amount', 'Time']
     console.log('creating header')
@@ -55,22 +55,22 @@ const createOpenHeader = () =>{
 
 }
 
-const createOpenRow = (newReimbursement) =>{
-    if(newReimbursement.status != 'pending'){
+const createOpenRow = (newReimbursement) => {
+    if (newReimbursement.status != 'pending') {
         console.log(newReimbursement.id + ' is not pending')
         return;
     }
     let row = document.createElement('tr');
-    switch(newReimbursement.type){
-        case 'lodging':{
+    switch (newReimbursement.type) {
+        case 'lodging': {
             row.classList.add('bg-success')
             break;
         }
-        case 'travel':{
+        case 'travel': {
             row.classList.add('bg-warning')
             break;
         }
-        case 'food' :{
+        case 'food': {
             row.classList.add('bg-info')
             break;
         }
@@ -130,23 +130,23 @@ const createOpenRow = (newReimbursement) =>{
     employeeTable.appendChild(row);
 }
 
-const viewClosedTable = ()=>{
+const viewClosedTable = () => {
     employeeTable.innerHTML = "";
     createClosedHeader();
 
-    fetch('http://localhost:8080/employee-servlet-app/employees/closedrequests',{
+    fetch('http://ec2-3-93-20-196.compute-1.amazonaws.com:8080/employee-servlet-app/employees/closedrequests', {
         method: 'GET',
-        headers:{
+        headers: {
             'Content-Type': 'application/json'
         }
-    }).then(function(response){
-        if(!response.ok){
+    }).then(function (response) {
+        if (!response.ok) {
             throw Error('Error retreiving open requests from DB');
         }
         return response.json();
-    }).then(function(data){
+    }).then(function (data) {
         console.log(data);
-        data.forEach(obj =>{
+        data.forEach(obj => {
             let newReimbursement = {
                 id: obj.id,
                 status: obj.status.status,
@@ -163,7 +163,7 @@ const viewClosedTable = ()=>{
     employeeTable.style.visibility = 'visible';
 }
 
-const createClosedHeader = () =>{
+const createClosedHeader = () => {
     const openTags = ['ID', 'Type', 'Description', 'Amount', 'Time Closed', 'Reviewing Manager']
     console.log('creating header')
     let tr = document.createElement('tr');
@@ -181,22 +181,22 @@ const createClosedHeader = () =>{
     employeeTable.appendChild(tr);
 }
 
-const createClosedRow = (newReimbursement) =>{
-    if(newReimbursement.status == 'pending'){
+const createClosedRow = (newReimbursement) => {
+    if (newReimbursement.status == 'pending') {
         console.log(newReimbursement.id + ' is pending')
         return;
     }
     let row = document.createElement('tr');
-    switch(newReimbursement.type){
-        case 'lodging':{
+    switch (newReimbursement.type) {
+        case 'lodging': {
             row.classList.add('bg-success')
             break;
         }
-        case 'travel':{
+        case 'travel': {
             row.classList.add('bg-warning')
             break;
         }
-        case 'food' :{
+        case 'food': {
             row.classList.add('bg-info')
             break;
         }

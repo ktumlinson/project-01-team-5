@@ -8,7 +8,7 @@ const getEmployeeReimbursements = () => {
     let employeeId = document.getElementById('username').value;
     empWarningText.innerHTML = "";
     employeeHeader();
-    fetch(`http://localhost:8080/employee-servlet-app/reimbursements?username=${employeeId}`, {
+    fetch(`http://ec2-3-93-20-196.compute-1.amazonaws.com:8080/employee-servlet-app/reimbursements?username=${employeeId}`, {
         method: 'GET',
         headers: {
             "Content-Type": "application/json"
@@ -23,7 +23,7 @@ const getEmployeeReimbursements = () => {
     }).then(function (data) {
         console.log(data);
         console.log(data.length);
-        if(data.length == 0){
+        if (data.length == 0) {
             console.log('length is 0')
             empWarningText.classList.add('bg-info');
             empWarningText.innerHTML = `<p style="color: red"><b>Failed to retreive reimbursements! User may not exist in DB or has no reimbursements</b> <br>`
@@ -39,7 +39,7 @@ const getEmployeeReimbursements = () => {
             }
             employeeRow(newReimbursement);
         })
-    }).catch(error =>{
+    }).catch(error => {
         console.warn(error);
         empWarningText.classList.add('bg-info');
         empWarningText.innerHTML = `<p style="color: white"><b>Failed to retreive reimbursements! Are you logged in as a manager?</b></p>`

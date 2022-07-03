@@ -5,7 +5,7 @@ const viewClosed = document.getElementById('manager-resolved-button');
 const viewPending = () => {
     managerTable.innerHTML = "";
     createPendingHeader();
-    fetch('http://localhost:8080/employee-servlet-app/reimbursements?status=open', {
+    fetch('http://ec2-3-93-20-196.compute-1.amazonaws.com:8080/employee-servlet-app/reimbursements?status=open', {
         method: 'GET'
     }).then(function (response) {
         console.log(response);
@@ -139,7 +139,7 @@ const createPendingRow = (newReimbursement) => {
 const viewClosedReimbursements = () => {
     managerTable.innerHTML = "";
     createClosedHeader();
-    fetch('http://localhost:8080/employee-servlet-app/reimbursements', {
+    fetch('http://ec2-3-93-20-196.compute-1.amazonaws.com:8080/employee-servlet-app/reimbursements', {
         method: 'GET',
         headers: {
             "Content-Type": "application/json"

@@ -11,7 +11,7 @@ const handleSubmitReimbursement = () => {
     type = document.getElementById('type').value;
     console.log('amount');
     if (!findUnansweredField()) {
-        fetch('http://localhost:8080/employee-servlet-app/reimbursements', {
+        fetch('http://ec2-3-93-20-196.compute-1.amazonaws.com:8080/employee-servlet-app/reimbursements', {
             method: 'POST',
             headers: {
                 "Content-Type": "application/json"

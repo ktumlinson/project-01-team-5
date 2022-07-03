@@ -6,7 +6,7 @@ const reimbID = document.getElementById('reimb-number');
 
 
 let reimbId = 0;
-let reimbursementToApprove = {id: 0, status: 'pending', amount: 0, description: '', user: '', type: ''};
+let reimbursementToApprove = { id: 0, status: 'pending', amount: 0, description: '', user: '', type: '' };
 
 const reviewTable = document.getElementById('review-table');
 
@@ -17,7 +17,7 @@ const findReimbursementById = () => {
     console.log(reimbId);
     reviewTable.innerHTML = "";
     createHeader();
-    fetch(`http://localhost:8080/employee-servlet-app/reimbursements/${reimbId}`, {
+    fetch(`http://ec2-3-93-20-196.compute-1.amazonaws.com:8080/employee-servlet-app/reimbursements/${reimbId}`, {
         method: 'GET',
         headers: {
             "Content-Type": "application/json"
@@ -38,7 +38,7 @@ const findReimbursementById = () => {
         reimbursementToApprove.user = data.employee.username;
         reimbursementToApprove.type = data.type.type;
         createRow(reimbursementToApprove);
-    }).catch(error =>{
+    }).catch(error => {
         console.warn(error);
         warningText.classList.add('bg-danger');
         warningText.innerHTML = `<p style="color: white"><b>Failed to retreive reimbursement! ID does not exist in DB or You are not a manager</b></p> <br>`
@@ -49,7 +49,7 @@ const findReimbursementById = () => {
     return reimbursementToApprove;
 }
 
-const createHeader = () =>{
+const createHeader = () => {
     console.log('creating header');
     const tags = ['ID', 'Status', 'Amount', 'Description', 'Type', 'User']
     let tr = document.createElement('tr');
@@ -66,12 +66,12 @@ const createHeader = () =>{
     reviewTable.appendChild(tr);
 }
 
-const createRow = (reimbursementToApprove) =>{
+const createRow = (reimbursementToApprove) => {
     //const tags = ['ID', 'Status', 'Amount', 'Description', 'Type', 'User']
     let Row = document.createElement('tr');
-    if(reimbursementToApprove.status == 'pending'){
+    if (reimbursementToApprove.status == 'pending') {
         Row.classList.add('bg-warning');
-    } else{
+    } else {
         Row.classList.add('bg-info');
     }
 
@@ -139,7 +139,7 @@ const handleDenyReimbursement = (reimbursementToApprove) => {
 }
 
 const pushReimbursementChange = (reimbursementToApprove) => {
-    fetch(`http://localhost:8080/employee-servlet-app/reimbursements/${reimbId}`, {
+    fetch(`http://ec2-3-93-20-196.compute-1.amazonaws.com:8080/employee-servlet-app/reimbursements/${reimbId}`, {
         method: 'POST',
         headers: {
             "Content-Type": "application/json",
@@ -148,7 +148,7 @@ const pushReimbursementChange = (reimbursementToApprove) => {
             status: reimbursementToApprove.status
         })
     }).then(function (response) {
-        if(!response.ok){
+        if (!response.ok) {
             throw Error("Unable to push the change");
         }
         return response.json();
@@ -161,5 +161,5 @@ const pushReimbursementChange = (reimbursementToApprove) => {
 }
 
 submitReview.addEventListener('click', findReimbursementById);
-approveReimbursement.addEventListener('click', function() {handleApproveReimbursement(reimbursementToApprove)});
-denyReimbursement.addEventListener('click', function() {handleDenyReimbursement(reimbursementToApprove)});
+approveReimbursement.addEventListener('click', function () { handleApproveReimbursement(reimbursementToApprove) });
+denyReimbursement.addEventListener('click', function () { handleDenyReimbursement(reimbursementToApprove) });

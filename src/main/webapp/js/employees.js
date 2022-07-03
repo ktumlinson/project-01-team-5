@@ -28,7 +28,7 @@ const toggleUpdateUser = () => {
     let password = document.getElementById('update-password');
     let email = document.getElementById('update-email');
     if (!updatInfoMenu.classList.contains('visible')) {
-        fetch('http://localhost:8080/employee-servlet-app/employees/info', {
+        fetch('http://ec2-3-93-20-196.compute-1.amazonaws.com:8080/employee-servlet-app/employees/info', {
             method: 'GET',
             headers: {
                 "Content-Type": "application/json"
@@ -57,7 +57,7 @@ const toggleViewUser = () => {
     let email = document.getElementById('view-email');
 
     if (!viewInfoMenu.classList.contains('visible')) {
-        fetch('http://localhost:8080/employee-servlet-app/employees/info', {
+        fetch('http://ec2-3-93-20-196.compute-1.amazonaws.com:8080/employee-servlet-app/employees/info', {
             method: 'GET',
             headers: {
                 "Content-Type": "application/json"
