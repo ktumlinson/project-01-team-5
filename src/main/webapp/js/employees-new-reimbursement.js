@@ -28,7 +28,7 @@ const handleSubmitReimbursement = () => {
             return response.json();
         }).then(function (data) {
             console.log(data);
-            warningText.innerHTML = `<p style"color: green><b>Successfully created new reimbursement with id ${data.id}</b></p>"`;
+            warningText.innerHTML = `<p><b>Successfully created new reimbursement with id ${data.id}</b></p>`;
         })
     } else {
         console.log('Could not upload, need more information');
@@ -46,7 +46,7 @@ const findUnansweredField = () => {
         warningText.innerHTML = `<p style"color: red><b>Unable to process request 'desciption' is invalid</b></p>"`
         return true;
     }
-    if(!isValid(type)){
+    if (!isValid(type)) {
         warningText.classList.add('bg-info');
         warningText.innerHTML = `<p style"color: red><b>Unable to process request 'type' is invalid make sure it is one of the following: "food", "lodging", "travel", or "other" </b></p>"`
         return true;
@@ -54,21 +54,21 @@ const findUnansweredField = () => {
     return false;
 }
 
-const isValid = (type) =>{
-    switch(type){
-        case 'food':{
+const isValid = (type) => {
+    switch (type) {
+        case 'food': {
             return true;
         }
-        case 'lodging':{
+        case 'lodging': {
             return true;
         }
-        case 'travel':{
+        case 'travel': {
             return true;
         }
-        case 'other':{
+        case 'other': {
             return true;
         }
-        default:{
+        default: {
             return false;
         }
     }
