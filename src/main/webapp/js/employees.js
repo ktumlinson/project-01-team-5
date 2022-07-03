@@ -24,10 +24,10 @@ const toggleReimbursement = () => {
 }
 
 const toggleUpdateUser = () => {
-    let firstName = document.getElementsByName('update-firstname');
-    let lastName = document.getElementsByName('update-lastname');
-    let password = document.getElementsByName('update-password');
-    let email = document.getElementsByName('update-email');
+    let firstName = document.getElementById('update-firstname');
+    let lastName = document.getElementById('update-lastname');
+    let password = document.getElementById('update-password');
+    let email = document.getElementById('update-email');
     if (!updatInfoMenu.classList.contains('visible')) {
         fetch('http://localhost:8080/employee-servlet-app/employees/info', {
             method: 'GET',
