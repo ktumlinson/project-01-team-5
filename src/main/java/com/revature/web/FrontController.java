@@ -29,7 +29,7 @@ public class FrontController extends HttpServlet {
 			RequestHelperManagers.getAllOpenReimbursements(request, response);
 			break;
 		case "reimbursements?status=closed":	// manager gets closed reimbursements
-			RequestHelperManagers.getAllOpenReimbursements(request, response);
+			RequestHelperManagers.getAllClosedReimbursements(request, response);
 			break;	
 			// manager get all emps
 		case "employees":			

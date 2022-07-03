@@ -59,18 +59,16 @@ public class FinanceManagerService extends UserService{
 	// tested and works
 	public List<User> allEmployees(){
 		return udao.findAllUsers().stream()
-			//	.filter(u -> (u.getRole().getId() == 1))
 				.collect(Collectors.toList());
 	}
 	
 	public Reimbursement findReimbursementById(int id) {
 		Reimbursement attempt;
 		try {
-			attempt  = rdao.findReimbursementById(id);
+			return rdao.findReimbursementById(id);
 			} catch(NoResultException e) {
 				return new Reimbursement();
 			}
-		return new Reimbursement();
 	}
 	
 	// tested and works

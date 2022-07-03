@@ -66,6 +66,7 @@ public class RequestHelperLogin {
 			System.out.println("Session is set for " + u);
 			request.getRequestDispatcher("managers.html").include(request, response);
 			
+			
 		} else {
 			// could replace employee-login w/ employee-login-error or something
 			response.sendRedirect("manager-login.html");

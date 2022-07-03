@@ -49,16 +49,17 @@ public class RequestHelperManagers {
 
 	public static void getReimbursementByReimbursementId(HttpServletRequest request, HttpServletResponse response,
 			int id) throws IOException, ServletException {
+		
 		response.setContentType("application/json");
 		response.addHeader("Access-Control-Allow-Origin", "*");
 		HttpSession sess = request.getSession();
-		User u = (User) sess.getAttribute("the-man");
-		if (u.getRole().getRole().equals("Manager")) {
+		
+		
 			Reimbursement reimb = mservs.findReimbursementById(id);
 			String jsonString = new ObjectMapper().writeValueAsString(reimb);
 			PrintWriter out = response.getWriter();
 			out.println(jsonString);
-		}
+		
 	}
 
 	public static void getAllReimbursements(HttpServletRequest request, HttpServletResponse response)
@@ -106,11 +107,11 @@ public class RequestHelperManagers {
 
 	public static void getAllEmployees(HttpServletRequest request, HttpServletResponse response)
 			throws IOException, ServletException {
+		response.setContentType("application/json");
+		response.addHeader("Access-Control-Allow-Origin", "*");
 		HttpSession sess = request.getSession();
 		User u = (User) sess.getAttribute("the-man");
 		if (u.getRole().getRole().equals("Manager")) {
-			response.setContentType("application/json");
-			response.addHeader("Access-Control-Allow-Origin", "*");
 			List<User> allReimb = mservs.allEmployees();
 			String jsonString = new ObjectMapper().writeValueAsString(allReimb);
 			PrintWriter out = response.getWriter();
@@ -122,10 +123,10 @@ public class RequestHelperManagers {
 	// Need a way to track manager updates. Can't do it currently
 	public static void updateReimbursementById(HttpServletRequest request, HttpServletResponse response, String id)
 			throws IOException, ServletException {
+		
 		HttpSession sess = request.getSession();
 		User u = (User) sess.getAttribute("the-man");
-		if (u.getRole().getRole().equals("manager")) {
-
+		if (u.getRole().getRole().equals("Manager")) {
 			response.setContentType("application/json");
 			response.addHeader("Access-Control-Allow-Origin", "*");
 
@@ -145,15 +146,16 @@ public class RequestHelperManagers {
 				int idInt = Integer.parseInt(id);
 
 				String statusString = jsonobj.get("status").getAsString();
+				
 				Reimbursement r = mservs.findReimbursementById(idInt);
 
 				ReimbursementStatus status = null;
 				switch (statusString) {
-				case "approved":
+				case "2":
 					status = ReimbursementStatus.generater("approved");
 					mservs.approveReimbursement(r, u);
 					break;
-				case "rejected":
+				case "3":
 					status = ReimbursementStatus.generater("rejected");
 					mservs.denyReimbursement(r, u);
 					break;

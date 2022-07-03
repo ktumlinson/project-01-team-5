@@ -66,7 +66,7 @@ public class RequestHelperEmployees {
 			response.addHeader("Access-Control-Allow-Origin", "*");
 	
 			String queryString = request.getQueryString();
-			List<Reimbursement> listReimb = (List<Reimbursement>) mservs.findUserByUsername(username);
+			List<Reimbursement> listReimb = (List<Reimbursement>) eservs.myResolvedRequests(u);
 			List<Reimbursement> listFiltered = listReimb.stream()
 					.filter(e -> e.getStatus().getStatus().equals("pending")).collect(Collectors.toList());
 			String jsonString = new ObjectMapper().writeValueAsString(listFiltered);
@@ -85,7 +85,7 @@ public class RequestHelperEmployees {
 			response.addHeader("Access-Control-Allow-Origin", "*");
 	
 			String queryString = request.getQueryString();
-			List<Reimbursement> listReimb = (List<Reimbursement>) mservs.findUserByUsername(username);
+			List<Reimbursement> listReimb = (List<Reimbursement>)eservs.myResolvedRequests(u);
 			List<Reimbursement> listFiltered = listReimb.stream()
 					.filter(e -> !e.getStatus().getStatus().equals("pending")).collect(Collectors.toList());
 			String jsonString = new ObjectMapper().writeValueAsString(listFiltered);
