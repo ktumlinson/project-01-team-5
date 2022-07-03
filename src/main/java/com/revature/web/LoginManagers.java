@@ -30,7 +30,7 @@ public class LoginManagers extends HttpServlet {
 		if (u != null && u.getId() > 0) {
 			HttpSession session = request.getSession();
 			
-			session.setAttribute("the-user", u);
+			session.setAttribute("the-man", u);
 			
 			System.out.println("Session is set for " + u);} 
 		else {
