@@ -39,7 +39,6 @@ public class Reimbursement {
 	private java.sql.Timestamp timeSubmitted;
 
 	@Column(name = "reimb_resolved") 
-	@Basic(optional = true)
 	private java.sql.Timestamp timeResolved;
 
 	@Column(name = "reimb_description")
