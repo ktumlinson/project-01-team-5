@@ -1,8 +1,8 @@
 const submitReimbursement = document.getElementById('sumbitRequest');
 const warningText = document.getElementById('warning-text');
 let amount = document.getElementById('amount');
-let description = document.getElementById('amount');
-let type = document.getElementById('amount');
+let description = document.getElementById('description');
+let type = document.getElementById('type');
 
 const handleSubmitReimbursement = () => {
     warningText.innerHTML = "";
@@ -29,10 +29,17 @@ const handleSubmitReimbursement = () => {
         }).then(function (data) {
             console.log(data);
             warningText.innerHTML = `<p><b>Successfully created new reimbursement with id ${data.id}</b></p>`;
+            clearFormFields();
         })
     } else {
         console.log('Could not upload, need more information');
     }
+}
+
+const clearFormFields = () => {
+    document.getElementById('amount').value = '';
+    document.getElementById('description').value = '';
+    document.getElementById('type').selectedIndex = 0;
 }
 
 const findUnansweredField = () => {
