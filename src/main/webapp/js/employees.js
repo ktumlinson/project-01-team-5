@@ -44,8 +44,8 @@ const toggleUpdateUser = () =>{
                 password.value = data.password;
                 email.value = data.email;
             })
-        updatInfoMenu.classList.toggle('visible');
-    }
+        }
+    updatInfoMenu.classList.toggle('visible');
     toggleBackground();
 }
 

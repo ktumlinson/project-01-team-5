@@ -4,8 +4,7 @@ const employeeTable = document.getElementById('employee-Reimbursements-table');
 
 const getEmployeeReimbursements = () =>{
     employeeTable.innerHTML = "";
-    sessionStorage.setItem('the-user', document.getElementById('username').value);
-    let employeeId = sessionStorage.getItem('the-user');
+    let employeeId = document.getElementById('username').value;
     employeeHeader();
     fetch(`http://localhost:8080/reimbursements?username=${employeeId}`,{
         method: 'GET',

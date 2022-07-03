@@ -1,12 +1,17 @@
 const update = document.getElementById('submitUpdate');
 
+let firstName = document.getElementsByName('update-firstname');
+let lastName = document.getElementsByName('update-lastname');
+let password = document.getElementsByName('update-password');
+let email = document.getElementsByName('update-email');
+
 const updateUserInfo = () =>{
-    let firstName = document.getElementsByName('update-firstname').value;
-    let lastName = document.getElementsByName('update-lastname').value;
-    let password = document.getElementsByName('update-password').value;
-    let email = document.getElementsByName('update-email').value;
+    firstName = document.getElementsByName('update-firstname').value;
+    lastName = document.getElementsByName('update-lastname').value;
+    password = document.getElementsByName('update-password').value;
+    email = document.getElementsByName('update-email').value;
     
-    if(!checkEmptyFields){
+    if(!checkEmptyFields()){
         fetch('http://localhost:8080/employee-servlet-app/employees/update',{
             method: 'POST',
             headers: {
@@ -50,6 +55,7 @@ const checkEmptyFields = () =>{
         console.log('email');
         return true;
     }
+    console.log('returning false');
     return false;
 }
 
