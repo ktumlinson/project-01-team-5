@@ -43,7 +43,7 @@ public class RequestHelperEmployees {
 		HttpSession sess = request.getSession();
 		PrintWriter out = response.getWriter();
 		User u = (User) sess.getAttribute("the-user");
-		if (u.getId() > 0) {
+		if (u != null && u.getId() > 0) {
 			int idInt = Integer.parseInt(id);
 			response.setContentType("application/json");
 			response.addHeader("Access-Control-Allow-Origin", "*");
@@ -61,7 +61,7 @@ public class RequestHelperEmployees {
 		PrintWriter out = response.getWriter();
 		HttpSession sess = request.getSession();
 		User u = (User) sess.getAttribute("the-user");
-		if (u.getId() > 0) {
+		if (u != null && u.getId() > 0) {
 			response.setContentType("application/json");
 			response.addHeader("Access-Control-Allow-Origin", "*");
 	
@@ -80,7 +80,7 @@ public class RequestHelperEmployees {
 		PrintWriter out = response.getWriter();
 		HttpSession sess = request.getSession();
 		User u = (User) sess.getAttribute("the-user");
-		if (u.getId() > 0) {
+		if (u != null && u.getId() > 0) {
 			response.setContentType("application/json");
 			response.addHeader("Access-Control-Allow-Origin", "*");
 	
@@ -97,7 +97,7 @@ public class RequestHelperEmployees {
 			throws IOException, ServletException {
 		HttpSession sess = request.getSession();
 		User u = (User) sess.getAttribute("the-user");
-		if (u.getId() > 0) {
+		if (u != null && u.getId() > 0) {
 			PrintWriter out = response.getWriter();
 			int idInt = Integer.parseInt(id);
 			response.setContentType("application/json");
@@ -115,7 +115,7 @@ public class RequestHelperEmployees {
 		HttpSession sess = request.getSession();
 		PrintWriter out = response.getWriter();
 		User u = (User) sess.getAttribute("the-user");
-		if (u.getId() > 0) {
+		if (u != null && u.getId() > 0) {
 			response.setContentType("application/json");
 			response.addHeader("Access-Control-Allow-Origin", "*");
 			String queryString = request.getQueryString();
@@ -130,7 +130,7 @@ public class RequestHelperEmployees {
 
 		HttpSession sess = request.getSession();
 		User u = (User) sess.getAttribute("the-user");
-		if (u.getId() > 0) {
+		if (u != null && u.getId() > 0) {
 			response.setContentType("application/json");
 			response.addHeader("Access-Control-Allow-Origin", "*");
 
@@ -190,7 +190,7 @@ public class RequestHelperEmployees {
 		// Might throw NullPointer Exception V
 		User u = (User) sess.getAttribute("the-user");
 		System.out.println("fetched user session for " + u);
-		if (u.getId() > 0) {
+		if (u != null && u.getId() > 0) {
 			// they are authenticated, paste all the code below in here
 			PrintWriter out = response.getWriter();
 

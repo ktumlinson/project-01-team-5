@@ -168,7 +168,7 @@ public class FrontController extends HttpServlet {
 		
 		// Employees will update their info
 		if(URI.matches("employees/update")) { 
-			System.out.println("Hit the employees/update path");
+
 				RequestHelperEmployees.updateInfoByID(request, response);
 			
 		}
