@@ -26,24 +26,26 @@ const toggleUpdateUser = () =>{
     let lastName = document.getElementsByName('update-lastname');
     let password = document.getElementsByName('update-password');
     let email = document.getElementsByName('update-email');
-    fetch('http://localhost:8080/employee-servlet-app/employees/info',{
-            method: 'GET',
-            headers: {
-                "Content-Type":"application/json"
-            }
-        }).then(function(response) {
-            if(!response.ok){
-                throw Error("Unable to pull info from DB");
-            }
-            return response.json();
-        }).then(function(data){
-            console.log(data);
-            firstName.value = data.firstname;
-            lastName.value = data.lastname;
-            password.value = data.password;
-            email.value = data.email;
-        })
-    updatInfoMenu.classList.toggle('visible');
+    if(!updatInfoMenu.classList.contains('visible')){
+        fetch('http://localhost:8080/employee-servlet-app/employees/info',{
+                method: 'GET',
+                headers: {
+                    "Content-Type":"application/json"
+                }
+            }).then(function(response) {
+                if(!response.ok){
+                    throw Error("Unable to pull info from DB");
+                }
+                return response.json();
+            }).then(function(data){
+                console.log(data);
+                firstName.value = data.firstname;
+                lastName.value = data.lastname;
+                password.value = data.password;
+                email.value = data.email;
+            })
+        updatInfoMenu.classList.toggle('visible');
+    }
     toggleBackground();
 }
 

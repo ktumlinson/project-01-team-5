@@ -83,7 +83,7 @@
             <h1>Please Login To Your Account</h1>
           </div>
           <div class="card-body">
-            <div>
+            <form method="POST" action="LoginEmployees">
               <label>Username:</label>
               <input
                 type="text"
@@ -100,75 +100,13 @@
               />
               <br />
               <input type="submit" value="Login" id="employee-login-button" />
-            </div>
+            </form>
             <input type="submit" value="Cancel" id="employee-cancel-button" />
           </div>
         </div>
       </div>
     </div>
 
-    <div class="modal container" id="registerModal">
-      <!-- move all the register stuff here-->
-      <div class="card">
-        <div class="shadow-lg">
-          <div class="card-header">
-            <h1>Welcome New Employee!</h1>
-            <h3>Please Fill Out This Form</h3>
-          </div>
-          <div class="card-body">
-            <form method="POST" action="register">
-              <label>First Name:</label>
-              <input
-                type="text"
-                name="firstname"
-                placeholder="Enter a first name"
-              /><br />
-              <label>Last Name:</label>
-              <input
-                type="text"
-                name="lastname"
-                placeholder="Enter a last name"
-              /><br />
-
-              <label>Username:</label>
-              <input
-                type="text"
-                name="username"
-                placeholder="Enter a username"
-              /><br />
-
-              <label>Password:</label>
-              <input type="password" name="password" placeholder="***" /><br />
-
-              <label>Email:</label>
-              <input
-                type="email"
-                name="email"
-                placeholder="123@yahoo.com"
-              /><br />
-              <p id="select">
-                <label>Role:</label>
-                <select class="form-select-sm mb-4" name="Role">
-                  <option value="1">Employee</option>
-                  <option value="2">Manager</option>
-                </select>
-              </p>
-              <br />
-              <input
-                id="complete-registration"
-                type="submit"
-                value="Register"
-              />
-            </form>
-            <input
-              id="registration-cancel-button"
-              type="submit"
-              value="Cancel"
-            />
-          </div>
-        </div>
-      </div>
-    </div>
 
     <script
       src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js"

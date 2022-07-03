@@ -2,13 +2,10 @@
 // get the buttons
 const managerLogin = document.getElementById('manager-login');
 const employeeLogin = document.getElementById('employee-login');
-const register = document.getElementById('register');
 const login = document.getElementById('manager-login-button');
 const cancel = document.getElementById('manager-cancel-button');
 const emplogin = document.getElementById('employee-login-button');
 const empcancel = document.getElementById('employee-cancel-button');
-const completeregister = document.getElementById('complete-registration');
-const regcancel = document.getElementById('registration-cancel-button');
     
 // get the modals
 const background = document.getElementById('background');
@@ -55,7 +52,7 @@ const managerAccountLogin = (ev) =>{
         })
     }).then(function (response) {
         if(!response.ok){
-            throw Error("Error");
+            throw Error("Unable to retreive manager");
         }
 
         let childDiv = document.getElementById('warningText');
@@ -83,31 +80,36 @@ const managerAccountLogin = (ev) =>{
 }
 
 const employeeAccountLogin = (ev) =>{
+    console.log('started');
     ev.preventDefault();
-
     let username = document.getElementById('employee-username').value;
     let password = document.getElementById('employee-password').value;
     console.log(username);
     console.log(password);
+    let request = {
+        username: username,
+        password: password
+    }
     fetch('http://localhost:8080/employee-servlet-app/LoginEmployees',{
         // make a post request to try to login with the given information
         method: 'POST',
+        body: JSON.stringify({request}),
         headers: {
             'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            username: username,
-            password: password
-        })
-    }).then(function (response) {
+        }
+    }).then(json => console.log('request: ', request, json))
+    
+    .then(function (response) {
         if(!response.ok){
-            throw Error("Error");
+            throw Error("Unable to find employee");
         }
         let childDiv = document.getElementById('warningText');
         childDiv.innerHTML = '<p style="color:red"><b>Username or Password is incorrect<b></p>'
 
         return response.json;
-    }).then(function(data){
+    })
+    
+    .then(function(data){
         console.log(data);
 
         if(data.id > 0){
@@ -121,14 +123,12 @@ const employeeAccountLogin = (ev) =>{
             let childDiv = document.getElementById('warningText');
             childDiv.innerHTML = '<p style="color:red"><b>Username or Password is incorrect<b></p>'
         }
-    }).catch(error => {
+    })
+    .catch(error => {
         console.log(error);
     })
 }
 
-const registerEmployee = () =>{
-    
-}
 
 managerLogin.addEventListener('click', toggleManagerLogin);
 cancel.addEventListener('click', toggleManagerLogin);

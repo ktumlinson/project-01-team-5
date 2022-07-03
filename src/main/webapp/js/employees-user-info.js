@@ -33,7 +33,24 @@ const updateUserInfo = () =>{
 }
 
 const checkEmptyFields = () =>{
-
+    console.log('checking cells');
+    if(firstName == ''){
+        console.log('firstname');
+        return true;
+    }
+    if(lastName == ''){
+        console.log('lastname');
+        return true;
+    }
+    if(password == ''){
+        console.log('password');
+        return true;
+    }
+    if(email == ''){ 
+        console.log('email');
+        return true;
+    }
+    return false;
 }
 
 update.addEventListener('click', updateUserInfo);

@@ -2,6 +2,7 @@ package com.revature.web;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Enumeration;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -17,14 +18,14 @@ import com.revature.service.EmployeeServices;
  */
 public class LoginEmployees extends HttpServlet {
 	
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		EmployeeServices empServs = new EmployeeServices();
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
 		request.getRequestDispatcher("employees.html").include(request, response);
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
+		System.out.println(username + password);
 		User u = empServs.confirmLogin(username, password);
 		System.out.println(u);
 		if (u != null && u.getId() > 0) {

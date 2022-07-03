@@ -1,11 +1,13 @@
 const submitReimbursement = document.getElementById('sumbitRequest');
-let userId = sessionStorage.getItem('the-user');
+let amount = document.getElementById('amount');
+let description = document.getElementById('amount');
+let type = document.getElementById('amount');
 
 const handleSubmitReimbursement = () =>{
-    console.log(userId);
-    let amount = getElementByName('amount').value;
-    let description = getElementByName('description').value;
-    let type = getElementByName('type').value;
+    amount = document.getElementsByName('amount').value;
+    description = document.getElementsByName('description').value;
+    type = document.getElementsByName('type').value;
+    console.log('amount');
     if(!findUnansweredField()){
         fetch('http://localhost:8080/employee-servlet-app/reimbursements',{
             method: 'POST',
@@ -31,9 +33,6 @@ const handleSubmitReimbursement = () =>{
 }
 
 const findUnansweredField = () =>{
-    if(userId == null){
-        return true;
-    }
     if(amount <= 0){
         return true;
     }
