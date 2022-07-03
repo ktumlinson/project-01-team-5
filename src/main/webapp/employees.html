@@ -87,12 +87,12 @@
           <div class="card-body">
             <div>
               <label>Amount:</label>
-              <input type="number" name="amount" placeholder="0.00" /><br />
+              <input type="number" id="amount" placeholder="0.00" /><br />
               <p id="description-container">
                 <label for="textarea">Description:</label>
                 <textarea
-                  id="textarea"
-                  name="description"
+
+                  id="description"
                   rows="3"
                   cols="23"
                   placeholder="What is the reimbursement for?"
@@ -100,7 +100,7 @@
               </p>
               <p id="select">
                 <label>Type:</label>
-                <select class="form-select-sm mb-4" name="type">
+                <select class="form-select-sm mb-4" id="type">
                   <option value="1">Lodging</option>
                   <option value="2">Travel</option>
                   <option value="3">Food</option>

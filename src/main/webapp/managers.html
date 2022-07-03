@@ -97,7 +97,7 @@
             <h6>Review Reimbursement</h6>
           </div>
           <div class="card-body">
-            <div id="review">
+            <button id="review">
               <label>ID:</label>
               <input
                 type="number"
@@ -105,9 +105,9 @@
                 placeholder="00"
                 id="reimb-number"
               /><!--note that if it gives a decimal you need to specify that it will not allow it on the error message-->
-              <input id="submitReview" type="submit" value="Review" /><br />
-              <input id="approve" type="submit" value="Approve" />
-              <input id="deny" type="submit" value="Deny" />
+              <button id="submitReview" >Review</button><br />
+              <button id="approve" >Approve</button>
+              <button id="deny" >Deny</button>
             </div>
             <input id="cancelReview" type="submit" value="Cancel" />
           </div>

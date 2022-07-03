@@ -3,24 +3,24 @@ const approveReimbursement = document.getElementById('approve');
 const denyReimbursement = document.getElementById('deny');
 const reimbID = document.getElementById('reimb-number');
 
-const findReimbursementById = () =>{
+const findReimbursementById = () => {
     let reimbId = reimbID.value;
     console.log(reimbId);
-    fetch(`http://localhost:8080/reimbursements/${reimbId}`,{
+    fetch(`http://localhost:8080/employee-servlet-app/reimbursements/${reimbId}`, {
         method: 'GET',
         headers: {
-            "Content-Type":"application/json"
+            "Content-Type": "application/json"
         }
-    }).then(function(response){
-        if(!response.ok){
+    }).then(function (response) {
+        if (!response.ok) {
             throw Error(`Error retreiving reimbursement ${reimbId}`);
         }
         return response.json();
-    }).then(function(data){
+    }).then(function (data) {
         console.log(data);
         let reimbursementToApprove = {
             id: data.id,
-            status: data.stats.stats
+            status: data.status.status
         }
     })
 
@@ -28,29 +28,28 @@ const findReimbursementById = () =>{
     denyReimbursement.style.visibility = 'visible';
 }
 
-const handleApproveReimbursement = (reimbursementToApprove) =>{
+const handleApproveReimbursement = (reimbursementToApprove) => {
     reimbursementToApprove.status = 'approved';
     pushReimbursementChange(reimbursementToApprove);
 }
 
-const handleDenyReimbursement = (reimbursementToApprove) =>{
-    reimbursementToApprove.status = 'denied';
+const handleDenyReimbursement = (reimbursementToApprove) => {
+    reimbursementToApprove.status = 'rejected';
     pushReimbursementChange(reimbursementToApprove);
 }
 
-const pushReimbursementChange = (reimbursementToApprove) =>{
-    fetch(`http://localhost:8080/reimbursements/${reimbId}`,{
+const pushReimbursementChange = (reimbursementToApprove) => {
+    fetch(`http://localhost:8080/employee-servlet-app/reimbursements/${reimbId}`, {
         method: 'POST',
         headers: {
-            "Content-Type" : "application/json",
+            "Content-Type": "application/json",
         },
         body: JSON.stringify({
-            id: reimbursementToApprove.id,
             status: reimbursementToApprove.status
         })
-    }).then(function(response){
+    }).then(function (response) {
         response.json();
-    }).then(function(json){
+    }).then(function (json) {
         console.log(json);
     })
 }

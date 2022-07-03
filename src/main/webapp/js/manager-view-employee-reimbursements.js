@@ -2,23 +2,23 @@ const submitSearch = document.getElementById('submitSearch');
 
 const employeeTable = document.getElementById('employee-Reimbursements-table');
 
-const getEmployeeReimbursements = () =>{
+const getEmployeeReimbursements = () => {
     employeeTable.innerHTML = "";
     let employeeId = document.getElementById('username').value;
     employeeHeader();
-    fetch(`http://localhost:8080/reimbursements?username=${employeeId}`,{
+    fetch(`http://localhost:8080/employee-servlet-app/reimbursements?username=${employeeId}`, {
         method: 'GET',
-        headers:{
-            "Content-Type" : "application/json"
+        headers: {
+            "Content-Type": "application/json"
         }
-    }).then(function(response){
-        if(!response.ok){
+    }).then(function (response) {
+        if (!response.ok) {
             throw Error('Error getting reimbursements from username ' + employeeId);
         }
         return response.json();
-    }).then(function(data){
+    }).then(function (data) {
         console.log(data);
-        data.forEach(obj=>{
+        data.forEach(obj => {
             newReimbursement = {
                 id: obj.id,
                 status: obj.status.status,
@@ -32,11 +32,11 @@ const getEmployeeReimbursements = () =>{
     employeeTable.style.visibility = 'visible';
 }
 
-const employeeHeader = () =>{
+const employeeHeader = () => {
     let tags = ['ID', 'Status', 'Type', 'Description', 'Amount']
     let tr = document.createElement('thead');
     tr.classList.add('bg-primary');
-    tags.forEach(obj =>{
+    tags.forEach(obj => {
         let header = document.createElement('th')
         let spacing = document.createElement('div');
         spacing.classList.add('spacing');
@@ -48,19 +48,19 @@ const employeeHeader = () =>{
     employeeTable.appendChild(tr);
 }
 
-const employeeRow = (newReimbursement) =>{
+const employeeRow = (newReimbursement) => {
     let row = document.createElement('tr');
 
-    switch(newReimbursement.type){
-        case 'lodging':{
+    switch (newReimbursement.type) {
+        case 'lodging': {
             row.classList.add('bg-success')
             break;
         }
-        case 'travel':{
+        case 'travel': {
             row.classList.add('bg-warning')
             break;
         }
-        case 'food' :{
+        case 'food': {
             row.classList.add('bg-info')
             break;
         }

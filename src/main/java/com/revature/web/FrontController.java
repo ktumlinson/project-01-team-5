@@ -41,6 +41,48 @@ public class FrontController extends HttpServlet {
 			map = extractQueryParams(query);
 		}
 		
+		// Path not really used in our app
+				if(URI.matches("employees/\\d+")) {		// Can be used by both managers and employees
+					String id = URI.replace("employees/", "");
+					RequestHelperEmployees.getEmployeeById(request, response, id);
+				}
+				// User wants to view their open requests
+				else if(URI.matches("employees/openrequests")) {		
+					HttpSession sess = request.getSession();
+					User u = (User) sess.getAttribute("the-user");
+					System.out.println("fetching user session for " + u);
+					
+					String username = URI.replace("employees/", "");
+					RequestHelperEmployees.getReimbursementByUsernameOpen(request, response, username);
+				}
+				// User wants to view their closed requests
+				else if(URI.matches("employees/closedrequests")) {		// User wants to view their open requests
+					HttpSession sess = request.getSession();
+					User u = (User) sess.getAttribute("the-user");
+					System.out.println("fetching user session for " + u);
+					
+					String username = URI.replace("employees/", "");
+					RequestHelperEmployees.getReimbursementByUsernameClosed(request, response, username);
+				}
+				// User wants to view their own info
+				else if(URI.matches("employees/info")) {		// User wants to view their info
+					String username = URI.replace("employees/", "");
+					HttpSession sess = request.getSession();
+					User u = (User) sess.getAttribute("the-user");
+					System.out.println("fetching user session for " + u);
+					RequestHelperEmployees.getEmployeeByUsername(request, response, u.getUsername());
+				}
+				// manager finds a reimbursement by reimbursement id
+				else if(URI.matches("reimbursements/\\d+")) { // ??????
+					String id = URI.replace("reimbursements/", "");
+					int idNum = Integer.parseInt(id);
+					HttpSession sess = request.getSession();
+					User u = (User) sess.getAttribute("the-man");
+					if(u.getUsername().equals("manager")) {
+						RequestHelperManagers.getReimbursementByReimbursementId(request, response, idNum);
+					}
+				}
+		
 		
 		switch(URI) {
 			
@@ -79,47 +121,7 @@ public class FrontController extends HttpServlet {
 			RequestHelperLogin.logout(request, response);
 			break;
 		}
-		// Path not really used in our app
-		if(URI.matches("employees/\\d+")) {		// Can be used by both managers and employees
-			String id = URI.replace("employees/", "");
-			RequestHelperEmployees.getEmployeeById(request, response, id);
-		}
-		// User wants to view their open requests
-		else if(URI.matches("employees/openrequests")) {		
-			HttpSession sess = request.getSession();
-			User u = (User) sess.getAttribute("the-user");
-			System.out.println("fetching user session for " + u);
-			
-			String username = URI.replace("employees/", "");
-			RequestHelperEmployees.getReimbursementByUsernameOpen(request, response, username);
-		}
-		// User wants to view their closed requests
-		else if(URI.matches("employees/closedrequests")) {		// User wants to view their open requests
-			HttpSession sess = request.getSession();
-			User u = (User) sess.getAttribute("the-user");
-			System.out.println("fetching user session for " + u);
-			
-			String username = URI.replace("employees/", "");
-			RequestHelperEmployees.getReimbursementByUsernameClosed(request, response, username);
-		}
-		// User wants to view their own info
-		else if(URI.matches("employees/info")) {		// User wants to view their info
-			String username = URI.replace("employees/", "");
-			HttpSession sess = request.getSession();
-			User u = (User) sess.getAttribute("the-user");
-			System.out.println("fetching user session for " + u);
-			RequestHelperEmployees.getEmployeeByUsername(request, response, u.getUsername());
-		}
-		// manager finds a reimbursement by reimbursement id
-		else if(URI.matches("reimbursements/\\d+")) { // ??????
-			String id = URI.replace("reimbursements/", "");
-			int idNum = Integer.parseInt(id);
-			HttpSession sess = request.getSession();
-			User u = (User) sess.getAttribute("the-man");
-			if(u.getUsername().equals("manager")) {
-				RequestHelperManagers.getReimbursementByReimbursementId(request, response, idNum);
-			}
-		}
+		
 		
 		
 	}

@@ -12,61 +12,34 @@ const reimbursementMenu = document.getElementById('reimbursementMenu');
 const updatInfoMenu = document.getElementById('updateMenu');
 const viewInfoMenu = document.getElementById('userInfo');
 
-const toggleBackground = () =>{
+
+
+const toggleBackground = () => {
     background.classList.toggle('visible');
 }
 
-const toggleReimbursement = () =>{
+const toggleReimbursement = () => {
     reimbursementMenu.classList.toggle('visible');
     toggleBackground();
 }
 
-const toggleUpdateUser = () =>{
+const toggleUpdateUser = () => {
     let firstName = document.getElementsByName('update-firstname');
     let lastName = document.getElementsByName('update-lastname');
     let password = document.getElementsByName('update-password');
     let email = document.getElementsByName('update-email');
-    if(!updatInfoMenu.classList.contains('visible')){
-        fetch('http://localhost:8080/employee-servlet-app/employees/info',{
-                method: 'GET',
-                headers: {
-                    "Content-Type":"application/json"
-                }
-            }).then(function(response) {
-                if(!response.ok){
-                    throw Error("Unable to pull info from DB");
-                }
-                return response.json();
-            }).then(function(data){
-                console.log(data);
-                firstName.value = data.firstname;
-                lastName.value = data.lastname;
-                password.value = data.password;
-                email.value = data.email;
-            })
-        }
-    updatInfoMenu.classList.toggle('visible');
-    toggleBackground();
-}
-
-const toggleViewUser = ()=>{
-    let firstName = document.getElementById('view-first');
-    let lastName = document.getElementById('view-last');
-    let password = document.getElementById('view-pass');
-    let email = document.getElementById('view-email');
-
-    if(!viewInfoMenu.classList.contains('visible')){
-        fetch('http://localhost:8080/employee-servlet-app/employees/info',{
+    if (!updatInfoMenu.classList.contains('visible')) {
+        fetch('http://localhost:8080/employee-servlet-app/employees/info', {
             method: 'GET',
             headers: {
-                "Content-Type":"application/json"
+                "Content-Type": "application/json"
             }
-        }).then(function(response) {
-            if(!response.ok){
+        }).then(function (response) {
+            if (!response.ok) {
                 throw Error("Unable to pull info from DB");
             }
             return response.json();
-        }).then(function(data){
+        }).then(function (data) {
             console.log(data);
             firstName.value = data.firstname;
             lastName.value = data.lastname;
@@ -74,7 +47,36 @@ const toggleViewUser = ()=>{
             email.value = data.email;
         })
     }
-    
+    updatInfoMenu.classList.toggle('visible');
+    toggleBackground();
+}
+
+const toggleViewUser = () => {
+    let firstName = document.getElementById('view-first');
+    let lastName = document.getElementById('view-last');
+    let password = document.getElementById('view-pass');
+    let email = document.getElementById('view-email');
+
+    if (!viewInfoMenu.classList.contains('visible')) {
+        fetch('http://localhost:8080/employee-servlet-app/employees/info', {
+            method: 'GET',
+            headers: {
+                "Content-Type": "application/json"
+            }
+        }).then(function (response) {
+            if (!response.ok) {
+                throw Error("Unable to pull info from DB");
+            }
+            return response.json();
+        }).then(function (data) {
+            console.log(data);
+            firstName.value = data.firstname;
+            lastName.value = data.lastname;
+            password.value = data.password;
+            email.value = data.email;
+        })
+    }
+
     viewInfoMenu.classList.toggle('visible');
     toggleBackground();
 }

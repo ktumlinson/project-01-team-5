@@ -2,20 +2,18 @@ const viewOpen = document.getElementById('manager-pending-button');
 const viewClosed = document.getElementById('manager-resolved-button');
 
 // pending reimbursements table
-const viewPending = () =>{
+const viewPending = () => {
     managerTable.innerHTML = "";
     createPendingHeader();
-    fetch('http://localhost:8080/employee-servlet-app/reimbursements?status=open',{
-        method: 'GET',
-        headers: {
-            "Content-Type" : "application/json"
-        }
-    }).then(function(response){
-        if(!response.ok){
+    fetch('http://localhost:8080/employee-servlet-app/reimbursements?status=open', {
+        method: 'GET'
+    }).then(function (response) {
+        console.log(response);
+        if (!response.ok) {
             throw Error("Error retreiving reimbursements from DB")
         }
         return response.json();
-    }).then(function(data){
+    }).then(function (data) {
         console.log(data);
         data.forEach(obj => {
             let newReimbursement = {
@@ -34,12 +32,12 @@ const viewPending = () =>{
     managerTable.style.visibility = 'visible';
 }
 
-const createPendingHeader = () =>{
+const createPendingHeader = () => {
 
     let tags = ['ID', 'Type', 'Description', 'Amount', 'Created by', 'Time stamp']
     let tr = document.createElement('thead');
     tr.classList.add("bg-primary");
-    tags.forEach(obj =>{
+    tags.forEach(obj => {
         let header = document.createElement('th');
         let spacing = document.createElement('div');
         spacing.classList.add('spacing');
@@ -52,24 +50,24 @@ const createPendingHeader = () =>{
     managerTable.appendChild(tr);
 }
 
-const createPendingRow = (newReimbursement) =>{
-    if(newReimbursement.status != 'pending'){
+const createPendingRow = (newReimbursement) => {
+    if (newReimbursement.status != 'pending') {
         console.log(newReimbursement.status + 'is not pending');
         return;
     }
 
     let row = document.createElement('tr');
     // decide the color of the row based on the type
-    switch(newReimbursement.type){
-        case 'lodging':{
+    switch (newReimbursement.type) {
+        case 'lodging': {
             row.classList.add('bg-success')
             break;
         }
-        case 'travel':{
+        case 'travel': {
             row.classList.add('bg-warning')
             break;
         }
-        case 'food' :{
+        case 'food': {
             row.classList.add('bg-info')
             break;
         }
@@ -133,25 +131,25 @@ const createPendingRow = (newReimbursement) =>{
     let timeCell = document.createElement('td');
     timeCell.appendChild(spacing);
     row.appendChild(timeCell);
-    
+
     managerTable.appendChild(row);
 }
 
 // closed 
-const viewClosedReimbursements = () =>{
+const viewClosedReimbursements = () => {
     managerTable.innerHTML = "";
     createClosedHeader();
-    fetch('http://localhost:8080/employee-servlet-app/reimbursements',{
+    fetch('http://localhost:8080/employee-servlet-app/reimbursements', {
         method: 'GET',
         headers: {
-            "Content-Type" : "application/json"
+            "Content-Type": "application/json"
         }
-    }).then(function(response){
-        if(!response.ok){
+    }).then(function (response) {
+        if (!response.ok) {
             throw Error("Error retreiving reimbursements from DB")
         }
         return response.json();
-    }).then(function(data){
+    }).then(function (data) {
         console.log(data);
         data.forEach(obj => {
             let newReimbursement = {
@@ -172,12 +170,12 @@ const viewClosedReimbursements = () =>{
     managerTable.style.visibility = 'visible';
 }
 
-const createClosedHeader = () =>{
+const createClosedHeader = () => {
 
     let tags = ['ID', 'Type', 'Description', 'Amount', 'Created By', 'Time stamp', 'Manager', 'Closed stamp']
     let tr = document.createElement('thead');
     tr.classList.add("bg-primary");
-    tags.forEach(obj =>{
+    tags.forEach(obj => {
         let header = document.createElement('th');
         let spacing = document.createElement('div');
         spacing.classList.add('spacing');
@@ -190,20 +188,20 @@ const createClosedHeader = () =>{
     managerTable.appendChild(tr);
 }
 
-const createclosedRow = (newReimbursement) =>{
-    if(newReimbursement.status == 'pending'){
+const createclosedRow = (newReimbursement) => {
+    if (newReimbursement.status == 'pending') {
         console.log(newReimbursement.id + 'is pending');
         return;
     }
 
     let row = document.createElement('tr');
     // decide the color of the row based on the type
-    switch(newReimbursement.status){
-        case 'approved':{
+    switch (newReimbursement.status) {
+        case 'approved': {
             row.classList.add('bg-success')
             break;
         }
-        case 'rejected':{
+        case 'rejected': {
             row.classList.add('bg-danger')
             break;
         }
@@ -286,7 +284,7 @@ const createclosedRow = (newReimbursement) =>{
     let closedCell = document.createElement('td');
     closedCell.appendChild(spacing);
     row.appendChild(closedCell);
-    
+
     managerTable.appendChild(row);
 }
 
