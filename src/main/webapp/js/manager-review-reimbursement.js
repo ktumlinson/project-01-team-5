@@ -1,8 +1,8 @@
 const submitReview = document.getElementById('submitReview');
 const approveReimbursement = document.getElementById('approve');
 const denyReimbursement = document.getElementById('deny');
-const reimbID = document.getElementById('reimb-number');
 const warningText = document.getElementById('warningText');
+const reimbID = document.getElementById('reimb-number');
 
 
 let reimbId = 0;
@@ -11,6 +11,8 @@ let reimbursementToApprove = {id: 0, status: 'pending', amount: 0, description: 
 const reviewTable = document.getElementById('review-table');
 
 const findReimbursementById = () => {
+
+    warningText.innerHTML = "";
     reimbId = reimbID.value;
     console.log(reimbId);
     reviewTable.innerHTML = "";
@@ -22,6 +24,7 @@ const findReimbursementById = () => {
         }
     }).then(function (response) {
         if (!response.ok) {
+            warningText.innerHTML = `<p style="color: blue"><b>Failed to retreive reimbursement! ID does not exist in DB or You are not a manager</b></p> <br>`
             throw Error(`Error retreiving reimbursement ${reimbId}`);
         }
         return response.json();
@@ -35,6 +38,10 @@ const findReimbursementById = () => {
         reimbursementToApprove.user = data.employee.username;
         reimbursementToApprove.type = data.type.type;
         createRow(reimbursementToApprove);
+    }).catch(error =>{
+        console.warn(error);
+        warningText.classList.add('bg-danger');
+        warningText.innerHTML = `<p style="color: white"><b>Failed to retreive reimbursement! ID does not exist in DB or You are not a manager</b></p> <br>`
     })
     reviewTable.style.visibility = 'visible';
     approveReimbursement.style.visibility = 'visible';
@@ -147,6 +154,7 @@ const pushReimbursementChange = (reimbursementToApprove) => {
         return response.json();
     }).then(function (json) {
         console.log(json);
+        warningText.classList.add('bg-light');
         warningText.innerHTML = `<p style="color: green"><b>Success!</b></p> <br>`;
         findReimbursementById();
     })

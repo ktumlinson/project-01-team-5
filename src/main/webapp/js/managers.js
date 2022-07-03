@@ -10,6 +10,8 @@ const background = document.getElementById('background');
 const reviewMenu = document.getElementById('reviewModal');
 const findByEmp = document.getElementById('findEmployeeModal');
 
+const backgroundText = document.getElementById('main-body-warning');
+
 const toggleBackground = () => {
     background.classList.toggle('visible');
 }
