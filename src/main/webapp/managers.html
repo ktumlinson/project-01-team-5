@@ -30,11 +30,18 @@
     <div class="container">
       <div class="card">
         <div class="shadow-lg">
-          <div class="card-header">
+          <div class="card-header d-flex justify-content-center">
             <h1>What Would You Like To Do?</h1>
+
+            <form action="logout" class="w-25">
+              <input type="submit" value="Logout" class="btn btn-light w-25" id="logout-button">
+            </form>
           </div>
 
           <div class="card-body">
+
+            <!-- <button class="btn btn-light" id="logout-button">Logout</button> -->
+			
             <h6>Find and Edit Reimbursement</h6>
             <button class="btn btn-light" id="reviewReimbursement">
               Review Reimbursement
@@ -97,9 +104,9 @@
                 placeholder="00"
                 id="reimb-number"
               /><!--note that if it gives a decimal you need to specify that it will not allow it on the error message-->
-              <input id="submitReview" type="submit" value="Review" /><br>
-              <input id="approve" type="submit" value="Approve"/>
-              <input id="deny" type="submit" value="Deny"/>
+              <input id="submitReview" type="submit" value="Review" /><br />
+              <input id="approve" type="submit" value="Approve" />
+              <input id="deny" type="submit" value="Deny" />
             </div>
             <input id="cancelReview" type="submit" value="Cancel" />
           </div>
@@ -116,7 +123,12 @@
           <div class="card-body">
             <div>
               <label>Employee ID:</label>
-              <input id="username" type="text" name="username" placeholder="User" />
+              <input
+                id="username"
+                type="text"
+                name="username"
+                placeholder="User"
+              />
               <input id="submitSearch" type="submit" value="Find" />
               <table id="employee-Reimbursements-table"></table>
             </div>
