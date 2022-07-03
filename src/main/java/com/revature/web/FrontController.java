@@ -121,21 +121,7 @@ public class FrontController extends HttpServlet {
 			}
 		}
 		
-		// ready to test!
-		// manager finds all reimbursements by username. Haven't extracted query string correctly
-		else if(URI.matches("reimbursements?username=")) { // ??????
-			HttpSession sess = request.getSession();
-			User u = (User) sess.getAttribute("the-man");
-			if(map.containsKey("username") ) {
-				String username = map.get("username");
-				
-				if(u.getUsername().equals("manager")) {
-					RequestHelperManagers.getReimbursementsByUsername(request, response, username);
-				}
-			}
-			
-			
-		}
+		
 	}
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

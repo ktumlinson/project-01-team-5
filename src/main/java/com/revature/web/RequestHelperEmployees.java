@@ -65,8 +65,8 @@ public class RequestHelperEmployees {
 			response.setContentType("application/json");
 			response.addHeader("Access-Control-Allow-Origin", "*");
 	
-			String queryString = request.getQueryString();
-			List<Reimbursement> listReimb = (List<Reimbursement>) eservs.myResolvedRequests(u);
+			
+			List<Reimbursement> listReimb = (List<Reimbursement>) eservs.myPendingRequests(u);
 			List<Reimbursement> listFiltered = listReimb.stream()
 					.filter(e -> e.getStatus().getStatus().equals("pending")).collect(Collectors.toList());
 			String jsonString = new ObjectMapper().writeValueAsString(listFiltered);
