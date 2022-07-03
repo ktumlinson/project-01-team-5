@@ -63,12 +63,23 @@ public class RequestHelperLogin {
 			session.setAttribute("the-man", u);
 			
 			System.out.println("Session is set for " + u);
+			
 		} else {
 			// could replace employee-login w/ employee-login-error or something
 			response.sendRedirect("manager-login.html");
 			out.write("Sorry, username or password error");
 		}
 		out.close();
+	}
+	
+	public static void logout(HttpServletRequest request, HttpServletResponse response) 
+			throws IOException, ServletException {
+		HttpSession session = request.getSession();
+		session.invalidate();
+		System.out.println(session.getAttribute("the-man"));
+		response.sendRedirect("index.html");
+		
+		
 	}
 	
 }

@@ -34,7 +34,11 @@ public class FrontController extends HttpServlet {
 			// manager get all emps
 		case "employees":			
 			RequestHelperManagers.getAllEmployees(request, response);
-			break;	
+			break;
+			// manager or employee logs out
+		case "logout":
+			RequestHelperLogin.logout(request, response);
+			break;
 		}
 		// Path not really used in our app
 		if(URI.matches("employees/\\d+")) {		// Can be used by both managers and employees
@@ -48,7 +52,7 @@ public class FrontController extends HttpServlet {
 			System.out.println("fetching user session for " + u);
 			
 			String username = URI.replace("employees/", "");
-			RequestHelperManagers.getReimbursementsByUsername(request, response, u.getUsername());
+			RequestHelperEmployees.getReimbursementByUsernameOpen(request, response, username);
 		}
 		// User wants to view their closed requests
 		else if(URI.matches("employees/closedrequests")) {		// User wants to view their open requests
@@ -57,7 +61,7 @@ public class FrontController extends HttpServlet {
 			System.out.println("fetching user session for " + u);
 			
 			String username = URI.replace("employees/", "");
-			RequestHelperManagers.getReimbursementsByUsername(request, response, u.getUsername());
+			RequestHelperEmployees.getReimbursementByUsernameClosed(request, response, username);
 		}
 		// User wants to view their own info
 		else if(URI.matches("employees/info")) {		// User wants to view their info
@@ -124,7 +128,6 @@ public class FrontController extends HttpServlet {
 		}
 		// not used in app
 		else if(URI.matches("employees/\\d+")) { 
-			
 			
 			String id = URI.replace("employees/", "");
 			int idInt = Integer.parseInt(id);

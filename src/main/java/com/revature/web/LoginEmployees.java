@@ -26,7 +26,7 @@ public class LoginEmployees extends HttpServlet {
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
 		User u = empServs.confirmLogin(username, password);
-		
+		System.out.println(u);
 		if (u.getId() > 0) {
 			HttpSession session = request.getSession();
 			

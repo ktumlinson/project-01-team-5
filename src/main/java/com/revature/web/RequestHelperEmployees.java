@@ -42,45 +42,87 @@ public class RequestHelperEmployees {
 			throws IOException, ServletException {
 		HttpSession sess = request.getSession();
 		PrintWriter out = response.getWriter();
-		int idInt = Integer.parseInt(id);
-		response.setContentType("application/json");
-		response.addHeader("Access-Control-Allow-Origin", "*");
-
-		String queryString = request.getQueryString();
-		Reimbursement r = mservs.findReimbursementById(idInt);
-		String jsonString = new ObjectMapper().writeValueAsString(r);
-		out.println(jsonString);
-
+		User u = (User) sess.getAttribute("the-user");
+		if (u.getId() > 0) {
+			int idInt = Integer.parseInt(id);
+			response.setContentType("application/json");
+			response.addHeader("Access-Control-Allow-Origin", "*");
+	
+			String queryString = request.getQueryString();
+			Reimbursement r = mservs.findReimbursementById(idInt);
+			String jsonString = new ObjectMapper().writeValueAsString(r);
+			out.println(jsonString);
+		}
+	}
+	
+	public static void getReimbursementByUsernameOpen(HttpServletRequest request, HttpServletResponse response, String username)
+			throws IOException, ServletException {
+		
+		PrintWriter out = response.getWriter();
+		HttpSession sess = request.getSession();
+		User u = (User) sess.getAttribute("the-user");
+		if (u.getId() > 0) {
+			response.setContentType("application/json");
+			response.addHeader("Access-Control-Allow-Origin", "*");
+	
+			String queryString = request.getQueryString();
+			List<Reimbursement> listReimb = (List<Reimbursement>) mservs.findUserByUsername(username);
+			List<Reimbursement> listFiltered = listReimb.stream()
+					.filter(e -> e.getStatus().getStatus().equals("pending")).collect(Collectors.toList());
+			String jsonString = new ObjectMapper().writeValueAsString(listFiltered);
+			out.println(jsonString);
+		}
+	}
+	
+	public static void getReimbursementByUsernameClosed(HttpServletRequest request, HttpServletResponse response, String username)
+			throws IOException, ServletException {
+		
+		PrintWriter out = response.getWriter();
+		HttpSession sess = request.getSession();
+		User u = (User) sess.getAttribute("the-user");
+		if (u.getId() > 0) {
+			response.setContentType("application/json");
+			response.addHeader("Access-Control-Allow-Origin", "*");
+	
+			String queryString = request.getQueryString();
+			List<Reimbursement> listReimb = (List<Reimbursement>) mservs.findUserByUsername(username);
+			List<Reimbursement> listFiltered = listReimb.stream()
+					.filter(e -> !e.getStatus().getStatus().equals("pending")).collect(Collectors.toList());
+			String jsonString = new ObjectMapper().writeValueAsString(listFiltered);
+			out.println(jsonString);
+		}
 	}
 
 	public static void getEmployeeById(HttpServletRequest request, HttpServletResponse response, String id)
 			throws IOException, ServletException {
 		HttpSession sess = request.getSession();
-		PrintWriter out = response.getWriter();
-		int idInt = Integer.parseInt(id);
-		response.setContentType("application/json");
-		response.addHeader("Access-Control-Allow-Origin", "*");
-		User u = eservs.findUserById(idInt);
-		String queryString = request.getQueryString();
-
-		String jsonString = new ObjectMapper().writeValueAsString(u);
-		out.println(jsonString);
-
+		User u = (User) sess.getAttribute("the-user");
+		if (u.getId() > 0) {
+			PrintWriter out = response.getWriter();
+			int idInt = Integer.parseInt(id);
+			response.setContentType("application/json");
+			response.addHeader("Access-Control-Allow-Origin", "*");
+			
+			String queryString = request.getQueryString();
+	
+			String jsonString = new ObjectMapper().writeValueAsString(u);
+			out.println(jsonString);
+		}
 	}
 
 	public static void getEmployeeByUsername(HttpServletRequest request, HttpServletResponse response, String username)
 			throws IOException, ServletException {
 		HttpSession sess = request.getSession();
 		PrintWriter out = response.getWriter();
-
-		response.setContentType("application/json");
-		response.addHeader("Access-Control-Allow-Origin", "*");
-		User u = eservs.findUserByUsername(username);
-		String queryString = request.getQueryString();
-
-		String jsonString = new ObjectMapper().writeValueAsString(u);
-		out.println(jsonString);
-
+		User u = (User) sess.getAttribute("the-user");
+		if (u.getId() > 0) {
+			response.setContentType("application/json");
+			response.addHeader("Access-Control-Allow-Origin", "*");
+			String queryString = request.getQueryString();
+	
+			String jsonString = new ObjectMapper().writeValueAsString(u);
+			out.println(jsonString);
+		}
 	}
 
 	public static void createNewReimbursement(HttpServletRequest request, HttpServletResponse response)
@@ -199,7 +241,7 @@ public class RequestHelperEmployees {
 		}
 
 	}
-
+	/* Not currently used in app */
 	public static void updateInfoByUsername(HttpServletRequest request, HttpServletResponse response, String username)
 			throws IOException, ServletException {
 

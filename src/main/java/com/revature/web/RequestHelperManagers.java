@@ -34,72 +34,97 @@ public class RequestHelperManagers {
 
 	public static void getReimbursementsByUsername(HttpServletRequest request, HttpServletResponse response,
 			String username) throws IOException, ServletException {
-		response.setContentType("application/json");
-		response.addHeader("Access-Control-Allow-Origin", "*");
-
-		List<Reimbursement> reimbList = mservs.allReimbursementsByEmployee(username);
-		String jsonString = new ObjectMapper().writeValueAsString(reimbList);
-		PrintWriter out = response.getWriter();
-		out.println(jsonString);
+		HttpSession sess = request.getSession();
+		User u = (User) sess.getAttribute("the-man");
+		if (u.getId() > 0) {
+			response.setContentType("application/json");
+			response.addHeader("Access-Control-Allow-Origin", "*");
+	
+			List<Reimbursement> reimbList = mservs.allReimbursementsByEmployee(username);
+			String jsonString = new ObjectMapper().writeValueAsString(reimbList);
+			PrintWriter out = response.getWriter();
+			out.println(jsonString);
+		}
 	}
 
 	public static void getReimbursementByReimbursementId(HttpServletRequest request, HttpServletResponse response,
 			int id) throws IOException, ServletException {
 		response.setContentType("application/json");
 		response.addHeader("Access-Control-Allow-Origin", "*");
-
-		Reimbursement reimb = mservs.findReimbursementById(id);
-		String jsonString = new ObjectMapper().writeValueAsString(reimb);
-		PrintWriter out = response.getWriter();
-		out.println(jsonString);
+		HttpSession sess = request.getSession();
+		User u = (User) sess.getAttribute("the-man");
+		if (u.getRole().getRole().equals("Manager")) {
+			Reimbursement reimb = mservs.findReimbursementById(id);
+			String jsonString = new ObjectMapper().writeValueAsString(reimb);
+			PrintWriter out = response.getWriter();
+			out.println(jsonString);
+		}
 	}
 
 	public static void getAllReimbursements(HttpServletRequest request, HttpServletResponse response)
 			throws IOException, ServletException {
 		response.setContentType("application/json");
 		response.addHeader("Access-Control-Allow-Origin", "*");
-		List<Reimbursement> allReimb = mservs.allReimbursements();
-		String jsonString = new ObjectMapper().writeValueAsString(allReimb);
-		PrintWriter out = response.getWriter();
-		out.println(jsonString);
+		HttpSession sess = request.getSession();
+		User u = (User) sess.getAttribute("the-man");
+		if (u.getRole().getRole().equals("Manager")) {
+			List<Reimbursement> allReimb = mservs.allReimbursements();
+			String jsonString = new ObjectMapper().writeValueAsString(allReimb);
+			PrintWriter out = response.getWriter();
+			out.println(jsonString);
+		}
 	}
 
+	
 	public static void getAllOpenReimbursements(HttpServletRequest request, HttpServletResponse response)
 			throws IOException, ServletException {
 		response.setContentType("application/json");
 		response.addHeader("Access-Control-Allow-Origin", "*");
-		List<Reimbursement> allReimb = mservs.allPendingReinbursements();
-		String jsonString = new ObjectMapper().writeValueAsString(allReimb);
-		PrintWriter out = response.getWriter();
-		out.println(jsonString);
+		HttpSession sess = request.getSession();
+		User u = (User) sess.getAttribute("the-man");
+		if (u.getRole().getRole().equals("Manager")) {
+			List<Reimbursement> allReimb = mservs.allPendingReinbursements();
+			String jsonString = new ObjectMapper().writeValueAsString(allReimb);
+			PrintWriter out = response.getWriter();
+			out.println(jsonString);
+		}
 	}
 
 	public static void getAllClosedReimbursements(HttpServletRequest request, HttpServletResponse response)
 			throws IOException, ServletException {
 		response.setContentType("application/json");
 		response.addHeader("Access-Control-Allow-Origin", "*");
-		List<Reimbursement> allReimb = mservs.allResolvedReinbursements();
-		String jsonString = new ObjectMapper().writeValueAsString(allReimb);
-		PrintWriter out = response.getWriter();
-		out.println(jsonString);
+		HttpSession sess = request.getSession();
+		User u = (User) sess.getAttribute("the-man");
+		if (u.getRole().getRole().equals("Manager")) {
+			List<Reimbursement> allReimb = mservs.allResolvedReinbursements();
+			String jsonString = new ObjectMapper().writeValueAsString(allReimb);
+			PrintWriter out = response.getWriter();
+			out.println(jsonString);
+		}
 	}
 
 	public static void getAllEmployees(HttpServletRequest request, HttpServletResponse response)
 			throws IOException, ServletException {
-		response.setContentType("application/json");
-		response.addHeader("Access-Control-Allow-Origin", "*");
-		List<User> allReimb = mservs.allEmployees();
-		String jsonString = new ObjectMapper().writeValueAsString(allReimb);
-		PrintWriter out = response.getWriter();
-		out.println(jsonString);
+		HttpSession sess = request.getSession();
+		User u = (User) sess.getAttribute("the-man");
+		if (u.getRole().getRole().equals("Manager")) {
+			response.setContentType("application/json");
+			response.addHeader("Access-Control-Allow-Origin", "*");
+			List<User> allReimb = mservs.allEmployees();
+			String jsonString = new ObjectMapper().writeValueAsString(allReimb);
+			PrintWriter out = response.getWriter();
+			out.println(jsonString);
+		}
 	}
+	
 
 	// Need a way to track manager updates. Can't do it currently
 	public static void updateReimbursementById(HttpServletRequest request, HttpServletResponse response, String id)
 			throws IOException, ServletException {
 		HttpSession sess = request.getSession();
 		User u = (User) sess.getAttribute("the-man");
-		if (u.getUsername().equals("manager")) {
+		if (u.getRole().getRole().equals("manager")) {
 
 			response.setContentType("application/json");
 			response.addHeader("Access-Control-Allow-Origin", "*");
