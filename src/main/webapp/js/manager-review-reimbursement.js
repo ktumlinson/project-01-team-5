@@ -19,7 +19,8 @@ const findReimbursementById = () =>{
     }).then(function(data){
         console.log(data);
         let reimbursementToApprove = {
-            id: data.id
+            id: data.id,
+            status: data.stats.stats
         }
     })
 
@@ -28,13 +29,12 @@ const findReimbursementById = () =>{
 }
 
 const handleApproveReimbursement = (reimbursementToApprove) =>{
-    reimbursementToApprove.status.status = 'approved';
-    reimbursementToApprove.status.id = 2;
+    reimbursementToApprove.status = 'approved';
     pushReimbursementChange(reimbursementToApprove);
 }
 
 const handleDenyReimbursement = (reimbursementToApprove) =>{
-    reimbursementToApprove.status.status = 'denied';
+    reimbursementToApprove.status = 'denied';
     pushReimbursementChange(reimbursementToApprove);
 }
 

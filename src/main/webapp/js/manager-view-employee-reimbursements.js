@@ -35,14 +35,15 @@ const getEmployeeReimbursements = () =>{
 
 const employeeHeader = () =>{
     let tags = ['ID', 'Status', 'Type', 'Description', 'Amount']
-    let tr = document.createElement('tr');
+    let tr = document.createElement('thead');
     tr.classList.add('bg-primary');
     tags.forEach(obj =>{
+        let header = document.createElement('th')
         let spacing = document.createElement('div');
         spacing.classList.add('spacing');
         let text = document.createTextNode(obj);
         spacing.appendChild(text);
-        let header = document.createElement('th').appendChild(spacing);
+        header.appendChild(spacing);
         tr.appendChild(header);
     })
     employeeTable.appendChild(tr);
