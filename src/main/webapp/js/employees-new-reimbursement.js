@@ -1,7 +1,8 @@
-const submitReimbursement = document.getElementById('submitRequest');
+const submitReimbursement = document.getElementById('sumbitRequest');
+let userId = sessionStorage.getItem('the-user');
 
 const handleSubmitReimbursement = () =>{
-    let userId = sessionStorage.getItem('the-user');
+    console.log(userId);
     let amount = getElementByName('amount').value;
     let description = getElementByName('description').value;
     let type = getElementByName('type').value;
