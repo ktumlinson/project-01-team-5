@@ -25,7 +25,7 @@ const getEmployeeReimbursements = () => {
                 type: obj.type.type,
                 description: obj.description,
                 amount: obj.reimbursementAmt,
-                manager: obj.manager.username
+                manager: obj.managerId.username
             }
             employeeRow(newReimbursement);
         })
