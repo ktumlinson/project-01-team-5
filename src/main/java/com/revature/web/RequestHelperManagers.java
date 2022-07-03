@@ -144,6 +144,7 @@ public class RequestHelperManagers {
 				JsonObject jsonobj = root.getAsJsonObject();
 
 				int idInt = Integer.parseInt(id);
+				System.out.println(idInt);
 
 				String statusString = jsonobj.get("status").getAsString();
 				System.out.println(statusString);
