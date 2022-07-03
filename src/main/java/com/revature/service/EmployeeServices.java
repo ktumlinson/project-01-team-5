@@ -31,7 +31,9 @@ public class EmployeeServices extends UserService{
 	
 	// tested and works
 	public List<Reimbursement> myPendingRequests(User u){
-		return rdao.findAllReimbersements().stream()
+		List<Reimbursement> myList = rdao.findAllReimbersements();
+		System.out.println(myList);
+		return myList.stream()
 				.filter(r-> (r.getEmployee().getId() == u.getId() && r.getStatus().getStatus().equals("pending")))
 				.collect(Collectors.toList());
 	}

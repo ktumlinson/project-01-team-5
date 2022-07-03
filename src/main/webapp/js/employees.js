@@ -13,7 +13,6 @@ const updatInfoMenu = document.getElementById('updateMenu');
 const viewInfoMenu = document.getElementById('userInfo');
 
 
-
 const toggleBackground = () => {
     background.classList.toggle('visible');
 }
@@ -81,8 +80,13 @@ const toggleViewUser = () => {
     toggleBackground();
 }
 
+const cancelReimbursementFunction = () => {
+    document.getElementById('warning-text').innerHTML = '';
+    toggleReimbursement();
+}
+
 newReimbursement.addEventListener('click', toggleReimbursement);
-cancelReimbursement.addEventListener('click', toggleReimbursement);
+cancelReimbursement.addEventListener('click', cancelReimbursementFunction);
 
 updateUser.addEventListener('click', toggleUpdateUser);
 cancelUpdate.addEventListener('click', toggleUpdateUser);

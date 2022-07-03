@@ -33,12 +33,12 @@
         <div class="shadow-lg">
           <div class="card-header d-flex justify-content-center">
             <h1>What Would You Like To Do?</h1>
-
-            <form action="logout" class="w-25">
+            
+            <form  action="logout" class="w-25">
               <input type="submit" value="Logout" class="btn btn-light w-25" id="logout-button">
             </form>
           </div>
-
+          
           <div class="card-body">
 
             <!-- <button class="btn btn-light" id="logout-button">Logout</button> -->
@@ -85,6 +85,7 @@
 
             <!--This will be dynamic and use a switch case for the color of the variant table as seen here https://getbootstrap.com/docs/4.1/content/tables/ under "Contextual Classes" and will change the switch based on if it is All reimbursemnents or pending/resolved ex: in all table pending will be a "Danger" class so the row will be red and in resolved lodging types will be "Primary" class so they will be a blue-->
             <table id="manager-table"></table>
+            <div id="main-body-warning"></div>
           </div>
         </div>
       </div>
@@ -111,6 +112,7 @@
               <button id="deny" >Deny</button>
             </div>
             <input id="cancelReview" type="submit" value="Cancel" />
+            <div id="warningText"></div>
           </div>
         </div>
       </div>
@@ -135,6 +137,7 @@
               <table id="employee-Reimbursements-table"></table>
             </div>
             <input id="cancelSearch" type="submit" value="Cancel" />
+            <div id="emp-warning-text"></div>
           </div>
         </div>
       </div>

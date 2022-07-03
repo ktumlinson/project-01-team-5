@@ -1,10 +1,12 @@
 const submitSearch = document.getElementById('submitSearch');
+const empWarningText = document.getElementById('emp-warning-text')
 
 const employeeTable = document.getElementById('employee-Reimbursements-table');
 
 const getEmployeeReimbursements = () => {
     employeeTable.innerHTML = "";
     let employeeId = document.getElementById('username').value;
+    empWarningText.innerHTML = "";
     employeeHeader();
     fetch(`http://localhost:8080/employee-servlet-app/reimbursements?username=${employeeId}`, {
         method: 'GET',
@@ -13,27 +15,40 @@ const getEmployeeReimbursements = () => {
         }
     }).then(function (response) {
         if (!response.ok) {
+            empWarningText.classList.add('bg-info');
+            empWarningText.innerHTML = `<p style="color: red"><b>Failed to retreive reimbursements! Are you logged in as a manager?</b></p>`
             throw Error('Error getting reimbursements from username ' + employeeId);
         }
         return response.json();
     }).then(function (data) {
         console.log(data);
+        console.log(data.length);
+        if(data.length == 0){
+            console.log('length is 0')
+            empWarningText.classList.add('bg-info');
+            empWarningText.innerHTML = `<p style="color: red"><b>Failed to retreive reimbursements! User may not exist in DB or has no reimbursements</b> <br>`
+        }
         data.forEach(obj => {
             newReimbursement = {
                 id: obj.id,
                 status: obj.status.status,
                 type: obj.type.type,
                 description: obj.description,
-                amount: obj.reimbursementAmt
+                amount: obj.reimbursementAmt,
+                manager: obj.managerId.username
             }
             employeeRow(newReimbursement);
         })
+    }).catch(error =>{
+        console.warn(error);
+        empWarningText.classList.add('bg-info');
+        empWarningText.innerHTML = `<p style="color: white"><b>Failed to retreive reimbursements! Are you logged in as a manager?</b></p>`
     })
     employeeTable.style.visibility = 'visible';
 }
 
 const employeeHeader = () => {
-    let tags = ['ID', 'Status', 'Type', 'Description', 'Amount']
+    let tags = ['ID', 'Status', 'Type', 'Description', 'Amount', 'Manager']
     let tr = document.createElement('thead');
     tr.classList.add('bg-primary');
     tags.forEach(obj => {
@@ -106,6 +121,14 @@ const employeeRow = (newReimbursement) => {
     spacing = document.createElement('div');
     spacing.classList.add('spacing');
     text = document.createTextNode(newReimbursement.amount);
+    spacing.appendChild(text);
+    cell = document.createElement('td');
+    cell.appendChild(spacing);
+    row.appendChild(cell);
+
+    spacing = document.createElement('div');
+    spacing.classList.add('spacing');
+    text = document.createTextNode(newReimbursement.manager);
     spacing.appendChild(text);
     cell = document.createElement('td');
     cell.appendChild(spacing);

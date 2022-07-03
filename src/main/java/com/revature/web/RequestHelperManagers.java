@@ -35,8 +35,8 @@ public class RequestHelperManagers {
 	public static void getReimbursementsByUsername(HttpServletRequest request, HttpServletResponse response,
 			String username) throws IOException, ServletException {
 		HttpSession sess = request.getSession();
-		User u = (User) sess.getAttribute("the-man");
-		if (u.getId() > 0) {
+
+		
 			response.setContentType("application/json");
 			response.addHeader("Access-Control-Allow-Origin", "*");
 	
@@ -44,7 +44,7 @@ public class RequestHelperManagers {
 			String jsonString = new ObjectMapper().writeValueAsString(reimbList);
 			PrintWriter out = response.getWriter();
 			out.println(jsonString);
-		}
+		
 	}
 
 	public static void getReimbursementByReimbursementId(HttpServletRequest request, HttpServletResponse response,
@@ -68,7 +68,7 @@ public class RequestHelperManagers {
 		response.addHeader("Access-Control-Allow-Origin", "*");
 		HttpSession sess = request.getSession();
 		User u = (User) sess.getAttribute("the-man");
-		if (u.getRole().getRole().equals("Manager")) {
+		if (u != null && u.getRole().getRole().equals("Manager")) {
 			List<Reimbursement> allReimb = mservs.allReimbursements();
 			String jsonString = new ObjectMapper().writeValueAsString(allReimb);
 			PrintWriter out = response.getWriter();
@@ -83,7 +83,7 @@ public class RequestHelperManagers {
 		response.addHeader("Access-Control-Allow-Origin", "*");
 		HttpSession sess = request.getSession();
 		User u = (User) sess.getAttribute("the-man");
-		if (u.getRole().getRole().equals("Manager")) {
+		if (u != null && u.getRole().getRole().equals("Manager")) {
 			List<Reimbursement> allReimb = mservs.allPendingReinbursements();
 			String jsonString = new ObjectMapper().writeValueAsString(allReimb);
 			PrintWriter out = response.getWriter();
@@ -97,7 +97,7 @@ public class RequestHelperManagers {
 		response.addHeader("Access-Control-Allow-Origin", "*");
 		HttpSession sess = request.getSession();
 		User u = (User) sess.getAttribute("the-man");
-		if (u.getRole().getRole().equals("Manager")) {
+		if (u != null && u.getRole().getRole().equals("Manager")) {
 			List<Reimbursement> allReimb = mservs.allResolvedReinbursements();
 			String jsonString = new ObjectMapper().writeValueAsString(allReimb);
 			PrintWriter out = response.getWriter();
@@ -111,7 +111,7 @@ public class RequestHelperManagers {
 		response.addHeader("Access-Control-Allow-Origin", "*");
 		HttpSession sess = request.getSession();
 		User u = (User) sess.getAttribute("the-man");
-		if (u.getRole().getRole().equals("Manager")) {
+		if (u != null && u.getRole().getRole().equals("Manager")) {
 			List<User> allReimb = mservs.allEmployees();
 			String jsonString = new ObjectMapper().writeValueAsString(allReimb);
 			PrintWriter out = response.getWriter();
@@ -126,7 +126,7 @@ public class RequestHelperManagers {
 		
 		HttpSession sess = request.getSession();
 		User u = (User) sess.getAttribute("the-man");
-		if (u.getRole().getRole().equals("Manager")) {
+		if (u != null && u.getRole().getRole().equals("Manager")) {
 			response.setContentType("application/json");
 			response.addHeader("Access-Control-Allow-Origin", "*");
 
@@ -144,6 +144,7 @@ public class RequestHelperManagers {
 				JsonObject jsonobj = root.getAsJsonObject();
 
 				int idInt = Integer.parseInt(id);
+				System.out.println(idInt);
 
 				String statusString = jsonobj.get("status").getAsString();
 				System.out.println(statusString);

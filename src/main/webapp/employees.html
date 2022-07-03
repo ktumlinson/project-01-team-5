@@ -30,7 +30,7 @@
     <div class="modal.visible container">
       <div class="card">
         <div class="shadow-lg">
-          <div class="card-header">
+          <div class="card-header d-flex justify-content-center">
             <h1>What Would You Like To Do?</h1>
             <form action="logout" class="w-25">
               <input type="submit" value="Logout" class="btn btn-light w-25" id="logout-button">
@@ -88,6 +88,14 @@
             <div>
               <label>Amount:</label>
               <input type="number" id="amount" placeholder="0.00" /><br />
+              <label>Type:</label>
+              <select name="type" id="type">
+                <option value="lodging">Lodging</option>
+                <option value="travel">Travel</option>
+                <option value="food">Food</option>
+                <option value="other">Other</option>
+              </select>
+
               <p id="description-container">
                 <label for="textarea">Description:</label>
                 <textarea
@@ -98,18 +106,10 @@
                   placeholder="What is the reimbursement for?"
                 ></textarea>
               </p>
-              <p id="select">
-                <label>Type:</label>
-                <select class="form-select-sm mb-4" id="type">
-                  <option value="1">Lodging</option>
-                  <option value="2">Travel</option>
-                  <option value="3">Food</option>
-                  <option value="4">Other</option></select
-                ><br />
-              </p>
               <input id="sumbitRequest" type="submit" value="Request" />
             </div>
             <input id="cancelRequest" type="submit" value="Cancel" />
+            <div id="warning-text"></div>
           </div>
         </div>
       </div>
@@ -142,6 +142,7 @@
                 <input id="submitUpdate" type="submit" value="Update" />
               </div>
               <input id="cancelUpdate" type="submit" value="Cancel" />
+              <div id="update-text"></div>
             </div>
           </div>
         </div>
