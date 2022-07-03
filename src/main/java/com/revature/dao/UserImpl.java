@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import javax.persistence.NoResultException;
+
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
@@ -34,7 +36,7 @@ public class UserImpl implements IUserDao{
 
 	// tested and works
 	@Override
-	public User findUserById(int id) {	
+	public User findUserById(int id) throws NoResultException{	
 		Session ses = HibernateUtil.getSession();
 		
 		User user = (User)ses.createQuery("from User where id=:id").setParameter("id", id).getSingleResult();
@@ -45,7 +47,7 @@ public class UserImpl implements IUserDao{
 
 	// tested and works
 	@Override
-	public User findUserByUsername(String username) {
+	public User findUserByUsername(String username) throws NoResultException {
 		Session ses = HibernateUtil.getSession();
 		
 		User user = (User)ses.createQuery("from User where username=:username").setParameter("username", username).getSingleResult();
@@ -67,7 +69,7 @@ public class UserImpl implements IUserDao{
 
 	// tested and works
 	@Override
-	public boolean delete(User u) {
+	public boolean delete(User u) throws NoResultException{
 		Session ses = HibernateUtil.getSession();
 		// begin a tx
 		Transaction tx = ses.beginTransaction();

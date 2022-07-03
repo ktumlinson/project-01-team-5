@@ -39,6 +39,7 @@ public class RequestHelperLogin {
 			session.setAttribute("the-user", u);
 			
 			System.out.println("Session is set for " + u);
+			request.getRequestDispatcher("employees.html").include(request, response);
 		} else {
 			// could replace employee-login w/ employee-login-error or something
 			response.sendRedirect("employee-login.html");
@@ -63,6 +64,7 @@ public class RequestHelperLogin {
 			session.setAttribute("the-man", u);
 			
 			System.out.println("Session is set for " + u);
+			request.getRequestDispatcher("managers.html").include(request, response);
 			
 		} else {
 			// could replace employee-login w/ employee-login-error or something

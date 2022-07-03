@@ -2,6 +2,8 @@ package com.revature.service;
 
 import java.util.Optional;
 
+import javax.persistence.NoResultException;
+
 import com.revature.dao.UserImpl;
 import com.revature.models.User;
 
@@ -15,21 +17,39 @@ public class UserService {
 	// tested and works
 	// what every user will be able to do(login, etc...)
 	public User confirmLogin(String username, String password) {
+		User attempt;
 		
-		User attempt = udao.findUserByUsername(username);
-		if(attempt == null) {
+		try {
+			attempt  = udao.findUserByUsername(username);
+			if(attempt.getUsername().equals(username) && attempt.getPassword().equals(password)) {
+				return attempt;
+			}
+		} catch(NoResultException e) {
 			return new User();
 		}
-		return attempt;
+
+		return new User();
 	}
 	
 	// tested and works
 	public User findUserByUsername(String username) {
+		User attempt;
+		try {
+			attempt  = udao.findUserByUsername(username);
+			} catch(NoResultException e) {
+				return new User();
+			}
 		return udao.findUserByUsername(username);
 	}
 	
 	public User findUserById(int id) {
-		return udao.findUserById(id);
+		User attempt;
+		try {
+			attempt  = udao.findUserById(id);
+			} catch(NoResultException e) {
+				return new User();
+			}
+		return new User();
 	}
 	
 	// tested and works

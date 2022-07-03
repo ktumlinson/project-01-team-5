@@ -3,6 +3,8 @@ package com.revature.dao;
 import java.util.List;
 import java.util.Optional;
 
+import javax.persistence.NoResultException;
+
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
@@ -33,7 +35,7 @@ public class ReimbursementImpl implements IReimbursementDao{
 
 	// tested and works
 	@Override
-	public Reimbursement findReimbursementById(int id) {
+	public Reimbursement findReimbursementById(int id) throws NoResultException{
 		Session ses = HibernateUtil.getSession();
 		
 		Reimbursement reimb = (Reimbursement)ses.createQuery("from Reimbursement where id=:id").setParameter("id", id).getSingleResult();
@@ -55,7 +57,7 @@ public class ReimbursementImpl implements IReimbursementDao{
 
 	// tested and works
 	@Override
-	public boolean delete(Reimbursement r) {
+	public boolean delete(Reimbursement r) throws NoResultException{
 		Session ses = HibernateUtil.getSession();
 		// begin a tx
 		Transaction tx = ses.beginTransaction();

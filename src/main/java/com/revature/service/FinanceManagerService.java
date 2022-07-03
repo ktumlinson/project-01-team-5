@@ -4,6 +4,8 @@ import java.sql.Timestamp;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.persistence.NoResultException;
+
 import com.revature.dao.ReimbursementImpl;
 import com.revature.dao.UserImpl;
 import com.revature.models.ReimbursementStatus;
@@ -62,7 +64,13 @@ public class FinanceManagerService extends UserService{
 	}
 	
 	public Reimbursement findReimbursementById(int id) {
-		return rdao.findReimbursementById(id);
+		Reimbursement attempt;
+		try {
+			attempt  = rdao.findReimbursementById(id);
+			} catch(NoResultException e) {
+				return new Reimbursement();
+			}
+		return new Reimbursement();
 	}
 	
 	// tested and works
