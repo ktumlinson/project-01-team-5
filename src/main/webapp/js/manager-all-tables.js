@@ -126,7 +126,7 @@ const viewReiembursements = () =>{
                 status: obj.status.status,
                 description: obj.description,
                 amount: obj.reimbursementAmt,
-                user: obj.employee.username
+                user: obj.employee.username,
             }
 
             createReimRow(newReimbursement);

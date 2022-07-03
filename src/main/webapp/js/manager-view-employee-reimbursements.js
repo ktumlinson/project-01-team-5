@@ -24,7 +24,8 @@ const getEmployeeReimbursements = () => {
                 status: obj.status.status,
                 type: obj.type.type,
                 description: obj.description,
-                amount: obj.reimbursementAmt
+                amount: obj.reimbursementAmt,
+                manager: obj.manager.username
             }
             employeeRow(newReimbursement);
         })
@@ -33,7 +34,7 @@ const getEmployeeReimbursements = () => {
 }
 
 const employeeHeader = () => {
-    let tags = ['ID', 'Status', 'Type', 'Description', 'Amount']
+    let tags = ['ID', 'Status', 'Type', 'Description', 'Amount', 'Manager']
     let tr = document.createElement('thead');
     tr.classList.add('bg-primary');
     tags.forEach(obj => {
@@ -106,6 +107,14 @@ const employeeRow = (newReimbursement) => {
     spacing = document.createElement('div');
     spacing.classList.add('spacing');
     text = document.createTextNode(newReimbursement.amount);
+    spacing.appendChild(text);
+    cell = document.createElement('td');
+    cell.appendChild(spacing);
+    row.appendChild(cell);
+
+    spacing = document.createElement('div');
+    spacing.classList.add('spacing');
+    text = document.createTextNode(newReimbursement.manager);
     spacing.appendChild(text);
     cell = document.createElement('td');
     cell.appendChild(spacing);

@@ -11,7 +11,7 @@ let reimbursementToApprove = {id: 0, status: 'pending', amount: 0, description: 
 const reviewTable = document.getElementById('review-table');
 
 const findReimbursementById = () => {
-    let reimbId = reimbID.value;
+    reimbId = reimbID.value;
     console.log(reimbId);
     reviewTable.innerHTML = "";
     createHeader();
