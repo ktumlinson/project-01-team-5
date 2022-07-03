@@ -148,22 +148,27 @@ public class RequestHelperManagers {
 				String statusString = jsonobj.get("status").getAsString();
 				
 				Reimbursement r = mservs.findReimbursementById(idInt);
-
+				
 				ReimbursementStatus status = null;
+				
 				switch (statusString) {
 				case "2":
 					status = ReimbursementStatus.generater("approved");
+					Timestamp ts = new Timestamp(System.currentTimeMillis());
+					r.setTimeResolved(ts);
 					mservs.approveReimbursement(r, u);
 					break;
 				case "3":
 					status = ReimbursementStatus.generater("rejected");
+					Timestamp ts2 = new Timestamp(System.currentTimeMillis());
+					r.setTimeResolved(ts2);
 					mservs.denyReimbursement(r, u);
 					break;
 				default:
 					status = ReimbursementStatus.generater("pending");
 					break;
 				}
-
+				System.out.println(r);
 				// write the collection of movies in json to the browser
 				if (r != null) {
 

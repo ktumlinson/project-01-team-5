@@ -51,18 +51,24 @@ public class FrontController extends HttpServlet {
 					HttpSession sess = request.getSession();
 					User u = (User) sess.getAttribute("the-user");
 					System.out.println("fetching user session for " + u);
-					
-					String username = URI.replace("employees/", "");
-					RequestHelperEmployees.getReimbursementByUsernameOpen(request, response, username);
+					if(u != null) {
+						RequestHelperEmployees.getReimbursementByUsernameOpen(request, response, u.getUsername());
+					} else {
+						response.sendRedirect("index.html");
+					}
 				}
 				// User wants to view their closed requests
 				else if(URI.matches("employees/closedrequests")) {		// User wants to view their open requests
 					HttpSession sess = request.getSession();
 					User u = (User) sess.getAttribute("the-user");
 					System.out.println("fetching user session for " + u);
+					if(u != null) {
+						RequestHelperEmployees.getReimbursementByUsernameClosed(request, response, u.getUsername());
+					} else {
+						response.sendRedirect("index.html");
+					}
 					
-					String username = URI.replace("employees/", "");
-					RequestHelperEmployees.getReimbursementByUsernameClosed(request, response, username);
+					
 				}
 				// User wants to view their own info
 				else if(URI.matches("employees/info")) {		// User wants to view their info
@@ -70,7 +76,12 @@ public class FrontController extends HttpServlet {
 					HttpSession sess = request.getSession();
 					User u = (User) sess.getAttribute("the-user");
 					System.out.println("fetching user session for " + u);
-					RequestHelperEmployees.getEmployeeByUsername(request, response, u.getUsername());
+					if(u != null) {
+						RequestHelperEmployees.getEmployeeByUsername(request, response, u.getUsername());
+					} else {
+						response.sendRedirect("index.html");
+					}
+					
 				}
 				// manager finds a reimbursement by reimbursement id
 				else if(URI.matches("reimbursements/\\d+")) { // ??????
@@ -78,8 +89,10 @@ public class FrontController extends HttpServlet {
 					int idNum = Integer.parseInt(id);
 					HttpSession sess = request.getSession();
 					User u = (User) sess.getAttribute("the-man");
-					if(u.getUsername().equals("manager")) {
+					if(u != null && u.getRole().getRole().equals("Manager")) {
 						RequestHelperManagers.getReimbursementByReimbursementId(request, response, idNum);
+					} else {
+						response.sendRedirect("index.html");
 					}
 				}
 		
@@ -103,13 +116,15 @@ public class FrontController extends HttpServlet {
 				User u = (User) sess.getAttribute("the-man");
 				String username = map.get("username");
 					
-				if(u.getRole().getRole().equals("Manager")) {
+				if(u != null && u.getRole().getRole().equals("Manager")) {
 					RequestHelperManagers.getReimbursementsByUsername(request, response, username);
+				} else {
+					response.sendRedirect("index.html");
 				}
 				
 			}
 			else {
-			RequestHelperManagers.getAllReimbursements(request, response);
+				RequestHelperManagers.getAllReimbursements(request, response);
 			}
 			break;
 			// manager get all emps
