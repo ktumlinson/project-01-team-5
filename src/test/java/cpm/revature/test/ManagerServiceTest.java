@@ -4,9 +4,6 @@ import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -18,11 +15,11 @@ import com.revature.models.ReimbursementStatus;
 import com.revature.models.ReimbursementType;
 import com.revature.models.User;
 import com.revature.models.UserRole;
-import com.revature.service.EmployeeServices;
+import com.revature.service.FinanceManagerService;
 
-public class EmployeeServiceTests {
+public class ManagerServiceTest {
 
-	private EmployeeServices eserv;
+	private FinanceManagerService mserv;
 	private UserImpl mockdao;
 	private ReimbursementImpl rmockdao;
 	
@@ -30,46 +27,66 @@ public class EmployeeServiceTests {
 	public void setup() {
 		mockdao = mock(UserImpl.class);
 		rmockdao = mock(ReimbursementImpl.class);
-		eserv = new EmployeeServices(mockdao, rmockdao);
+		mserv = new FinanceManagerService(mockdao, rmockdao);
 	}
 	
 	@After
 	public void teardown() {
 		mockdao = null;
 		rmockdao = null;
-		eserv = null;
+		mserv = null;
 	}
 	
 	@Test
-	public void newReimbursement() {
-		ReimbursementType type = new ReimbursementType(1, "lodging");
-		ReimbursementStatus status = new ReimbursementStatus(1, "pending");
+	public void testConfirmLogin_success() {
 		UserRole role = new UserRole(1, "Employee");
-		User empl = new User(5, "kt", "money", "kyle", "t", "email@yahoo", role);
-		Reimbursement reim = new Reimbursement(2, type, status, 220.52, null, null, "Testing", empl, null);
-		when(rmockdao.insert(reim)).thenReturn(2);
+		User u1 = new User(5, "kt", "money", "kyle", "t", "email@yahoo", role);
 		
-		int actual = eserv.newReimbursementRequest(reim);
-		int expected = 2;
+		when(mockdao.findUserByUsername("kt")).thenReturn(u1);
+		User actual = mserv.confirmLogin("kt", "money");
+		User expected = u1;
+		
 		assertEquals(expected, actual);
 	}
 	
 	@Test
-	public void allRequests() {
+	public void testConfirmLogin_fail() {
+		UserRole role = new UserRole(1, "Employee");
+		User u1 = new User(5, "kt", "money", "kyle", "t", "email@yahoo", role);
+		
+		when(mockdao.findUserByUsername("kt")).thenReturn(u1);
+		User actual = mserv.confirmLogin("kt", "monii");
+		User expected = new User();
+		assertEquals(expected, actual);
+	}
+	
+	@Test
+	public void findReimbursementById() {
 		ReimbursementType type = new ReimbursementType(1, "lodging");
 		ReimbursementStatus status = new ReimbursementStatus(1, "pending");
 		UserRole role = new UserRole(1, "Employee");
 		User empl = new User(5, "kt", "money", "kyle", "t", "email@yahoo", role);
 		Reimbursement reim = new Reimbursement(2, type, status, 220.52, null, null, "Testing", empl, null);
-		Reimbursement reim1 = new Reimbursement(3, new ReimbursementType(2, "food"), status, 25, null, null, "Testing", empl, null);
-		List<Reimbursement> reims = new ArrayList<Reimbursement>();
-		reims.add(reim1);
-		reims.add(reim);
 		
-		when(rmockdao.findAllReimbersements()).thenReturn(reims);
-		List<Reimbursement> expected = reims;
-		List<Reimbursement> actual = eserv.allRequests(empl);
+		when(rmockdao.findReimbursementById(2)).thenReturn(reim);
+		Reimbursement actual = mserv.findReimbursementById(2);
+		Reimbursement expected = reim;
 		
+		assertEquals(expected, actual);
+	}
+	
+	@Test
+	public void denyReimbursement() {
+		ReimbursementType type = new ReimbursementType(1, "lodging");
+		ReimbursementStatus status = new ReimbursementStatus(1, "pending");
+		UserRole role = new UserRole(1, "Employee");
+		User man = new User(1, "manager", "test", "guy", "girl", "email", new UserRole(2, "Manager"));
+		User empl = new User(5, "kt", "money", "kyle", "t", "email@yahoo", role);
+		Reimbursement reim = new Reimbursement(2, type, status, 220.52, null, null, "Testing", empl, null);
+		
+		when(rmockdao.update(reim)).thenReturn(true);
+		boolean actual = mserv.denyReimbursement(reim, man);
+		boolean expected = true;
 		assertEquals(expected, actual);
 	}
 }
